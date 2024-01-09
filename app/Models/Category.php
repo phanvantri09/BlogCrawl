@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Blog;
+use App\Models\Post;
 class Category extends Model
 {
     use HasFactory;
     protected $table = 'categories';
 
     protected $fillable = [
-        'title',
-        'description',
-        'type',
+        'name',
+        'description'
     ];
-    public function blogs()
+    public function Post()
     {
-        return $this->belongsTo(Blog::class, 'id_category', 'id');
+        return $this->belongsTo(Post::class, 'id_category', 'id');
     }
 }
