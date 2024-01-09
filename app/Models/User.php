@@ -30,7 +30,10 @@ class User extends Authenticatable
         'social_type',
         'id_user_referral',
         'number_phone',
-        'code'
+        'code', 
+        'image',
+        'address',
+        'birthday',
     ];
 
     /**
@@ -52,15 +55,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     protected $cascadeDeletes = true;
-    public function UserInfo(){
-        return $this->hasOne(UserInfo::class, 'id');
-    }
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
-    public function Transaction(){
-        return $this->hasMany(Transaction::class,'id_user','id');
+   
+    public function post(){
+        return $this->hasMany(Post::class,'id_user','id');
     }
     public function referredUser()
     {
