@@ -32,16 +32,16 @@ class ImageRepository implements ImageRepositoryInterface
     {
         return Image::findOrFail($id);
     }
-    public function getAllByIDProductItem($id_product)
+    public function getAllByIDProductItem($id_post)
     {
-        return Image::where('id_product', $id_product)->whereNull('type')->whereNull('is_slide')->get();
+        return Image::where('id_post', $id_post)->whereNull('type')->whereNull('is_slide')->get();
     }
-    public function getAllByIDProductMain($id_product)
+    public function getAllByIDProductMain($id_post)
     {
-        return Image::where('id_product', $id_product)->where('type', 1)->first();
+        return Image::where('id_post', $id_post)->where('type', 1)->first();
     }
-    public function getAllByIDProductSlide($id_product)
+    public function getAllByIDProductSlide($id_post)
     {
-        return Image::where('id_product', $id_product)->whereNull('type')->where('is_slide', 1)->first();
+        return Image::where('id_post', $id_post)->whereNull('type')->where('is_slide', 1)->first();
     }
 }
