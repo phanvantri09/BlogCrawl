@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->integer('id_post')->nullable();
             $table->integer('id_broker')->nullable();
             $table->integer('id_coment')->nullable();
-            $table->id_user('status')->default(1);
+            $table->integer('id_user')->default(1);
             $table->longText('content')->nullable();
             $table->timestamps();
         });

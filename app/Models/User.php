@@ -24,13 +24,12 @@ class User extends Authenticatable
         'password',
         'type',
         'status',
-        'balance',
         'id_user_referral',
-        'social_id',
-        'social_type',
-        'id_user_referral',
+        'social_id', //không cần
+        'social_type', //không cần
+        'id_user_referral',// dùng id của admin thêm user này
         'number_phone',
-        'code', 
+        'code', //chưa cần thêm
         'image',
         'address',
         'birthday',
@@ -55,7 +54,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     protected $cascadeDeletes = true;
-   
+
     public function post(){
         return $this->hasMany(Post::class,'id_user','id');
     }

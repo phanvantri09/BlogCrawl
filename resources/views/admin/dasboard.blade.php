@@ -34,7 +34,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{ route('box.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('box.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -48,7 +48,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{ route('box.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('box.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a> --}}
 
             </div>
         </div>
@@ -65,7 +65,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{ route('product.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('product.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a> --}}
 
             </div>
         </div>
@@ -81,7 +81,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="{{ route('cart.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('cart.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a> --}}
 
             </div>
         </div>
@@ -97,7 +97,7 @@
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="{{ route('transaction.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('transaction.index') }}" class="small-box-footer">Nhiều thông tin hơn <i class="fas fa-arrow-circle-right"></i></a> --}}
 
             </div>
         </div>
