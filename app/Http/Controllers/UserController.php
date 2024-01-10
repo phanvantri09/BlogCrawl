@@ -55,9 +55,19 @@ class UserController extends Controller
      */
     public function store(CreateRequestUser $request)
     {
-        $request->merge(['password' => Hash::make($request->password)]);
-        $type = $request->type;
         $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['image'] = $imageName;
+        }
+
+        $data['password'] = Hash::make($request->password);
+        $data['id_user_referral'] = auth()->user()->id;
+        
+        $type = $request->type;
         $this->userRepository->create($data);
         return redirect()->route('user.list', ['type' => $type])->with('success', 'Thành công');
     }
@@ -91,18 +101,30 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['image'] = $imageName;
+        }
         if(empty($request->password)){
             $data = [
                 'email' => $request->email,
                 'type' => $request->type,
-                'balance' => $request->balance
+                'number_phone' => $request->number_phone,
+                'image' => $imageName,
+                'address' => $request->address,
+                'birthday' => $request->address,
             ];
         }else{
             $data = [
                 'email' => $request->email,
                 'password' =>  Hash::make($request->password),
                 'type' => $request->type,
-                'balance' => $request->balance
+                'number_phone' => $request->number_phone,
+                'image' => $imageName,
+                'address' => $request->address,
+                'birthday' => $request->address,
             ];
         }
 

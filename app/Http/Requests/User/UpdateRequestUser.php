@@ -24,6 +24,7 @@ class UpdateRequestUser extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|unique:users',
             'email' => 'required',
             'password' => 'required',
         ];
@@ -31,6 +32,7 @@ class UpdateRequestUser extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'Không để trống',
             'email.required' => 'Không để trống',
             'email.unique' => 'Đã tồn tại',
             'password.required' => 'Không để trống',

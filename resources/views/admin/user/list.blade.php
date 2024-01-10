@@ -83,12 +83,12 @@
                                             <i class="fas fa-book-open"></i> Xem thông tin
                                         </a>
 
-                                        @if ($item->type != 222)
+                                        {{-- @if ($item->type != 222)
                                             <a href="{{ route('user.transaction', ['id' => $item->id]) }}"
                                                 class="btn btn-app">
                                                 <i class="fas fa-money-bill-alt"></i> Lịch sử giao dịch
                                             </a>
-                                        @endif
+                                        @endif --}}
                                         <a href="{{ route('user.edit', ['id' => $item->id]) }}" class="btn btn-app">
                                             <i class="fas fa-edit"></i> Sửa
                                         </a>
@@ -96,10 +96,10 @@
                                             onclick="return confirm('Bạn có chắc chắn xóa không?')" class="btn btn-app">
                                             <i class="fas fa-trash-alt"></i>Xóa
                                         </a>
-                                        <a href="{{ route('user.listCartMarket', ['id' => $item->id]) }}"
+                                        {{-- <a href="{{ route('user.listCartMarket', ['id' => $item->id]) }}"
                                             class="btn btn-app"> <i class="fas fa-box-open"></i>
                                             Các hộp hiện có
-                                        </a>
+                                        </a> --}}
 
                                     </td>
                                 </tr>

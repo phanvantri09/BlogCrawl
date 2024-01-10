@@ -44,46 +44,50 @@ class UserRepository implements UserRepositoryInterface
 
     public function show($id)
     {
-        return UserInfo::leftjoin('users','user_infos.id_user', '=','users.id' )
-        ->select('user_infos.*','users.*')
-        ->where('user_infos.id', $id)
-        ->first();
+        return User::findOrFail($id);
+        //bị lỗi vì dùng thèn user_infor
+        // return UserInfo::leftjoin('users','user_infos.id_user', '=','users.id' )
+        // ->select('user_infos.*','users.*')
+        // ->where('user_infos.id', $id)
+        // ->first();
     }
-
-    public function showUpdate($id)
-    {
-        return UserInfo::where('id_user',$id)->first();
-    }
-
     public function getUserByType($type)
     {
-        return User::leftjoin('user_infos', 'users.id', '=', 'user_infos.id_user')
-        ->select('user_infos.*','users.*','user_infos.id as id_info_users' )
-        ->where('users.type', $type)
-        ->orderByDesc('users.created_at')
-        ->get();
+        return User::where('type', $type)
+            ->orderByDesc('created_at')
+            ->get();
+            // bị lỗi vì dùng thèn user_infor
+            // return User::leftjoin('user_infos', 'users.id', '=', 'user_infos.id_user')
+            // ->select('user_infos.*','users.*','user_infos.id as id_info_users' )
+            // ->where('users.type', $type)
+            // ->orderByDesc('users.created_at')
+            // ->get();
     }
     public function getUserByTypeGT()
     {
-        return User::leftjoin('user_infos', 'users.id', '=', 'user_infos.id_user')
-        ->select('user_infos.*','users.*','user_infos.id as id_info_users' )
-        ->whereNotNull('id_user_referral')
-        ->orderByDesc('users.created_at')
+        return User::whereNotNull('id_user_referral')
+        ->orderByDesc('created_at')
         ->get();
+        // bị lỗi do dùng thèn user_infor
+        // return User::leftjoin('user_infos', 'users.id', '=', 'user_infos.id_user')
+        // ->select('user_infos.*','users.*','user_infos.id as id_info_users' )
+        // ->whereNotNull('id_user_referral')
+        // ->orderByDesc('users.created_at')
+        // ->get();
     }
-    public function checkInfoUser($id){
-        return UserInfo::where('id_user', $id)->first();
-    }
-    public function createInfo($data)
-    {
-        return UserInfo::create($data);
-    }
-    public function updateInfoUser($data, $id){
-        $infoUser = UserInfo::where('id_user', $id)->first();
+    // public function checkInfoUser($id){
+    //     return UserInfo::where('id_user', $id)->first();
+    // }
+    // public function createInfo($data)
+    // {
+    //     return UserInfo::create($data);
+    // }
+    // public function updateInfoUser($data, $id){
+    //     $infoUser = UserInfo::where('id_user', $id)->first();
 
-        $infoUser->update($data);
-        return $infoUser;
-    }
+    //     $infoUser->update($data);
+    //     return $infoUser;
+    // }
 
     public function listGT($id){
         return User::where('id_user_referral', $id)->orderBy('updated_at', 'desc')->get();
