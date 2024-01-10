@@ -27,12 +27,14 @@ class PostRepository implements PostRepositoryInterface
         $user = Post::findOrFail($id);
         $user->delete();
     }
+    public function edit($id)
+    {
+        return Post::findOrFail($id);
+    }
 
     public function show($id)
     {
         return Post::findOrFail($id);
     }
-    public function getAllByType($type){
-        return Post::where('type', $type)->get();
-    }
+
 }

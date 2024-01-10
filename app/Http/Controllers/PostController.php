@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Post\CreateRequestPost;
+use App\Http\Requests\CreateRequestPost;
 use App\Models\Post;
 use App\Repositories\PostRepositoryInterface;
 use Illuminate\Http\Request;
@@ -52,7 +52,7 @@ class PostController extends Controller
         }
 
         $this->postRepository->create($data);
-        return redirect()->route('post.index')->with('success', 'data created successfully');
+        return redirect()->route('post.list')->with('success', 'data created successfully');
     }
 
     /**
@@ -70,14 +70,13 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        
-        $user = $this->postRepository->edit($id);
-        return view('admin.user.edit', compact('user'));
+        $post = $this->postRepository->edit($id);
+        dd($post);
+        return view('admin.post.edit', compact('post'));
     }
 
     /**
@@ -85,11 +84,28 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $id)
+    public function update(Request $request, $id)
     {
         //
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['image'] = $imageName;
+        }
+       
+            $data = [
+                'title' => $request->title,
+                'des_preview' => $request->des_preview,
+                'description' => $request->description,
+                'avt_image' => $imageName,
+                'video' => $request->video,
+                'birthday' => $request->address,
+            ];
+        
+        $this->postRepository->update($data, $id);
+        return redirect()->route('post.index')->with('success', 'data updated successfully');
     }
 
     /**

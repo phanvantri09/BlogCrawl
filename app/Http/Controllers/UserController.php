@@ -101,11 +101,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        i  $image = $request->file('image');
             $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-            $data['image'] = $imageName;
+           f ($request->hasFile('image')) {
+           $data['image'] = $imageName;
         }
         if(empty($request->password)){
             $data = [

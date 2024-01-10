@@ -33,6 +33,19 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Description preview</label>
+
+                                    <input class="form-control" name="des_preview" rows="3" placeholder="Enter ...">
+                                        {{ empty(old('des_preview')) ? '' : old('des_preview') }}
+                                    @error('des_preview')
+                                        <div class="alert alert-danger">{{ $errors->first('des_preview') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label for="description">Nội Dung </label>
@@ -56,15 +69,10 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
+                                <!-- text input -->
                                 <div class="form-group">
-                                    <label>Comment</label>
-
-                                    <textarea class="form-control" name="des_preview" rows="3" placeholder="Enter ...">
-                                        {{ empty(old('des_preview')) ? '' : old('des_preview') }}
-                                    </textarea>
-                                    @error('des_preview')
-                                        <div class="alert alert-danger">{{ $errors->first('des_preview') }}</div>
-                                    @enderror
+                                    <label for="description">Video</label>
+                                    <textarea name="description"  class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
