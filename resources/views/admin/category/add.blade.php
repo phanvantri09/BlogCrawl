@@ -23,9 +23,9 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Tiêu đề</label>
-                                    <input type="text" name="title" class="form-control" placeholder="Enter ..." value="{{old('title')}}">
-                                    @error('title')
-                                        <div class="alert alert-danger">{{ $errors->first('title') }}</div>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{old('name')}}">
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                                     @enderror
                                 </div>
                             </div>
