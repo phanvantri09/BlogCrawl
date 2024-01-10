@@ -23,9 +23,9 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Tiêu đề</label>
-                                    <input type="text" name="title" class="form-control" placeholder="Enter ..." value="{{old('title', $data->title)}}">
-                                    @error('title')
-                                        <div class="alert alert-danger">{{ $errors->first('title') }}</div>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{old('name', $data->name)}}">
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -33,9 +33,7 @@
                                 <div class="form-group">
                                     <label>Nội dung</label>
 
-                                    <textarea class="form-control" name="description" rows="3" placeholder="Enter ..." >
-                                        {{empty(old('description')) ? $data->description : old('description')}}
-                                    </textarea>
+                                    <textarea class="form-control" name="description" rows="3" placeholder="Enter ..." >{{empty(old('description')) ? $data->description : old('description')}}</textarea>
                                     @error('description')
                                         <div class="alert alert-danger">{{ $errors->first('description') }}</div>
                                     @enderror
