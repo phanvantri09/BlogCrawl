@@ -24,7 +24,9 @@ class CreateRequestUser extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|unique:users',
             'email' => 'required|unique:users',
+            'number_phone' => 'required|unique:users',
             'password' =>  [
                 'required',
                 'min:8',
@@ -35,11 +37,13 @@ class CreateRequestUser extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'Không để trống',
+            'number_phone.required' => 'Không để trống',
             'email.required' => 'Không để trống',
             'email.unique' => 'Đã tồn tại',
             'password.required' => 'Không để trống',
             'password.min' => 'Phải nhiều hơn 8 ký tự',
-            'password.regex' => 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt'
+            'password.regex' => 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt',
         ];
     }
 }
