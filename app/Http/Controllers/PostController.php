@@ -2,45 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\CreateRequestPost;
 use App\Models\Post;
+use App\Repositories\PostRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Helpers\ConstCommon;
 
 class PostController extends Controller
 {
-    protected $userRepository;
-    public function __construct(UserRepositoryInterface $userRepository)
+    protected $postRepository;
+
+    public function __construct(PostRepositoryInterface $postRepository)
     {
-        $this->userRepository = $userRepository;
+        $this->postRepository = $postRepository;
     }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
+        $data = $this->postRepository->all();
+        return view('admin.post.list', compact('data'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         //
+        return view('admin.post.add');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        if ($request->hasFile('avt_image')) {
+            $image = $request->file('avt_image');
+            $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['avt_image'] = $imageName;
+        }
+
+        $this->postRepository->create($data);
+        return redirect()->route('post.index')->with('success', 'data created successfully');
     }
 
     /**
@@ -60,9 +72,12 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
         //
+        
+        $user = $this->postRepository->edit($id);
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -72,7 +87,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $id)
     {
         //
     }
@@ -83,8 +98,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
         //
+        $this->postRepository->delete($id);
+        return back()->with('success', 'Thành công');
     }
 }
