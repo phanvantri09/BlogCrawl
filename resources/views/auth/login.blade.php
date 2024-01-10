@@ -6,8 +6,8 @@
     <meta name="google-site-verification" content="rl9JD04KBYYNOg7JDiZBzygfodJw_BPAOMY6cyXUK9o" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="{{ config('session.lifetime') * 60 }}">
-    <title>Lucky Box</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('/dist/img/logo.png')}}">
+    <title>Clone</title>
+    {{-- <link rel="icon" type="image/x-icon" href="{{asset('/dist/img/logo.png')}}"> --}}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -64,7 +64,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-white">
         <div class="container-lg justify-content-start">
             <a class="navbar-brand text-white col-lg-2 col-md-3 col-5" href="{{ route('home') }}">
-                <img src="{{asset('/dist/img/logo.png')}}" style="width: 100%;" alt="">
+                {{-- <img src="{{asset('/dist/img/logo.png')}}" style="width: 100%;" alt=""> --}}
             </a>
             <h4 class="mb-0">Đăng nhập</h4>
         </div>
