@@ -15,7 +15,7 @@ use App\Models\Cart;
 use App\Models\Box_item;
 use App\Models\Transaction;
 class ConstCommon {
-    
+
     const ListTypeUser = ['user'=>111, 'admin'=>222];
     const TypeUser = 111;
     const TypeAdmin = 222;

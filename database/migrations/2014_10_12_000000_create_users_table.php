@@ -26,9 +26,9 @@ class CreateUsersTable extends Migration
             $table->string('social_id')->nullable()->comment('láy id của nền tảng đăng ký: mail, facebook');
             $table->string('social_type')->nullable()->comment('2 loại là mail và facebook => chỉ cần lưu là google hoặc facebook');
             $table->bigInteger('id_user_referral')->nullable();
-            $table->string('image');
-            $table->string('address');
-            $table->string('birthday');
+            $table->string('image')->nullable();
+            $table->string('address')->nullable();
+            $table->string('birthday')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

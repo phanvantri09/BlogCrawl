@@ -43,19 +43,6 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Loại</label>
-                                    <select name="type" class="form-control">
-                                        @foreach (\App\Helpers\ConstCommon::ListTypeCatogory as $key => $item)
-                                            <option {{( $data->type == $item) ? ' selected' : '' }} value="{{ $item }}"> {{ $key }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Lưu lại</button>
                         </div>

@@ -2,7 +2,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu"   role="button"><i class="fas fa-bars"></i></a>
+            <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
 
@@ -11,7 +11,8 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <div class="info w-100">
-                <a href="{{ route('logout') }}" class="w-100 btn btn-danger"> <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                <a href="{{ route('logout') }}" class="w-100 btn btn-danger"> <i class="fas fa-sign-out-alt"></i> Đăng
+                    xuất</a>
             </div>
         </li>
     </ul>
@@ -22,8 +23,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link d-flex flex-column">
-        <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image  elevation-3"
-            style="opacity: .8">
+        <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image  elevation-3" style="opacity: .8">
     </a>
 
     <!-- Sidebar -->
@@ -34,7 +34,7 @@
                 <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a   class="d-block">{{ Auth::user()->email }}</a>
+                <a class="d-block">{{ Auth::user()->email }}</a>
             </div>
         </div>
 
@@ -79,107 +79,7 @@
                         </li> --}}
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a   class="nav-link bg-warning">
-                        <i class="fas fa-money-bill-alt"></i>
-                        <p>
-                            Giao dịch
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    {{-- [ 1 => 'Rút tiền', 2 => 'Nạp tiền', 3 => 'Thanh toán box', 4 => "Doanh thu bán box", 5 => 'Hoa hồng bán box', 6 => 'Giới thiệu'] --}}
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tất cả</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index',['type' => 1]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Rút tiền</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index',['type' => 2]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nạp tiền</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index',['type' => 3]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thanh toán</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index',['type' => 4]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Doanh thu bán box</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index',['type' => 5]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hoa hồng bán box</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaction.index',['type' => 6]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Giới thiệu người dùng</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a   class="nav-link bg-success">
-                        <i class="fas fa-shopping-cart"></i>
-                        <p>
-                            Đơn Hàng
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item ">
-                            <a href="{{ route('cart.index', ['type'=>2]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đã thanh toán chưa mở box</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('cart.index', ['type'=>3]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đã mở box chưa xác nhận giao</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('cart.index', ['type'=>7]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đã mở xác nhận giao</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('cart.index', ['type'=>4]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đang giao Hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('cart.index', ['type'=>5]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đã hoàn thành</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('cart.index', ['type'=>6]) }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đã từ chối hoặc phát sinh lỗi</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
                 <li class="nav-item border-bottom">
                     <a href="{{ route('chat.index') }}" class="nav-link">
                         <i class="fas fa-comment-alt"></i>
@@ -189,7 +89,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a   class="nav-link">
+                    <a class="nav-link">
                         <i class="fas fa-users"></i>
                         <p>
                             Người dùng
@@ -204,7 +104,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a   class="nav-link">
+                            <a class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
@@ -216,8 +116,7 @@
                                 </a>
                             </ul>
                             <ul>
-                                <a href="{{ route('user.list', ['type' => 3]) }}"
-                                    class="nav-link">
+                                <a href="{{ route('user.list', ['type' => 3]) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>User được giới thiệu</p>
                                 </a>
@@ -228,61 +127,14 @@
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Admin</p>
                                 </a>
-                    </ul>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a   class="nav-link">
-                        <i class="fas fa-credit-card"></i>
-                        <p>
-                            Thẻ user
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('card.add') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('card.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item border-bottom">
-                    <a   class="nav-link">
-                        <i class="fas fa-credit-card"></i>
-                        <p>
-                            Thẻ admin
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('card.addAdmin') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('card.indexAdmin') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
+                            </ul>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a   class="nav-link">
+                    <a class="nav-link">
                         <i class="fas fa-boxes"></i>
                         <p>
-                            Loại event, box, product
+                            Loại bài post
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -295,75 +147,6 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('category.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a   class="nav-link">
-                        <i class="fas fa-glass-whiskey"></i>
-                        <p>
-                            Sản phẩm
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('product.add') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('product.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a   class="nav-link">
-                        <i class="fas fa-box-open"></i>
-                        <p>
-                            Box ( Hộp box )
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('box.add') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('box.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a   class="nav-link">
-                        <i class="fas fa-calendar-alt"></i>
-                        <p>
-                            Event ( sự kiện )
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('box.box_event.add') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('box.box_event.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
