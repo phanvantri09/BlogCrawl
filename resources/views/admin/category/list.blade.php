@@ -26,7 +26,7 @@
                                 <th>stt</th>
                                 <th>Tiêu đề</th>
                                 <th>Nội dung</th>
-                                <th>Loại </th>
+                                {{-- <th>Loại </th> --}}
                                 <th></th>
                             </tr>
                         </thead>
@@ -34,9 +34,9 @@
                             @foreach ($data as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{$item->title}}</td>
+                                    <td>{{$item->name}}</td>
                                     <td>{{$item->description}}</td>
-                                    <td>{{ \App\Helpers\ConstCommon::getnameByTypeCategory($item->type) }}</td>
+                                    {{-- <td>{{ \App\Helpers\ConstCommon::getnameByTypeCategory($item->type) }}</td> --}}
                                     <td>
                                         <a href="{{ route('category.show', ['id'=>$item->id]) }}" class="btn btn-app">
                                             <i class="fas fa-book-open"></i> Xem

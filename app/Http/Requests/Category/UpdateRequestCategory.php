@@ -24,14 +24,14 @@ class UpdateRequestCategory extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'name' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'title.required' => 'Không để trống',
-            // 'title.unique' => 'Đã tồn tại',
+            'name.required' => 'Không để trống',
+            // 'name.unique' => 'Đã tồn tại',
         ];
     }
 }

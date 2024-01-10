@@ -33,9 +33,7 @@
                                 <div class="form-group">
                                     <label>Nội dung</label>
 
-                                    <textarea class="form-control" name="description" rows="3" placeholder="Enter ..." >
-                                        {{empty(old('description')) ? $data->description : old('description')}}
-                                    </textarea>
+                                    <textarea class="form-control" name="description" rows="3" placeholder="Enter ..." >{{empty(old('description')) ? $data->description : old('description')}}</textarea>
                                     @error('description')
                                         <div class="alert alert-danger">{{ $errors->first('description') }}</div>
                                     @enderror
