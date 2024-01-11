@@ -2,67 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\CreateRequestPost;
 use App\Models\Post;
+use App\Repositories\CategoryRepositoryInterface;
+use App\Repositories\PostRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Helpers\ConstCommon;
 
 class PostController extends Controller
 {
-    protected $userRepository;
-    public function __construct(UserRepositoryInterface $userRepository)
+    protected $postRepository;
+    protected $categoryRepository;
+
+    public function __construct(PostRepositoryInterface $postRepository, CategoryRepositoryInterface $categoryRepository)
     {
-        $this->userRepository = $userRepository;
+        $this->postRepository = $postRepository;
+        $this->categoryRepository = $categoryRepository;
     }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $data = $this->postRepository->all();
+        return view('admin.post.list', compact('data'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $category = $this->categoryRepository->all();
+        return view('admin.post.add', compact('category'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequestPost $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
+        $data = $request->all();
+        if ($request->hasFile('avt_image')) {
+            $image = $request->file('avt_image');
+            $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['avt_image'] = $imageName;
+        }
+        $data['id_category'] = $request->id_category;
+        $this->postRepository->create($data);
+        return redirect()->route('post.index')->with('success', 'data created successfully');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
         //
+        $category = $this->categoryRepository->all();
+        $post = $this->postRepository->edit($id);
+        return view('admin.post.edit', compact('post','category'));
     }
 
     /**
@@ -70,11 +75,31 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['image'] = $imageName;
+        }
+        else {
+            $post = $this->postRepository->find($id);
+            $imageName = $post->avt_image; // Lấy giá trị của ảnh hiện tại
+            $data['image'] = $imageName;
+        }
+    
+        $data = [
+            'title' => $request->title,
+            'des_preview' => $request->des_preview,
+            'description' => $request->description,
+            'avt_image' => $imageName,
+            'id_category' => $request->id_category,
+        ];
+    
+        $this->postRepository->update($data, $id);
+        return back()->with('success', 'Thành công');
     }
 
     /**
@@ -83,8 +108,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
         //
+        $this->postRepository->delete($id);
+        return back()->with('success', 'Thành công');
     }
 }
