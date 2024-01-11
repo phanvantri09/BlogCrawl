@@ -23,9 +23,9 @@ class Post extends Model
         'video',
         'amount_read',
     ];
-    // public function Post()
-    // {
-    //     return $this->belongsTo(Post::class, 'id_product', 'id');
-    // }
+    public function category()
+    {
+        return $this->hasOne(Category::class,'id', 'id_category');
+    }
 
 }
