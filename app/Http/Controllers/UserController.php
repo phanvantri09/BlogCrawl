@@ -101,11 +101,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        i  $image = $request->file('image');
+        $user = $this->userRepository->find($id);
+        $imageName = $user->image; // Lấy giá trị của ảnh hiện tại
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-           f ($request->hasFile('image')) {
-           $data['image'] = $imageName;
+            $data['image'] = $imageName;
         }
         if(empty($request->password)){
             $data = [

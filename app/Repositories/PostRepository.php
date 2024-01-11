@@ -32,9 +32,9 @@ class PostRepository implements PostRepositoryInterface
         return Post::findOrFail($id);
     }
 
-    public function show($id)
+    public function find($id)
     {
-        return Post::findOrFail($id);
+        return Post::find($id);
     }
 
 }

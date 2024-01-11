@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class CreateRequestPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,9 @@ class CreateRequestPost extends FormRequest
     {
         return [
             //
-            'title' => 'required|unique:posts',
-            'description' => 'required|unique:posts',
+            'title' => 'required:posts',
+            'description' => 'required:posts',
+            'des_preview' => 'required:posts',
         ];
     }
     public function messages()
@@ -34,6 +35,7 @@ class CreateRequestPost extends FormRequest
         return [
             'title.required' => 'Không để trống',
             'description.required' => 'Không để trống',
+            'des_preview.required' => 'Không để trống',
         ];
     }
 }

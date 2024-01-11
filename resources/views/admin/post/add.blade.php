@@ -37,10 +37,22 @@
                                     <label>Description preview</label>
 
                                     <input class="form-control" name="des_preview" rows="3" placeholder="Enter ...">
-                                        {{ empty(old('des_preview')) ? '' : old('des_preview') }}
+                                    {{ empty(old('des_preview')) ? '' : old('des_preview') }}
                                     @error('des_preview')
                                         <div class="alert alert-danger">{{ $errors->first('des_preview') }}</div>
                                     @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Loại</label>
+                                    <select name="id_category" class="form-control">
+                                        @foreach ($category as $categories)
+                                            <option value="{{ $categories->id }}">{{ $categories->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -64,15 +76,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <img id="image_preview" style="max-width: 100%; max-height: 200px;">
+                                <img id="avt_image_preview" style="max-width: 100%; max-height: 200px;">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- text input -->
                                 <div class="form-group">
-                                    <label for="description">Video</label>
-                                    <textarea name="description"  class="form-control"></textarea>
+                                    <label for="video">Video</label>
+                                    <textarea name="video" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
