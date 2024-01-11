@@ -61,7 +61,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label for="description">Nội Dung </label>
-                                    <textarea name="description" id="editor">{!! $post->description !!}</textarea>
+                                    <textarea name="description" id="summernote">{!! $post->description !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +101,9 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            $('#summernote').summernote();
+        });
         function previewImage(typeImage) {
             var fileImage = document.querySelector('input[name=' + typeImage + ']').files[0];
             if (fileImage) {
