@@ -23,6 +23,7 @@ class CreateSocialsTable extends Migration
             $table->string('youtube')->nullable();
             $table->string('web')->nullable();
             $table->string('skype')->nullable();
+            $table->integer('is_show')->default(1); //  1 là hiển thị 2 là ẩn
             $table->timestamps();
         });
     }

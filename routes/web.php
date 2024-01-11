@@ -133,8 +133,23 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
             // xóa
             Route::get('/delete/{id}', 'destroy')->name('delete');
 
-            // hiển thị tất cả
-            Route::get('/show/{id}', 'show')->name('show');
+        });
+    });
+    Route::group(['prefix' => 'social', 'as' =>'social.'], function () {
+        Route::controller(SocialController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addSocial');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editSocial');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
         });
     });
 });
