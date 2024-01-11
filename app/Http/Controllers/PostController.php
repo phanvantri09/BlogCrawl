@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\CreateRequestPost;
+use App\Http\Requests\Post\UpdateRequestPost;
 use App\Models\Post;
 use App\Repositories\CategoryRepositoryInterface;
 use App\Repositories\PostRepositoryInterface;
@@ -53,6 +54,7 @@ class PostController extends Controller
             $data['avt_image'] = $imageName;
         }
         $data['id_category'] = $request->id_category;
+        $data['id_user_create'] = auth()->user()->id;
         $this->postRepository->create($data);
         return redirect()->route('post.index')->with('success', 'data created successfully');
     }
@@ -76,7 +78,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequestPost $request, $id)
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -96,6 +98,7 @@ class PostController extends Controller
             'description' => $request->description,
             'avt_image' => $imageName,
             'id_category' => $request->id_category,
+            'id_user_update' => auth()->user()->id
         ];
     
         $this->postRepository->update($data, $id);

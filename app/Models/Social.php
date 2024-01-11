@@ -17,5 +17,6 @@ class Social extends Model
         'youtube',
         'skype',
         'web',
+        'is_show'
     ];
 }

@@ -71,14 +71,16 @@
                                     <label>Image</label>
                                     <label class="btn btn-primary btn-md btn-file">
                                         Tải ảnh<input name="avt_image" type="file" accept=".jpg, .png"
-                                            onchange="previewImage('image_preview')">
+                                            onchange="previewImage('avt_image_preview')">
                                     </label>
                                 </div>
                             </div>
+                            @if ($post->avt_image)
                             <div class="col-sm-6">
                                 <img id="avt_image_preview" style="max-width: 100%; max-height: 200px;"
                                     src="{{ asset('storage/images/' . $post->avt_image) }}">
                             </div>
+                            @endif
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
