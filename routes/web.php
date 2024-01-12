@@ -170,5 +170,23 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
 
         });
     });
+
+    Route::group(['prefix' => 'license', 'as' =>'license.'], function () {
+        Route::controller(LicenseController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addLicense');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editLicense');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
 });
 

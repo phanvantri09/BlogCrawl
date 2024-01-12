@@ -80,26 +80,18 @@ class PostController extends Controller
      */
     public function update(UpdateRequestPost $request, $id)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+        $data = $request->all();
+        if ($request->hasFile('avt_image')) {
+            $image = $request->file('avt_image');
+            $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-            $data['image'] = $imageName;
+            $data['avt_image'] = $imageName;
         }
         else {
             $post = $this->postRepository->find($id);
             $imageName = $post->avt_image; // Lấy giá trị của ảnh hiện tại
-            $data['image'] = $imageName;
+            $data['avt_image'] = $imageName;
         }
-    
-        $data = [
-            'title' => $request->title,
-            'des_preview' => $request->des_preview,
-            'description' => $request->description,
-            'avt_image' => $imageName,
-            'id_category' => $request->id_category,
-            'id_user_update' => auth()->user()->id
-        ];
     
         $this->postRepository->update($data, $id);
         return back()->with('success', 'Thành công');
