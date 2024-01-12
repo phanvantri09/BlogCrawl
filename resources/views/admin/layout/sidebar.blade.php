@@ -5,7 +5,17 @@
             <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
-
+    <!-- search all -->
+    <ul class="navbar-nav" style="margin-left: 770px">
+        <li class="nav-item">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Nhập dữ liệu...">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+        </li>
+    </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
