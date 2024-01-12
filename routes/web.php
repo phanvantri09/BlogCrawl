@@ -152,5 +152,23 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
 
         });
     });
+
+    Route::group(['prefix' => 'video', 'as' =>'video.'], function () {
+        Route::controller(VideoController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addVideo');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editVideo');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
 });
 
