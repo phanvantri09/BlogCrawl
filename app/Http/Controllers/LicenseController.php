@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\License\CreateRequestLicense;
+use App\Http\Requests\License\UpdateRequestLicense;
 use App\Models\Licence;
 use App\Repositories\LicenseRepositoryInterface;
 use Illuminate\Http\Request;
@@ -41,7 +43,7 @@ class LicenseController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(CreateRequestLicense $request)
     {
         //
         $data = $request->all();
@@ -72,7 +74,7 @@ class LicenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\License  $license
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequestLicense $request, $id)
     {
         //
         $data = $request->all();

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\video\CreateRequestVideo;
-use App\Http\Requests\video\UpdateRequestVideo;
+use App\Http\Requests\Video\CreateRequestVideo;
+use App\Http\Requests\Video\UpdateRequestVideo;
 use App\Repositories\VideoRepository;
 use App\Repositories\VideoRepositoryInterface;
 use Illuminate\Http\Request;

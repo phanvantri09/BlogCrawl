@@ -15,7 +15,7 @@ class HomeController extends Controller
     protected $userRepository;
     protected $imageRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository, ImageRepositoryInterface $imageRepository,
+    public function __construct(UserRepositoryInterface $userRepository, ImageRepositoryInterface $imageRepository
     )
     {
         $this->userRepository = $userRepository;
