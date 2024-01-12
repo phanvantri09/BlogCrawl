@@ -177,8 +177,8 @@
                         </li>
                     </ul>
                 </li>
-                  {{-- add menu social --}}
-                  <li class="nav-item">
+                {{-- add menu social --}}
+                <li class="nav-item">
                     <a class="nav-link">
                         <i class="far fa-newspaper"></i>
                         <p>
@@ -195,6 +195,30 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('social.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- add menu video --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-video"></i>
+                        <p>
+                            Video
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('video.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('video.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
