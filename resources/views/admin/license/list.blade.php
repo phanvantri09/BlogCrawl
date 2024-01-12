@@ -35,9 +35,13 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $license->name }}</td>
+                                        @if($license->image)
                                         <td><img style="max-width: 100%; max-height: 200px;"
                                             src="{{ asset('storage/images/' . $license->image) }}">
                                         </td>
+                                        @else
+                                        <td></td>
+                                        @endif
                                         <td>{!! $license->description !!}</td>
                                         <td>
                                             <a href="{{ route('license.edit', ['id' => $license->id]) }}"
