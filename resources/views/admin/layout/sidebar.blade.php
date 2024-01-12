@@ -180,7 +180,7 @@
                 {{-- add menu social --}}
                 <li class="nav-item">
                     <a class="nav-link">
-                        <i class="far fa-newspaper"></i>
+                        <i class="fas fa-users"></i>
                         <p>
                             Social
                             <i class="right fas fa-angle-left"></i>
@@ -219,6 +219,30 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('video.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- add menu license --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        <p>
+                            License
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('license.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('license.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>

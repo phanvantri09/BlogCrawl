@@ -15,6 +15,8 @@ use App\Repositories\SocialRepository;
 use App\Repositories\SocialRepositoryInterface;
 use App\Repositories\VideoRepository;
 use App\Repositories\VideoRepositoryInterface;
+use App\Repositories\LicenseRepository;
+use App\Repositories\LicenseRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
         $this->app->bind(SocialRepositoryInterface::class, SocialRepository::class);
         $this->app->bind(VideoRepositoryInterface::class, VideoRepository::class);
+        $this->app->bind(LicenseRepositoryInterface::class, LicenseRepository::class);
     }
     /**
      * Bootstrap services.
