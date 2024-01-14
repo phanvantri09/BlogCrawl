@@ -9,8 +9,8 @@
     <ul class="navbar-nav" style="margin-left: 770px">
         <li class="nav-item">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Nhập dữ liệu...">
-                <button type="submit" class="btn btn-primary">
+                <input type="text" id="search-input" class="form-control" placeholder="Nhập dữ liệu...">
+                <button type="button" id="search-button" class="btn btn-primary">
                     <i class="fas fa-search"></i> Tìm kiếm
                 </button>
             </div>
@@ -51,8 +51,7 @@
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                    aria-label="Search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>
@@ -63,8 +62,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item menu-open">
 
@@ -265,3 +263,29 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<script>
+    $(document).ready(function () {
+        $('#search-button').click(function () {
+            var query = $('#search-input').val();
+            search(query);
+        });
+
+        function search(query) {
+            $.ajax({
+                url: '{{ route('search.search') }}',
+                type: 'POST',
+                data: {
+                    query: query
+                },
+                success: function (response) {
+                    var encodedResults = encodeURIComponent(JSON.stringify(response));
+                    var url = '{{ route('search.index') }}?results=' + encodedResults;
+                window.location.href = url;
+            },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+        });
+    }
+});
+</script>

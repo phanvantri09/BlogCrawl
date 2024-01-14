@@ -41,7 +41,7 @@
                                     @if ($post->category)
                                         <td>{{ $post->category->name }}</td>
                                     @else
-                                        <td>N/A</td>
+                                        <td></td>
                                     @endif
                                     {{-- <td>{{ \App\Helpers\ConstCommon::getnameByTypeCategory($item->type) }}</td> --}}
                                     <td>

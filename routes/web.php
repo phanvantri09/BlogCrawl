@@ -188,5 +188,15 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
 
         });
     });
+
+    Route::group(['prefix' => 'search', 'as' =>'search.'], function () {
+        Route::controller(SearchController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            Route::post('/search', 'search')->name('search');
+
+        });
+    });
 });
 
