@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(123);
+        return view('user.layout.index', compact([]));
     }
 
     public function chatbox()
