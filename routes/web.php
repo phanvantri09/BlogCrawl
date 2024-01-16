@@ -4,6 +4,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +16,19 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/crawl-1', function () {
+    $response = Http::get('https://vnwallstreet.top/api/inter/video/list?uid=-1&time_=1705378840365&sign_=00320E175B223C04148E2D96F0CBD8F3');
+
+    if ($response->successful()) {
+        $data = $response->json();
+
+        return response()->json($data); // Trả về dữ liệu dạng JSON
+    } else {
+        dd(123);
+        abort($response->status());
+    }
+});
 
 // trang chủ ở đây
 Route::fallback(function () {
