@@ -18,11 +18,15 @@ use Illuminate\Support\Facades\Http;
 */
 
 Route::get('/crawl-1', function () {
-    $response = Http::get('https://vnwallstreet.top/api/inter/video/list?uid=-1&time_=1705378840365&sign_=00320E175B223C04148E2D96F0CBD8F3');
+    //video
+    // $response = Http::get('https://vnwallstreet.top/api/inter/video/list?uid=-1&time_=1705378840365&sign_=00320E175B223C04148E2D96F0CBD8F3');
+
+    // post
+    $response = Http::get('https://vnwallstreet.com/api/inter/newsFlash/page?limit=5&start=0&uid=-1');
 
     if ($response->successful()) {
         $data = $response->json();
-
+// dd($data);
         return response()->json($data); // Trả về dữ liệu dạng JSON
     } else {
         dd(123);
