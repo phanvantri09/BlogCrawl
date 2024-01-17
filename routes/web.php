@@ -17,13 +17,20 @@ use Illuminate\Support\Facades\Http;
 |
 */
 
+
+// cmd  php -i | grep cURL
+
+// php -i | grep curl
 Route::get('/crawl-1', function () {
     //video
     // $response = Http::get('https://vnwallstreet.top/api/inter/video/list?uid=-1&time_=1705378840365&sign_=00320E175B223C04148E2D96F0CBD8F3');
 
     // post
-    $response = Http::get('https://vnwallstreet.com/api/inter/newsFlash/page?limit=5&start=0&uid=-1');
-
+    $response = Http::get('https://vnwallstreet.com/api/inter/newsFlash/page?limit=50&start=0&uid=-1&time_=1705486890759&sign_=C27608603286D272C27BB26A4ECB77D0');
+    // $response = Http::withOptions([
+    //     CURLOPT_SSL_VERIFYHOST => false,
+    //     CURLOPT_SSL_VERIFYPEER => false,
+    // ])->get('https://vnwallstreet.com/api/inter/platformMerchants/get?pmid=23&uid=-1&time_=1705486891986&sign_=9F481199AADF9F4AE301B87C1CF13909');
     if ($response->successful()) {
         $data = $response->json();
 // dd($data);
