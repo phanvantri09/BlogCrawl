@@ -23,9 +23,9 @@ class ConstCommon {
     const MailAdmin = [];
 
     const Domain = 'https://vnwallstreet.top';
-    const ListAPI = 
+    const ListAPI =
         [
-            'posts'=>'',
+            'posts'=>'https://vnwallstreet.top/api/inter/newsFlash/page?limit=10&start=0&uid=-1',
             'broders'=>'',
             'videos'=>'',
             'licenses'=>''
