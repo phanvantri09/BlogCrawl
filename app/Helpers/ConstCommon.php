@@ -22,6 +22,15 @@ class ConstCommon {
     const ListStatusPost = [1=>"Hiện", 2=>"Ẩn"];
     const MailAdmin = [];
 
+    const Domain = 'https://vnwallstreet.top';
+    const ListAPI = 
+        [
+            'posts'=>'',
+            'broders'=>'',
+            'videos'=>'',
+            'licenses'=>''
+        ];
+
     public static function getAllCategory(){
         return Category::all();
     }
