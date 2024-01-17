@@ -26,8 +26,12 @@
                             <tr>
                                 <th>stt</th>
                                 <th>Tiêu đề</th>
-                                <th>Frame</th>
-                                <th>link</th>
+                                <th>Nội dung</th>
+                                <th>head img</th>
+                                <th>Link Url</th>
+                                <th>Video name</th>
+                                <th>Video file name</th>
+                                <th>Url</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,8 +39,18 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $video->title }}</td>
-                                    <td>{{ $video->frame }}</td>
-                                    <td>{{ $video->link }}</td>
+                                    <td>{!! $video->content !!}</td>
+                                    @if($video->headImg)
+                                        <td><img style="max-width: 100%; max-height: 200px;"
+                                            src="{{ asset('storage/images/' . $video->headImg) }}">
+                                        </td>
+                                    @else
+                                    <td></td>
+                                    @endif
+                                    <td>{{ $video->linkUrl }}</td>
+                                    <td>{{ $video->videoName }}</td>
+                                    <td>{{ $video->videoFileName }}</td>
+                                    <td>{{ $video->url }}</td>
                                     <td>
                                         <a href="{{ route('video.edit', ['id' => $video->id]) }}" class="btn btn-app">
                                             <i class="fas fa-edit"></i> Sửa

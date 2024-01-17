@@ -12,8 +12,14 @@ class Video extends Model
 
     protected $fillable = [
         'title',
-        'frame',
-        'link',
+        'content',
+        'headImg',
+        'linkUrl',
+        'videoName',
+        'status',
+        'videoid',
+        'videoFileName',
+        'url',
         'id_user'
     ];
 }
