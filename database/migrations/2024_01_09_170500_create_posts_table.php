@@ -12,6 +12,42 @@ class CreatePostsTable extends Migration
      * @return void
      */
 
+    //  "actual": "",
+    //  "articleid": -1,
+    //  "commentNum": 0,
+    //  "consensus": "",
+    //  "content": "USD/JPY đã tăng 1,00% trong ngày và hiện ở mức 147,22.",
+    //  "createtime": 1705425217468,
+    //  "facebookUrl": "",
+    //  "firstIncrease": "",
+    //  "firstName": "WTI",
+    //  "firstPrice": "",
+    //  "headImg": "",
+    //  "img": "",
+    //  "important": "0",
+    //  "influence": 2,
+    //  "isLike": 2,
+    //  "labelIds": "",
+    //  "labelList": [],
+    //  "likeNum": 0,
+    //  "linkUrl": "",
+    //  "lookNum": 339,
+    //  "messageid": 174818,
+    //  "nickname": "",
+    //  "otherId": "202401170113371050",
+    //  "previous": "",
+    //  "quotation": -1,
+    //  "secondIncrease": "",
+    //  "secondName": "",
+    //  "secondPrice": "",
+    //  "star": "",
+    //  "status": 1,
+    //  "tiktokUrl": "",
+    //  "title": "",
+    //  "type": 2,
+    //  "updatetime": -1,
+    //  "youtubeUrl": ""
+
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
