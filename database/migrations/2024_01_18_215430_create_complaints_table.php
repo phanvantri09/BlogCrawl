@@ -36,10 +36,10 @@ class CreateComplaintsTable extends Migration
             $table->id();
             $table->integer("complaintid")->nullable();
             $table->integer("complainttypeid")->nullable();
-            $table->integer("lookNum")->nullable();
-            $table->integer("status")->nullable();
-            $table->integer("id_user_create")->nullable();
-            $table->integer("id_user_update")->nullable();
+            $table->integer("lookNum")->->default(100);
+            $table->integer("status")->default(1);
+            $table->integer("id_user_create")->default(0);
+            $table->integer("id_user_update")->default(0);
 
             $table->string("complaintName")->nullable();
             $table->string("headImg")->nullable();
