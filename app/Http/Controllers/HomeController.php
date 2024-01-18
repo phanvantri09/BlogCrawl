@@ -28,11 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.layout.index', compact([]));
+        return view('user.page.home', compact([]));
     }
 
     public function chatbox()
     {
         return view('user.layout.chatbox', compact([]));
+    }
+    public function complain()
+    {
+        return view('user.page.complain', compact([]));
     }
 }
