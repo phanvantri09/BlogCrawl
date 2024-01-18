@@ -19,45 +19,56 @@
                     </h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>stt</th>
-                                <th>Tiêu đề</th>
-                                <th>Nội dung tóm tắt</th>
-                                <th>Nội dung</th>
-                                <th>Loại</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $key => $post)
+                <div class="table-responsive">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->des_preview }}</td>
-                                    <td>{!! $post->description !!}</td>
-                                    @if ($post->category)
-                                        <td>{{ $post->category->name }}</td>
-                                    @else
-                                        <td>N/A</td>
-                                    @endif
-                                    {{-- <td>{{ \App\Helpers\ConstCommon::getnameByTypeCategory($item->type) }}</td> --}}
-                                    <td>
-                                        <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-app">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-app">
-                                            <i class="fas fa-trash-alt"></i>Xóa
-                                        </a>
-
-                                    </td>
+                                    <th>stt</th>
+                                    <th>Nội dung</th>
+                                    <th>facebook url</th>
+                                    <th>Link url</th>
+                                    <th>img</th>
+                                    <th>Loại</th>
+                                    <th>youtube url</th>
+                                    <th></th>
                                 </tr>
-                            @endforeach
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $key => $post)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{!! $post->content !!}</td>
+                                        <td>{{ $post->facebookUrl }}</td>
+                                        <td>{!! $post->linkUrl !!}</td>
+                                        @if ($post->headImg)
+                                            <td><img style="max-width: 100%; max-height: 200px;"
+                                                    src="{{ asset('storage/images/' . $post->headImg) }}">
+                                            </td>
+                                        @else
+                                            <td></td>
+                                        @endif
+                                        @if ($post->category)
+                                            <td>{{ $post->category->name }}</td>
+                                        @else
+                                            <td>N/A</td>
+                                        @endif
+                                        <td>{{ $post->youtubeUrl }}</td>
+                                        {{-- <td>{{ \App\Helpers\ConstCommon::getnameByTypeCategory($item->type) }}</td> --}}
+                                        <td>
+                                            <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-app">
+                                                <i class="fas fa-edit"></i> Sửa
+                                            </a>
+                                            <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-app">
+                                                <i class="fas fa-trash-alt"></i>Xóa
+                                            </a>
 
-                        </tbody>
-                        {{-- <tfoot>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                            {{-- <tfoot>
                             <tr>
                                 <th>Rendering engine</th>
                                 <th>Browser</th>
@@ -67,7 +78,8 @@
                                 <th>acttion</th>
                             </tr>
                         </tfoot> --}}
-                    </table>
+                        </table>
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>
