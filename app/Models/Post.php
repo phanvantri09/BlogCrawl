@@ -9,17 +9,13 @@ class Post extends Model
 {
     use HasFactory;
     protected $table = 'posts';
-    
+
     protected $fillable = [
         "id_category",
         "content", //description
         "createtime",
         "facebookUrl",
-        "firstIncrease",
-        "firstName",
-        "firstPrice",
         "headImg", //avt_image
-        "img",
         "important",
         "influence",
         "linkUrl",
@@ -31,9 +27,7 @@ class Post extends Model
         "type",
         "youtubeUrl",
         "id_user_create",
-        "video",
-        'id_category',
-        'id_user_create',
+        'id_user_update',
     ];
     // protected $fillable = [
     //     'id_category',
