@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\complaint;
+use App\Repositories\ComplaintRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Helpers\ConstCommon;
 
 class ComplaintController extends Controller
 {
+    protected $complaintRepository;
+    public function __construct(ComplaintRepositoryInterface $complaintRepository){ 
+        $this->complaintRepository = $complaintRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +21,8 @@ class ComplaintController extends Controller
     public function index()
     {
         //
+        $data = $this->complaintRepository->all();
+        return view('admin.complaint.list', compact('data'));
     }
 
     /**
@@ -25,6 +33,7 @@ class ComplaintController extends Controller
     public function create()
     {
         //
+        return view('admin.complaint.add');
     }
 
     /**
@@ -36,17 +45,29 @@ class ComplaintController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\complaint  $complaint
-     * @return \Illuminate\Http\Response
-     */
-    public function show(complaint $complaint)
-    {
-        //
+        $data = $request->all();
+        if ($request->hasFile('headImg')) {
+            $headImg = $request->file('headImg');
+            $headImgName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $headImg->extension();
+            ConstCommon::addImageToStorage($headImg, $headImgName);
+            $data['headImg'] = $headImgName;
+        }
+        
+        if ($request->hasFile('img')) {
+            $images = $request->file('img');
+            $imageNames = [];
+        
+            foreach ($images as $image) {
+                $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+                ConstCommon::addImageToStorage($image, $imageName);
+                $imageNames[] = $imageName;
+            }
+        
+            $data['img'] = implode(',', $imageNames);
+        }
+        $data['id_user_create'] = auth()->user()->id;
+        $this->complaintRepository->create($data);
+        return redirect()->route('complaint.index')->with('success', 'data created successfully');
     }
 
     /**
@@ -55,9 +76,12 @@ class ComplaintController extends Controller
      * @param  \App\Models\complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function edit(complaint $complaint)
+    public function edit($id)
     {
         //
+        $data['id_user_update'] = auth()->user()->id;
+        $complaint = $this->complaintRepository->edit($id);
+        return view('admin.post.edit', compact('post'));
     }
 
     /**
@@ -67,9 +91,12 @@ class ComplaintController extends Controller
      * @param  \App\Models\complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, complaint $complaint)
+    public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $this->complaintRepository->update($data);
+        return back()->with('success', 'Thành công');
     }
 
     /**
@@ -78,8 +105,10 @@ class ComplaintController extends Controller
      * @param  \App\Models\complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(complaint $complaint)
+    public function destroy($id)
     {
         //
+        $this->complaintRepository->delete($id);
+
     }
 }
