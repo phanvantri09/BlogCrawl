@@ -25,17 +25,16 @@ class UpdateRequestPost extends FormRequest
     {
         return [
             //
-            'title' => 'required',
-            'description' => 'required',
-            'des_preview' => 'required',
+            'content' => 'required:posts',
+            'title' => 'required:posts'
         ];
     }
     public function messages()
     {
         return [
+            'content.required' => 'Không để trống',
             'title.required' => 'Không để trống',
-            'description.required' => 'Không để trống',
-            'des_preview.required' => 'Không để trống',
+            
         ];
     }
 }
