@@ -62,67 +62,6 @@
             //   Need to add Toggle aria-expanded value here as well because it stays as true when you click a menu item
         }))
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
-        integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Initialize and configure your Slick Slider -->
-    <script>
-        $(document).ready(function() {
-            $('.slider-box').slick({
-                infinite: true,
-                slidesToShow: 3,
-                centerMode: true,
-                prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-                nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-                responsive: [{
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 3,
-                            centerMode: false,
-                        }
-                    },
-                    {
-                        breakpoint: 567,
-                        settings: {
-                            slidesToShow: 2,
-                            centerMode: false
-                        }
-                    }
-                ]
-            });
-            $('.slider-short-video-card').slick({
-                slidesToShow: 3,
-                prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-                nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-                responsive: [{
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 2
-
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 567,
-                        settings: {
-                            slidesToShow: 2,
-                        }
-                    }
-                ]
-            });
-        });
-    </script>
 
     <script>
         function myFunction() {
@@ -141,6 +80,7 @@
             }
         }
     </script>
+    @yield('scripts')
 </body>
 
 </html>

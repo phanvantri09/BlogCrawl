@@ -598,3 +598,113 @@ a:hover {
     right: 0;
     top: 0;
 }
+.video-item{
+    padding: 1rem 1rem 2rem 1rem;
+    border-bottom: 1px solid #38444d;
+}
+.video-view-container{
+    border: 1px solid #38444d;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+.video-box iframe{
+    width: 100%;
+    height: 300px;
+    border-radius: 10px 10px 0px 0;
+}
+@media (max-width: 567px) {
+    .video-item{
+        padding: 0.5rem;
+    }
+    .video-box iframe{
+        height: auto;
+    }
+}
+.video-info-avatar-box{
+    width: 50px;
+    height: 50px;
+}
+.video-info-avatar-box img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.video-info-time{
+    font-size: 13px;
+}
+.video-info-title{
+    font-weight: bold;
+    font-size: 14px;
+}
+.btn-video-item{
+    border: none;
+    background: rgb(255, 0, 0);
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+.comment-view{
+    padding: 40px 0;
+    border-top: 1px solid #38444d;
+}
+.comment-replay-view{
+    border-bottom: 1px solid #38444d;
+    margin-bottom: 30px;
+    padding: 0 16px 40px;
+}
+.comment-replay-view-first{
+    background: #192734;
+    border-radius: 20px;
+    padding: 12px 12px 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-replay-avatar-box{
+    width: 40px;
+    height: 40px;
+}
+.comment-replay-avatar-box img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.comment-replay-view-first .replay-box{
+    border: 1px solid #3d4c5c;
+    background: #192734;
+    border-radius: 10px;
+    padding: 10px;
+    width: calc(100% - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.comment-replay-view-first .replay-box .el-textarea__inner{
+    font-size: 14px;
+    padding: 5px 15px;
+    width: 100%;
+    background: none;
+    border: 0;
+    resize: none;
+    outline: none;
+    height: 31px;
+    min-height: 31px;
+    color: #fff;
+}
+.comment-replay-view-first .replay-box button{
+    color: #770085;
+    border: none;
+    background: none;
+}
+.commont-container-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+.commont-item{
+    margin-top: 30px;
+}
+.comment-item-content{
+    width: calc(100% - 50px);
+}
