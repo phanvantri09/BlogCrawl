@@ -1,7 +1,6 @@
 <?php
 
 
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -228,6 +227,24 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
             //sửa
             Route::get('edit/{id}','edit')->name('edit');
             Route::post('edit/{id}','update')->name('editLicense');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'complaint', 'as' =>'complaint.'], function () {
+        Route::controller(ComplaintController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addComplaint');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editComplaint');
             // xóa
             Route::get('/delete/{id}', 'destroy')->name('delete');
 
