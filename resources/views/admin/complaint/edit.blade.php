@@ -16,7 +16,8 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="{{ route('complaint.addComplaint', ['id' => $complaint->id]) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('complaint.addComplaint', ['id' => $complaint->id]) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">
@@ -50,7 +51,8 @@
                                 <div class="form-group">
                                     <label>Number phone</label>
                                     <input class="form-control" name="mobile" rows="3"
-                                        value="{{ empty(old('mobile',$complaint->mobile)) ? '' : old('mobile',$complaint->mobile) }}" placeholder="Enter ...">
+                                        value="{{ empty(old('mobile', $complaint->mobile)) ? '' : old('mobile', $complaint->mobile) }}"
+                                        placeholder="Enter ...">
                                     @error('mobile')
                                         <div class="alert alert-danger">{{ $errors->first('mobile') }}</div>
                                     @enderror
@@ -62,7 +64,8 @@
                                 <div class="form-group">
                                     <label>Money</label>
                                     <input class="form-control" name="money" rows="3"
-                                        value="{{ empty(old('money',$complaint->money)) ? '' : old('money', $complaint->money) }}" placeholder="Enter ...">
+                                        value="{{ empty(old('money', $complaint->money)) ? '' : old('money', $complaint->money) }}"
+                                        placeholder="Enter ...">
                                     @error('money')
                                         <div class="alert alert-danger">{{ $errors->first('money') }}</div>
                                     @enderror
@@ -74,7 +77,8 @@
                                 <div class="form-group">
                                     <label>Ten san khieu nai</label>
                                     <input class="form-control" name="nickname" rows="3"
-                                        value="{{ empty(old('nickname', $complaint->nickname)) ? '' : old('nickname', $complaint->nickname) }}" placeholder="Enter ...">
+                                        value="{{ empty(old('nickname', $complaint->nickname)) ? '' : old('nickname', $complaint->nickname) }}"
+                                        placeholder="Enter ...">
                                     @error('nickname')
                                         <div class="alert alert-danger">{{ $errors->first('nickname') }}</div>
                                     @enderror
@@ -86,7 +90,8 @@
                                 <div class="form-group">
                                     <label>Ten that san khieu nai</label>
                                     <input class="form-control" name="realname" rows="3"
-                                        value="{{ empty(old('realname', $complaint->realname)) ? '' : old('realname',$complaint->realname) }}" placeholder="Enter ...">
+                                        value="{{ empty(old('realname', $complaint->realname)) ? '' : old('realname', $complaint->realname) }}"
+                                        placeholder="Enter ...">
                                     @error('realname')
                                         <div class="alert alert-danger">{{ $errors->first('realname') }}</div>
                                     @enderror
@@ -98,7 +103,8 @@
                                 <div class="form-group">
                                     <label>Zalo</label>
                                     <input class="form-control" name="zalo" rows="3"
-                                        value="{{ empty(old('zalo', $complaint->zalo)) ? '' : old('zalo', $complaint->zalo) }}" placeholder="Enter ...">
+                                        value="{{ empty(old('zalo', $complaint->zalo)) ? '' : old('zalo', $complaint->zalo) }}"
+                                        placeholder="Enter ...">
                                     @error('zalo')
                                         <div class="alert alert-danger">{{ $errors->first('zalo') }}</div>
                                     @enderror
@@ -188,10 +194,12 @@
                 }
             }
 
-            Promise.all(promises).then(function() {
-                var imageNamesInput = document.querySelector('input[name="' + typeImage + '_names"]');
+            // Lưu tên ảnh vào input ẩn
+            var imageNamesInput = document.querySelector('input[name="' + typeImage + '_names"]');
+            if (imageNamesInput) {
+                // Check if the input exists before setting the value
                 imageNamesInput.value = imageNames.join(',');
-            });
+            }
         }
 
         function getBase64(file) {

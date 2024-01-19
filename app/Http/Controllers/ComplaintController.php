@@ -54,7 +54,7 @@ class ComplaintController extends Controller
                 $imageNames = [];
         
                 foreach ($images as $image) {
-                    $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+                    $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
                     ConstCommon::addImageToStorage($image, $imageName);
                     $imageNames[] = $imageName;
                 }
