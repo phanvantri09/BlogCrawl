@@ -126,7 +126,6 @@
                             <div class="col-sm-6">
                                 <div id="img_preview"></div>
                             </div>
-                            <input type="hidden" name="img_names" />
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -186,13 +185,9 @@
                     );
 
                     imageNames.push(fileImage.name);
+                    console.log(imageNames)
                 }
             }
-
-            Promise.all(promises).then(function() {
-                var imageNamesInput = document.querySelector('input[name="' + typeImage + '_names"]');
-                imageNamesInput.value = imageNames.join(',');
-            });
         }
 
         function getBase64(file) {

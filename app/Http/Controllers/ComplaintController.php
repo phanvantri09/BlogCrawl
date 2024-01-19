@@ -64,6 +64,7 @@ class ComplaintController extends Controller
         }
         
         $data['id_user_create'] = auth()->user()->id;
+        dd($data);
         $this->complaintRepository->create($data);
         return redirect()->route('complaint.index')->with('success', 'Data created successfully');
     }
