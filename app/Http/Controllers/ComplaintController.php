@@ -47,25 +47,26 @@ class ComplaintController extends Controller
     {
         $data = $request->all();
         $imageFields = ['headImg', 'img'];
-
+        
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
                 $images = $request->file($field);
                 $imageNames = [];
-
+        
                 foreach ($images as $image) {
                     $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
                     ConstCommon::addImageToStorage($image, $imageName);
                     $imageNames[] = $imageName;
                 }
-
+        
                 // Save the array of image names in $data
-                $data[$field] = $imageNames;
+                $data[$field] = implode(',', $imageNames);
             }
         }
+        
+        // Now, $data['headImg'] and $data['img'] should contain different sets of image names
+        
 
-        $data['img'] = implode(',', $data['img']);
-dd($data);
         $data['id_user_create'] = auth()->user()->id;
         $this->complaintRepository->create($data);
         return redirect()->route('complaint.index')->with('success', 'Data created successfully');
