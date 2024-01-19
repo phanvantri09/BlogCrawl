@@ -44,30 +44,27 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
-        if ($request->hasFile('headImg')) {
-            $headImg = $request->file('headImg');
-            $headImgName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $headImg->extension();
-            ConstCommon::addImageToStorage($headImg, $headImgName);
-            $data['headImg'] = $headImgName;
-        }
+        $imageFields = ['headImg', 'img'];
         
-        if ($request->hasFile('img')) {
-            $images = $request->file('img');
-            $imageNames = [];
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                $images = $request->file($field);
+                $imageNames = [];
         
-            foreach ($images as $image) {
-                $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
-                ConstCommon::addImageToStorage($image, $imageName);
-                $imageNames[] = $imageName;
+                foreach ($images as $image) {
+                    $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+                    ConstCommon::addImageToStorage($image, $imageName);
+                    $imageNames[] = $imageName;
+                }
+        
+                $data[$field] = implode(',', $imageNames);
             }
-        
-            $data['img'] = implode(',', $imageNames);
         }
+        
         $data['id_user_create'] = auth()->user()->id;
         $this->complaintRepository->create($data);
-        return redirect()->route('complaint.index')->with('success', 'data created successfully');
+        return redirect()->route('complaint.index')->with('success', 'Data created successfully');
     }
 
     /**
@@ -81,7 +78,7 @@ class ComplaintController extends Controller
         //
         $data['id_user_update'] = auth()->user()->id;
         $complaint = $this->complaintRepository->edit($id);
-        return view('admin.post.edit', compact('post'));
+        return view('admin.complaint.edit', compact('complaint'));
     }
 
     /**
@@ -95,7 +92,7 @@ class ComplaintController extends Controller
     {
         //
         $data = $request->all();
-        $this->complaintRepository->update($data);
+        $this->complaintRepository->update($data, $id);
         return back()->with('success', 'Thành công');
     }
 
@@ -109,6 +106,6 @@ class ComplaintController extends Controller
     {
         //
         $this->complaintRepository->delete($id);
-
+        return back()->with('success', 'Thành công');
     }
 }
