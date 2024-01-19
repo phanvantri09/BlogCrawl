@@ -10,7 +10,8 @@ use App\Helpers\ConstCommon;
 class ComplaintController extends Controller
 {
     protected $complaintRepository;
-    public function __construct(ComplaintRepositoryInterface $complaintRepository){ 
+    public function __construct(ComplaintRepositoryInterface $complaintRepository)
+    {
         $this->complaintRepository = $complaintRepository;
     }
     /**
@@ -46,22 +47,25 @@ class ComplaintController extends Controller
     {
         $data = $request->all();
         $imageFields = ['headImg', 'img'];
-        
+
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
                 $images = $request->file($field);
                 $imageNames = [];
-        
+
                 foreach ($images as $image) {
                     $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
                     ConstCommon::addImageToStorage($image, $imageName);
                     $imageNames[] = $imageName;
                 }
-        
-                $data[$field] = implode(',', $imageNames);
+
+                // Save the array of image names in $data
+                $data[$field] = $imageNames;
             }
         }
-        
+
+        $data['img'] = implode(',', $data['img']);
+dd($data);
         $data['id_user_create'] = auth()->user()->id;
         $this->complaintRepository->create($data);
         return redirect()->route('complaint.index')->with('success', 'Data created successfully');

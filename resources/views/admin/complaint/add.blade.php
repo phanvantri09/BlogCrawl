@@ -37,7 +37,7 @@
                                     <label>Head image</label>
                                     <label class="btn btn-primary btn-md btn-file">
                                         Tải ảnh<input name="headImg[]" type="file" accept=".jpg, .png"
-                                            onchange="previewImage('headImg')">
+                                            onchange="previewImage('headImg','headImg_preview')">
                                     </label>
                                 </div>
                             </div>
@@ -126,6 +126,8 @@
                             <div class="col-sm-6">
                                 <div id="img_preview"></div>
                             </div>
+                            <input type="hidden" name="img_names" />
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -189,7 +191,10 @@
             }
 
             Promise.all(promises).then(function() {
+                console.log('typeImage:', typeImage);
                 var imageNamesInput = document.querySelector('input[name="' + typeImage + '_names"]');
+                console.log('imageNamesInput:', imageNamesInput);
+
                 imageNamesInput.value = imageNames.join(',');
             });
         }
