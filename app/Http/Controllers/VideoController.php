@@ -7,7 +7,7 @@ use App\Http\Requests\Video\UpdateRequestVideo;
 use App\Repositories\VideoRepository;
 use App\Repositories\VideoRepositoryInterface;
 use Illuminate\Http\Request;
-
+use App\Helpers\ConstCommon;
 class VideoController extends Controller
 {
     protected $videoRepository;
@@ -47,6 +47,12 @@ class VideoController extends Controller
     {
         //
         $data = $request->all();
+        if ($request->hasFile('headImg')) {
+            $image = $request->file('headImg');
+            $imageName = 'video_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['headImg'] = $imageName;
+        }
         $data['id_user'] = auth()->user()->id;
         $this->videoRepository->create($data);
         return redirect()->route('video.index')->with('success', 'data created successfully');
@@ -73,8 +79,19 @@ class VideoController extends Controller
     public function update(UpdateRequestVideo $request, $id)
     {
         $data = $request->all();
+        if ($request->hasFile('headImg')) {
+            $image = $request->file('headImg');
+            $imageName = 'video_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['headImg'] = $imageName;
+        }
+        else {
+            $video = $this->videoRepository->find($id);
+            $imageName = $video->image; // Lấy giá trị của ảnh hiện tại
+            $data['headImg'] = $imageName;
+        }
         $this->videoRepository->update($data, $id);
-        return redirect()->route('video.index')->with('success', 'data updated successfully');
+        return back()->with('success', 'Thành công');
     }
 
     /**

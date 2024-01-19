@@ -20,13 +20,19 @@
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">
-                                <!-- text input -->
                                 <div class="form-group">
-                                    <label>Tiêu đề</label>
-                                    <input type="text" name="title" class="form-control" placeholder="Enter ..."
-                                        value="{{ $post->title }}">
-                                    @error('title')
-                                        <div class="alert alert-danger">{{ $errors->first('title') }}</div>
+                                    <label for="content">Nội Dung </label>
+                                    <textarea name="content" id="summernote">{{ empty(old('content' , $post->content)) ? '' : old('content', $post->content) }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Facebook Url</label>
+                                    <textarea class="form-control" name="facebookUrl" rows="3" placeholder="Enter ...">{{ empty(old('facebookUrl', $post->facebookUrl)) ? '' : old('facebookUrl',  $post->facebookUrl) }}</textarea>
+                                    @error('facebookUrl')
+                                        <div class="alert alert-danger">{{ $errors->first('facebookUrl') }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -34,12 +40,38 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Description preview</label>
-
-                                    <input class="form-control" name="des_preview" value="{{ $post->des_preview }}"
-                                        rows="3" placeholder="Enter ...">
-                                    @error('des_preview')
-                                        <div class="alert alert-danger">{{ $errors->first('des_preview') }}</div>
+                                    <label>Link Url</label>
+                                    <textarea class="form-control" name="linkUrl" rows="3" placeholder="Enter ...">{{ empty(old('linkUrl',  $post->linkUrl)) ? '' : old('linkUrl',  $post->linkUrl) }}</textarea>
+                                    @error('linkUrl')
+                                        <div class="alert alert-danger">{{ $errors->first('linkUrl') }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <label class="btn btn-primary btn-md btn-file">
+                                        Tải ảnh<input name="headImg" type="file" accept=".jpg, .png"
+                                            onchange="previewImage('headImg')">
+                                    </label>
+                                </div>
+                            </div>
+                            @if ($post->headImg)
+                            <div class="col-sm-6">
+                                <img id="headImg_preview" style="max-width: 100%; max-height: 200px;"
+                                    src="{{ asset('storage/images/' . $post->headImg) }}">
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input class="form-control" name="title" rows="3" value="{{ empty(old('title', $post->title)) ? '' : old('title', $post->title) }}" placeholder="Enter ...">
+                                    @error('title')
+                                        <div class="alert alert-danger">{{ $errors->first('title') }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -58,36 +90,9 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <!-- text input -->
                                 <div class="form-group">
-                                    <label for="description">Nội Dung </label>
-                                    <textarea name="description" id="summernote">{!! $post->description !!}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <label class="btn btn-primary btn-md btn-file">
-                                        Tải ảnh<input name="avt_image" type="file" accept=".jpg, .png"
-                                            onchange="previewImage('avt_image_preview')">
-                                    </label>
-                                </div>
-                            </div>
-                            @if ($post->avt_image)
-                            <div class="col-sm-6">
-                                <img id="avt_image_preview" style="max-width: 100%; max-height: 200px;"
-                                    src="{{ asset('storage/images/' . $post->avt_image) }}">
-                            </div>
-                            @endif
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <!-- text input -->
-                                <div class="form-group">
-                                    <label for="video">Video</label>
-                                    <textarea name="video" class="form-control"></textarea>
+                                    <label for="video">Youtube Url</label>
+                                    <textarea name="youtubeUrl" class="form-control">{{ empty(old('youtubeUrl',$post->youtubeUrl)) ? '' : old('youtubeUrl',$post->youtubeUrl) }}</textarea>
                                 </div>
                             </div>
                         </div>

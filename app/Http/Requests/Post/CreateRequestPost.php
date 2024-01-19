@@ -25,17 +25,15 @@ class CreateRequestPost extends FormRequest
     {
         return [
             //
+            'content' => 'required:posts',
             'title' => 'required:posts',
-            'description' => 'required:posts',
-            'des_preview' => 'required:posts',
         ];
     }
     public function messages()
     {
         return [
+            'content.required' => 'Không để trống',
             'title.required' => 'Không để trống',
-            'description.required' => 'Không để trống',
-            'des_preview.required' => 'Không để trống',
         ];
     }
 }

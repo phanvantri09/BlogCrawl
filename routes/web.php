@@ -67,6 +67,8 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/chatbox','chatbox');
 
         Route::get('khieu-nai','complain')->name('complain');
+        Route::get('video','video')->name('video');
+        Route::get('article_detail','article')->name('article');
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');

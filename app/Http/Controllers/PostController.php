@@ -47,11 +47,11 @@ class PostController extends Controller
     {
         //
         $data = $request->all();
-        if ($request->hasFile('avt_image')) {
-            $image = $request->file('avt_image');
+        if ($request->hasFile('headImg')) {
+            $image = $request->file('headImg');
             $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-            $data['avt_image'] = $imageName;
+            $data['headImg'] = $imageName;
         }
         $data['id_category'] = $request->id_category;
         $data['id_user_create'] = auth()->user()->id;
@@ -81,17 +81,19 @@ class PostController extends Controller
     public function update(UpdateRequestPost $request, $id)
     {
         $data = $request->all();
-        if ($request->hasFile('avt_image')) {
-            $image = $request->file('avt_image');
+        if ($request->hasFile('headImg')) {
+            $image = $request->file('headImg');
             $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-            $data['avt_image'] = $imageName;
+            $data['headImg'] = $imageName;
         }
         else {
             $post = $this->postRepository->find($id);
-            $imageName = $post->avt_image; // Lấy giá trị của ảnh hiện tại
-            $data['avt_image'] = $imageName;
+            $imageName = $post->headImg; // Lấy giá trị của ảnh hiện tại
+            $data['headImg'] = $imageName;
         }
+
+        $data['type'] = $request->id_category;
     
         $this->postRepository->update($data, $id);
         return back()->with('success', 'Thành công');

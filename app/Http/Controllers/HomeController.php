@@ -39,4 +39,12 @@ class HomeController extends Controller
     {
         return view('user.page.complain', compact([]));
     }
+    public function video()
+    {
+        return view('user.page.video', compact([]));
+    }
+    public function article()
+    {
+        return view('user.page.article_detail', compact([]));
+    }
 }
