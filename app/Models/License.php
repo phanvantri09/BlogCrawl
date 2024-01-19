@@ -11,9 +11,25 @@ class License extends Model
     protected $table = 'licenses';
 
     protected $fillable = [
-        'name',
-        'image',
-        'description',
+        'plid', // khóa chính
+        'address',
+        'countryLogo',
+        'email',
+        'fax',
+        'licenseLevel',
+        'licenseLogo',
+        'licenseName',
+        'organizationName',
+        'registrationCode',
+        'regulatoryEffectiveTime',
+        'regulatoryLicense',
+        'tel',
+        'website',
+        'licenseScore',
+        'platformMerchantsId',
+        'regulatoryNumber',
+        'status',
+        
         
     ];
 }
