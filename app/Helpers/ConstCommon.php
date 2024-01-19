@@ -26,9 +26,10 @@ class ConstCommon {
     const ListAPI =
         [
             'posts'=>'https://vnwallstreet.top/api/inter/newsFlash/page?limit=10&start=0&uid=-1',
-            'broders'=>'',
-            'videos'=>'',
-            'licenses'=>''
+            'broders'=>'https://vnwallstreet.top/api/inter/platformMerchants/listOrderByCreateTime?limit=20&start=0&uid=-1',
+            'videos'=>'https://vnwallstreet.top/api/inter/video/list?uid=-1',
+            'licenses'=>'',
+            'complaint'=>'https://vnwallstreet.top/api/inter/complaint/list?limit=20&start=0&uid=-1',
         ];
 
     public static function getAllCategory(){
