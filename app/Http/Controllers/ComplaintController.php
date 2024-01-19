@@ -45,14 +45,16 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->all();
-        $imageFields = ['headImg', 'img'];
-        
+        // headImg => imageItem
+        $imageFields = ['imageItem', 'img'];
+
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
                 $images = $request->file($field);
                 $imageNames = [];
-        
+
                 foreach ($images as $image) {
                     $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
                     ConstCommon::addImageToStorage($image, $imageName);
@@ -62,9 +64,9 @@ class ComplaintController extends Controller
                 $data[$field] = implode(',', $imageNames);
             }
         }
-        
+
         $data['id_user_create'] = auth()->user()->id;
-        dd($data);
+        // dd($data);
         $this->complaintRepository->create($data);
         return redirect()->route('complaint.index')->with('success', 'Data created successfully');
     }
