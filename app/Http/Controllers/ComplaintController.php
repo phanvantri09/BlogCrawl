@@ -58,15 +58,11 @@ class ComplaintController extends Controller
                     ConstCommon::addImageToStorage($image, $imageName);
                     $imageNames[] = $imageName;
                 }
-        
-                // Save the array of image names in $data
+
                 $data[$field] = implode(',', $imageNames);
             }
         }
         
-        // Now, $data['headImg'] and $data['img'] should contain different sets of image names
-        
-
         $data['id_user_create'] = auth()->user()->id;
         $this->complaintRepository->create($data);
         return redirect()->route('complaint.index')->with('success', 'Data created successfully');
