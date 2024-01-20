@@ -48,7 +48,7 @@ class ComplaintController extends Controller
         // dd($request->all());
         $data = $request->all();
         // headImg => imageItem
-        $imageFields = ['imageItem', 'img'];
+        $imageFields = ['headImg', 'img'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
@@ -56,7 +56,7 @@ class ComplaintController extends Controller
                 $imageNames = [];
 
                 foreach ($images as $image) {
-                    $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
+                    $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '_' . $field . '_' . pathinfo($image, PATHINFO_FILENAME).'.' . $image->extension();
                     ConstCommon::addImageToStorage($image, $imageName);
                     $imageNames[] = $imageName;
                 }
@@ -66,7 +66,6 @@ class ComplaintController extends Controller
         }
 
         $data['id_user_create'] = auth()->user()->id;
-        // dd($data);
         $this->complaintRepository->create($data);
         return redirect()->route('complaint.index')->with('success', 'Data created successfully');
     }
@@ -96,6 +95,23 @@ class ComplaintController extends Controller
     {
         //
         $data = $request->all();
+        $imageFields = ['headImg', 'img'];
+
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                $images = $request->file($field);
+                $imageNames = [];
+
+                foreach ($images as $image) {
+                    $imageName = 'complaint_' . ConstCommon::getCurrentTime() . '_' . $field . '_' . pathinfo($image, PATHINFO_FILENAME).'.' . $image->extension();
+                    ConstCommon::addImageToStorage($image, $imageName);
+                    $imageNames[] = $imageName;
+                }
+
+                $data[$field] = implode(',', $imageNames);
+            }
+        }
+
         $this->complaintRepository->update($data, $id);
         return back()->with('success', 'Thành công');
     }
