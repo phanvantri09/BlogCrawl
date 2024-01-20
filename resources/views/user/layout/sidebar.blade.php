@@ -12,13 +12,13 @@
             <a href="#" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">Services</a>
+            <a href="{{ route('complain') }}" class="nav-link">Khiếu nại</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
+            <a href="{{ route('video') }}" class="nav-link">Video</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{{ route('article') }}" class="nav-link">Detail post</a>
         </li>
     </ul>
 
