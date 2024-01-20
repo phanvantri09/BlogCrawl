@@ -33,7 +33,6 @@ class CrawlBroker implements ShouldQueue
      */
     public function handle()
     {
-        // dd(123);
         $response = Http::get('https://vnwallstreet.top/api/inter/platformMerchants/listOrderByCreateTime?limit=20&start=0&uid=-1');
         if ($response->successful()) {
             $data = $response->json();
@@ -41,9 +40,32 @@ class CrawlBroker implements ShouldQueue
                 DB::beginTransaction();
                 try {
                     foreach ($data['data'] as $item) {
-                        // dd(123123);
                         $BrokerByMessageid = Broker::where("pmid", $item["pmid"])->first();
                         if (empty($BrokerByMessageid)){
+                            if (!empty($item["platformLicenseList"])) {
+                                foreach ($item["platformLicenseList"] as $platformLicenseList){
+                                    License::create([
+                                        "plid" =>  $platformLicenseList["plid"],
+                                        "address" =>  $platformLicenseList["address"],
+                                        "countryLogo" =>  $platformLicenseList["countryLogo"],
+                                        "email" =>  $platformLicenseList["email"],
+                                        "fax" =>  $platformLicenseList["fax"],
+                                        "licenseLevel" =>  $platformLicenseList["licenseLevel"],
+                                        "licenseLogo" =>  $platformLicenseList["licenseLogo"],
+                                        "licenseName" =>  $platformLicenseList["licenseName"],
+                                        "organizationName" =>  $platformLicenseList["organizationName"],
+                                        "registrationCode" =>  $platformLicenseList["registrationCode"],
+                                        "regulatoryEffectiveTime" => $platformLicenseList["regulatoryEffectiveTime"],
+                                        "regulatoryLicense" =>  $platformLicenseList["regulatoryLicense"],
+                                        "tel" =>  $platformLicenseList["tel"],
+                                        "website" =>  $platformLicenseList["website"],
+                                        "licenseScore" =>  $platformLicenseList["licenseScore"],
+                                        "platformMerchantsId" =>  $platformLicenseList["platformMerchantsId"],
+                                        "regulatoryNumber" =>  $platformLicenseList["regulatoryNumber"],
+                                        "status" =>  $platformLicenseList["status"]
+                                    ]);
+                                }
+                            }
                             if(Broker::create(
                                 [
                                     "isHero" =>  $item["isHero"],
@@ -52,7 +74,7 @@ class CrawlBroker implements ShouldQueue
                                     "likeNum" =>  $item["likeNum"],
                                     "lookNum" =>  $item["lookNum"],
                                     "pmid" =>  $item["pmid"],
-                                    "resolutionRate" =>  $item["resolutionRate"],
+                                    "resolutionRate" =>  $item["resolutionRate"] ?? 0,
                                     "resolveComplaintsNum" =>  $item["resolveComplaintsNum"],
                                     "serversNum" =>  $item["serversNum"],
                                     "status" =>  $item["status"],
@@ -71,8 +93,10 @@ class CrawlBroker implements ShouldQueue
                                     "youtubeLink" =>  $item["youtubeLink"],
                                     "zaloLink" =>  $item["zaloLink"],
                                     "content" =>  $item["content"],
-                                    "platformLicenseList" =>  !empty($item["platformLicenseList"]) ? json_encode($item["platformLicenseList"]) : '',
-                                    "lookImgList" =>  !empty($item["lookImgList"]) ? json_encode($item["lookImgList"]) : '',
+
+                                    "platformLicenseList" => '',
+                                    "lookImgList" =>  !empty($item["lookImgList"]) ? implode(",", $item["lookImgList"]) : '',
+
                                     "id_user_create" => 0,
                                     "id_user_update" => 0,
                                 ]

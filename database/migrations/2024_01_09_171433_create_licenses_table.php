@@ -13,7 +13,7 @@ class CreateLicensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('licences', function (Blueprint $table) {
+        Schema::create('licenses', function (Blueprint $table) {
             $table->id();
             $table->string('address')->nullable();
             $table->string('countryLogo')->nullable();
@@ -28,13 +28,13 @@ class CreateLicensesTable extends Migration
             $table->string('regulatoryLicense')->nullable();
             $table->string('tel')->nullable();
             $table->string('website')->nullable();
+            $table->string('regulatoryNumber')->nullable();
 
             $table->integer('licenseScore')->default(0);
             $table->integer('platformMerchantsId')->default(0);
             $table->integer('plid')->default(0);
-            $table->integer('regulatoryNumber')->default(0);
             $table->integer('status')->default(1);
-           
+
             $table->timestamps();
         });
     }
@@ -46,6 +46,6 @@ class CreateLicensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('licences');
+        Schema::dropIfExists('licenses');
     }
 }
