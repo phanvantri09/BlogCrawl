@@ -26,10 +26,8 @@ class License extends Model
         'tel',
         'website',
         'licenseScore',
-        'platformMerchantsId',
+        'platformMerchantsId', // khóa ngoại
         'regulatoryNumber',
         'status',
-        
-        
     ];
 }

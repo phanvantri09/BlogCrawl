@@ -17,16 +17,17 @@ class CreateBrokersTable extends Migration
             $table->id();
             $table->integer("uid")->default(0); // khóa chính của cái này
             $table->integer("isHero")->default(1); // 1 là có nhãn hero 2 là không có
-            $table->integer("leverMax")->default(1);
             $table->integer("likeNum")->default(100);
             $table->integer("lookNum")->default(100);
             $table->integer("pmid")->default(0);
-            $table->integer("resolutionRate")->default(0);
             $table->integer("resolveComplaintsNum")->default(0);
             $table->integer("serversNum")->default(0);
             $table->integer("status")->default(1);
             $table->integer("walletStatus")->default(1); // 1 là mở, 2 là đóng
 
+            $table->string("resolutionRate")->nullable();
+
+            $table->string("leverMax")->nullable();
             $table->string("facebookLink")->nullable();
             $table->string("firstCountryLogo")->nullable();
             $table->string("img")->nullable();
