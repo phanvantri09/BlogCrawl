@@ -35,13 +35,13 @@
                             <div class="col-sm-12">
                                 <!-- select -->
                                 <div class="form-group">
-                                    <label>Ảnh thành phần</label>
+                                    <label>Head image</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="imageItem[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this)" multiple="" name="headImg[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
-                                    @error('imageItem')
-                                    <div class="alert alert-danger">{{ $errors->first('imageItem') }}</div>
+                                    @error('headImg')
+                                    <div class="alert alert-danger">{{ $errors->first('headImg') }}</div>
                                     @enderror
                                     <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
                                     </div>
@@ -78,7 +78,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Number phone</label>
-                                    <input class="form-control" type="number" name="mobile" rows="3"
+                                    <input class="form-control" name="mobile" rows="3"
                                         value="{{ empty(old('mobile')) ? '' : old('mobile') }}" placeholder="Enter ...">
                                     @error('mobile')
                                         <div class="alert alert-danger">{{ $errors->first('mobile') }}</div>
@@ -126,7 +126,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Zalo</label>
-                                    <input class="form-control" type="number" name="zalo" rows="3"
+                                    <input class="form-control" name="zalo" rows="3"
                                         value="{{ empty(old('zalo')) ? '' : old('zalo') }}" placeholder="Enter ...">
                                     @error('zalo')
                                         <div class="alert alert-danger">{{ $errors->first('zalo') }}</div>
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>image</label>
@@ -154,6 +154,35 @@
                             </div>
                             <div class="col-sm-6">
                                 <div id="img_preview"></div>
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- select -->
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <div class="custom-file">
+                                        <input onchange="readURL3(this)" multiple="" name="img[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
+                                    </div>
+                                    @error('img')
+                                    <div class="alert alert-danger">{{ $errors->first('img') }}</div>
+                                    @enderror
+                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    </div>
+                                    <div class="d-flex flex-row mb-3 mt-3">
+                                        {{-- @if(count($getAllByIDProductItem))
+                                            @foreach ($getAllByIDProductItem as $key => $item)
+                                                <div class="d-flex flex-column justify-content-center text-center">
+                                                    <img style="width: 200px;height: 200px; object-fit: cover; margin-bottom: 5px;" class="rounded mr-3" src="{{\App\Helpers\ConstCommon::getLinkImageToStorage( $item->link_image ?? null)}}">
+                                                    <a class="text-danger" href="{{ route('product.deleteImage', ['id' => $item->id]) }}">
+                                                        <i class="fas fa-trash-alt">&nbsp; Xóa ảnh</i>
+                                                    </a>
+                                                </div>
+                                                @endforeach
+                                        @endif --}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -191,34 +220,6 @@
         $(document).ready(function() {
             $('#summernote').summernote();
         });
-
-        function previewImage(typeImage, previewId) {
-            var fileInput = '';
-            fileInput = document.querySelector('input[name="' + typeImage + '[]"]');
-            var fileImages = fileInput.files;
-            var imagePreview = $('#' + previewId);
-            var imageNames = [];
-            var promises = [];
-
-            for (var i = 0; i < fileImages.length; i++) {
-                var fileImage = fileImages[i];
-
-                if (fileImage) {
-                    promises.push(
-                        getBase64(fileImage).then(function(mediabase64data) {
-                            var image = document.createElement('img');
-                            image.src = mediabase64data;
-                            image.style.maxWidth = '100%';
-                            image.style.maxHeight = '200px';
-                            imagePreview.append(image);
-                        })
-                    );
-
-                    imageNames.push(fileImage.name);
-                    console.log(imageNames)
-                }
-            }
-        }
 
         function getBase64(file) {
             return new Promise((resolve, reject) => {
@@ -300,7 +301,7 @@
                     '<div class="form-group">' +
                     '<label>Ảnh Thành Phần ' + indexX + '</label>' +
                     '<div id="image-form">' +
-                    '<input type="file" name="imageItem' + index + '" class="imageItem' + index +
+                    '<input type="file" name="headImg' + index + '" class="headImg' + index +
                     '" accept="image/*">' +
                     '<div class="input-group my-3">' +
                     '<input type="text" class="form-control" disabled placeholder="Upload File" id="fileImageItem' +
@@ -322,10 +323,62 @@
                 $('.imageAllItem').append(html);
 
                 $(document).on("click", ".browseImageItem" + index, function() {
-                    var file = $(this).parents().find(".imageItem" + index);
+                    var file = $(this).parents().find(".headImg" + index);
                     file.trigger("click");
                 });
-                $('input[name="imageItem' + index + '"]').change(function(e) {
+                $('input[name="headImg' + index + '"]').change(function(e) {
+                    var fileName = e.target.files[0].name;
+                    $("#fileImageItem" + index).val(fileName);
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // get loaded data and render thumbnail.
+                        document.getElementById("previewImageItem" + index).src = e.target
+                            .result;
+                    };
+                    // read the image file as a data URL.
+                    reader.readAsDataURL(this.files[0]);
+                });
+            });
+
+            //image
+
+            $('.add_more_button').click(function(e) {
+                var index = $('.imageItemcount').length + 1; //initialize counter for text box
+                var indexX = index + 1;
+                e.preventDefault();
+                html =
+                    '<div class="row imageItemcount">' +
+                    '<div class="col-sm-3">' +
+                    '<div class="form-group">' +
+                    '<label>Ảnh Thành Phần ' + indexX + '</label>' +
+                    '<div id="image-form">' +
+                    '<input type="file" name="img' + index + '" class="img' + index +
+                    '" accept="image/*">' +
+                    '<div class="input-group my-3">' +
+                    '<input type="text" class="form-control" disabled placeholder="Upload File" id="fileImageItem' +
+                    index + '">' +
+                    '<div class="input-group-append">' +
+                    '<button type="button" class="browseImageItem' + index +
+                    ' btn btn-primary">Tải lên</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-9">' +
+                    '<img src="https://placehold.it/80x80" id="previewImageItem' + index +
+                    '" class="img-thumbnail">' +
+                    '</div>' +
+                    '</div>';
+
+                $('.imageAllItem').append(html);
+
+                $(document).on("click", ".browseImageItem" + index, function() {
+                    var file = $(this).parents().find(".img" + index);
+                    file.trigger("click");
+                });
+                $('input[name="img' + index + '"]').change(function(e) {
                     var fileName = e.target.files[0].name;
                     $("#fileImageItem" + index).val(fileName);
 
