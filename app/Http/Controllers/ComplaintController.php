@@ -45,9 +45,7 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->all();
-        // headImg => imageItem
         $imageFields = ['headImg', 'img'];
 
         foreach ($imageFields as $field) {
@@ -79,7 +77,6 @@ class ComplaintController extends Controller
     public function edit($id)
     {
         //
-        $data['id_user_update'] = auth()->user()->id;
         $complaint = $this->complaintRepository->edit($id);
         return view('admin.complaint.edit', compact('complaint'));
     }
@@ -112,6 +109,7 @@ class ComplaintController extends Controller
             }
         }
 
+        $data['id_user_update'] = auth()->user()->id;
         $this->complaintRepository->update($data, $id);
         return back()->with('success', 'Thành công');
     }
