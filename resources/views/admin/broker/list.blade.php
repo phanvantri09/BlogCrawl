@@ -39,45 +39,63 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $key => $complaint)
+                            @foreach ($data as $key => $broker)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $broker->resolutionRate }}</td>
                                 <td>{{ $broker->leverMax }}</td>
                                 <td>{{ $broker->facebookLink }}</td>
                                 @if ($broker->firstCountryLogo)
-                                <td><img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $broker->firstCountryLogo) }}">
+                                @php
+                                $images = explode(',', $broker->firstCountryLogo);
+                                @endphp
+                                <<td>
+                                    @foreach ($images as $image)
+                                    <img style="max-width: 100%; max-height: 200px;"
+                                        src="{{ asset('storage/images/' . trim($image)) }}">
+                                    @endforeach
                                 </td>
                                 @else
                                 <td></td>
                                 @endif
                                 @if ($broker->img)
-                                <td><img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $broker->img) }}">
+                                @php
+                                $images = explode(',', $broker->img);
+                                @endphp
+                                <td>
+                                    @foreach ($images as $image)
+                                    <img style="max-width: 100%; max-height: 200px;"
+                                        src="{{ asset('storage/images/' . trim($image)) }}">
+                                    @endforeach
                                 </td>
                                 @else
                                 <td></td>
                                 @endif
-                                <td>{{ $$broker->licenseName }}</td>
+                                <td>{{ $broker->licenseName }}</td>
                                 @if ($broker->logo)
-                                <td><img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $broker->logo) }}">
+                                @php
+                                $images = explode(',', $broker->logo);
+                                @endphp
+                                <td>
+                                    @foreach ($images as $image)
+                                    <img style="max-width: 100%; max-height: 200px;"
+                                        src="{{ asset('storage/images/' . trim($image)) }}">
+                                    @endforeach
                                 </td>
                                 @else
                                 <td></td>
                                 @endif
-                                <td>{{ $complaint->nickname }}</td>
-                                <td>{{ $complaint->peoples }}</td>
-                                <td>{{ $complaint->skypeLink }}</td>
+                                <td>{{ $broker->nickname }}</td>
+                                <td>{{ $broker->peoples }}</td>
+                                <td>{{ $broker->skypeLink }}</td>
                                 
                                 {{-- <td>{{ \App\Helpers\ConstCommon::getnameByTypeCategory($item->type) }}</td> --}}
                                 <td>
-                                    <a href="{{ route('complaint.edit', ['id' => $complaint->id]) }}"
+                                    <a href="{{ route('broker.edit', ['id' => $broker->id]) }}"
                                         class="btn btn-app">
                                         <i class="fas fa-edit"></i> Sửa
                                     </a>
-                                    <a href="{{ route('complaint.delete', ['id' => $complaint->id]) }}"
+                                    <a href="{{ route('broker.delete', ['id' => $broker->id]) }}"
                                         class="btn btn-app">
                                         <i class="fas fa-trash-alt"></i>Xóa
                                     </a>
