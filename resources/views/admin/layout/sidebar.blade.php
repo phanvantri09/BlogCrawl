@@ -273,6 +273,30 @@
                         </li>
                     </ul>
                 </li>
+                {{-- add menu broker --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-news"></i>
+                        <p>
+                            Broker
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('broker.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('broker.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

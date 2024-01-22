@@ -2,6 +2,8 @@
 namespace App\Providers;
 
 
+use App\Repositories\BrokerRepository;
+use App\Repositories\BrokerRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryInterface;
@@ -37,6 +39,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SocialRepositoryInterface::class, SocialRepository::class);
         $this->app->bind(VideoRepositoryInterface::class, VideoRepository::class);
         $this->app->bind(ComplaintRepositoryInterface::class, ComplaintRepository::class);
+        $this->app->bind(BrokerRepositoryInterface::class, BrokerRepository::class);
+        $this->app->bind(LicenseRepositoryInterface::class, LicenseRepository::class);
     }
     /**
      * Bootstrap services.
