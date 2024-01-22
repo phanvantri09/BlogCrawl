@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ComplaintRepositoryInterface;
 use App\Repositories\PostRepositoryInterface;
 use App\Repositories\VideoRepositoryInterface;
 use Hashids\Hashids;
@@ -17,19 +18,21 @@ class HomeController extends Controller
     protected $userRepository;
     protected $imageRepository;
     protected $postRepository;
-
     protected $videoRepository;
+    protected $complaintReposytory;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
         ImageRepositoryInterface $imageRepository,
         PostRepositoryInterface $postRepository,
-        VideoRepositoryInterface $videoRepository
+        VideoRepositoryInterface $videoRepository,
+        ComplaintRepositoryInterface $complaintReposytory
     ) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
         $this->postRepository = $postRepository;
         $this->videoRepository = $videoRepository;
+        $this->complaintReposytory = $complaintReposytory;
     }
     /**
      * Display a listing of the resource.
@@ -48,11 +51,13 @@ class HomeController extends Controller
     }
     public function complain()
     {
-        return view('user.page.complain', compact([]));
+        $complaints = $this->complaintReposytory->all();
+        $posts = $this->postRepository->getLatestPosts(30);
+        return view('user.page.complain', compact(['posts', 'complaints']));
     }
     public function video()
     {
-        $videos = $this->videoRepository->All();
+        $videos = $this->videoRepository->all();
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.video', compact(['posts', 'videos']));
     }
