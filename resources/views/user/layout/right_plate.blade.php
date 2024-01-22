@@ -68,9 +68,10 @@
                 <span class="text-danger">07:33:12</span>
             </div>
         </div>
+        @foreach ($posts as $post )
         <div class="carlender-box-item">
             <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
+                <div class="carlendar-box-item-time">{{ $post->created_at->format('H:i:s') }}</div>
                 <div class="star-rating pl-3">
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -83,101 +84,11 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
                     alt="">
                 <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
+                    {!! $post->content !!}
                 </div>
             </div>
         </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
     <div class="complaint-box mt-3 px-3 py-4">

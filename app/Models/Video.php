@@ -22,4 +22,9 @@ class Video extends Model
         'url',
         'id_user'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id', 'id_user');
+    }
 }

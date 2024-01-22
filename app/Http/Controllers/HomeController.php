@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PostRepositoryInterface;
+use App\Repositories\VideoRepositoryInterface;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
@@ -14,12 +16,20 @@ class HomeController extends Controller
     //
     protected $userRepository;
     protected $imageRepository;
+    protected $postRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository, ImageRepositoryInterface $imageRepository
-    )
-    {
+    protected $videoRepository;
+
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        ImageRepositoryInterface $imageRepository,
+        PostRepositoryInterface $postRepository,
+        VideoRepositoryInterface $videoRepository
+    ) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
+        $this->postRepository = $postRepository;
+        $this->videoRepository = $videoRepository;
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +38,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.page.home', compact([]));
+        $posts = $this->postRepository->getLatestPosts(30);
+        return view('user.page.home', compact(['posts']));
     }
 
     public function chatbox()
@@ -41,7 +52,9 @@ class HomeController extends Controller
     }
     public function video()
     {
-        return view('user.page.video', compact([]));
+        $videos = $this->videoRepository->All();
+        $posts = $this->postRepository->getLatestPosts(30);
+        return view('user.page.video', compact(['posts', 'videos']));
     }
     public function article()
     {
