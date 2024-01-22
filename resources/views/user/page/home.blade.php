@@ -10,8 +10,8 @@
         </svg>&nbsp;<span>Trang chủ</span>
     </div>
     <div class="main-content-container px-3 py-2">
-        <div class="calendar-container-box">
-            @foreach ($posts as $post)
+    @foreach ($posts as $post)
+        <div class="calendar-container-box mt-2">
                 <div class="d-flex">
                     <div class="calendar-container-box-time">{{ $post->created_at->format('H:i:s') }}</div>
                     <div class="star-rating pl-3">
@@ -26,7 +26,7 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
                         alt="">
                     <div class="calendar-container-box-title pl-2">
-                        {!! $post->content !!}
+                        {!! $post->content ?? '' !!}
                     </div>
                 </div>
                 <div class="calendar-container-card d-flex justify-content-between">
@@ -43,8 +43,8 @@
                         <span class="font-weight-bold text-red">-0.90%</span>
                     </div>
                 </div>
-            @endforeach
         </div>
+        @endforeach
         <div class="brokers-container-top p-3">
             <div class="d-flex justify-content-between">
                 <div class="d-flex">

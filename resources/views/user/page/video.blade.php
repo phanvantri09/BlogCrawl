@@ -17,7 +17,7 @@
                 <div class="video-view-container">
                     <a href="">
                         <div class="video-box">
-                            <iframe src="{{ $video->videoFileName }}" title="YouTube video player" frameborder="0"
+                            <iframe src="{{ str_replace('watch', 'embed',$video->videoFileName)}}" title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen></iframe>
                         </div>
@@ -28,7 +28,7 @@
                                         alt="">
                                 </div>
                                 <div class="pl-1">
-                                    <div class="font-weight-bold">{{ $video->user->name }}</div>
+                                    <div class="font-weight-bold">{{ $video->user->name ?? 'Ẩn danh' }}</div>
                                     <div class="video-info-time text-grey">
                                         <span>{{ $video->created_at->format('H:i:s') }}</span>&nbsp;
                                         <span>{{ $video->created_at->format('d/m/Y') }}</span>
