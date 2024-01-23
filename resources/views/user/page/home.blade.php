@@ -35,19 +35,21 @@
                     <span>What's hero broker?</span>
                 </div>
             </div>
-            @foreach ($brokers as $broker )
             <div class="slider-box pt-2">
+                @foreach ($brokers as $broker )
                 <div class="slider-box-item mx-1">
                     <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                        <a href="{{ $broker->facebookLink ?? " " }}">
+                            @if ($broker->img)
+                            <img src="{{ asset('storage/images/' . $broker->headimgImg) }}" alt="">
+                            @endif
                         </a>
                     </div>
                     <div class="slider-box-item-content px-2 py-3">
                         <div class="title">
-                            <span>RoboForex</span> &nbsp;
+                            <span>{{ $broker->nickname ?? " " }}</span> &nbsp;
                             <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
+                            <span>{{ $broker->licenseName ?? " " }}</span>
                         </div>
                         <div class="box">
                             <span class="box-text">Tỉ lệ giải quyết</span>
@@ -67,8 +69,8 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
 
         <div class="futures-box p-3">

@@ -112,7 +112,7 @@
                             alt="">
                     </div>
                     <div class="pl-2">
-                        <div class="font-weight-bold">{{ $firstComplaint->readname ?? "Ẩn danh" }}</div>
+                        <div class="font-weight-bold">{{ $firstComplaint->realname ?? "Ẩn danh" }}</div>
                         <div class="font-weight-bold">{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="complaint-box-info-container-time">
                             <span>{{ $firstComplaint->created_at->format('H:i:s') }}</span>&nbsp;
@@ -140,7 +140,7 @@
                             alt="">
                     </div>
                     <div class="col-md-8 px-1">
-                        <div>Exness</div>
+                        <div>{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="d-flex align-items-center">
                             <div class="images-box">
                                 <img src="https://img.wsbird.com/upload/2022/02/14/185417389.png"
