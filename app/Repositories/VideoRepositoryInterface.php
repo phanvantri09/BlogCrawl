@@ -9,4 +9,6 @@ interface VideoRepositoryInterface
      public function delete($id);
      public function find($id);
      public function edit($id);
+     public function getLastedVideo($limit);
+     public function getFirstVideo();
 }

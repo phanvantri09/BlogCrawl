@@ -12,41 +12,48 @@
     </div>
     <div class="main-content-container px-3 py-2">
         <div class="brokers-container">
-            @foreach ($complaints as $complaint )
-            <div class="brokers-item p-2 mb-2">
-                <a href="">
-                    <div class="row p-2">
-                        <div class="col-md-2 col-sm-2 col-3 brokers-item-avatar-box px-1">
-                            <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
-                                alt="">
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-9">
-                            <div class="font-weight-bold">{{ $complaint->readname}}</div>
-                            <div class="font-weight-bold">{{ $complaint->nickname}}</div>
-                            <div class="brokers-item-time text-grey">
-                                <span>{{ $complaint->created_at->format('H:i:s')}}</span>&nbsp;
-                                <span>{{ $complaint->created_at->format('d/m/Y')}}</span>
+            @foreach ($complaints as $complaint)
+                <div class="brokers-item p-2 mb-2">
+                    <a href="">
+                        <div class="row p-2">
+                            <div class="col-md-2 col-sm-2 col-3 brokers-item-avatar-box px-1">
+                                @if ($complaint->headImg)
+                                    @php
+                                        $images = explode(',', $complaint->headImg);
+                                    @endphp
+                                    @foreach ($images as $image)
+                                        <img src="{{ asset('storage/images/' . trim($image)) }}" alt="">
+                                    @endforeach
+                                @else
+                                @endif
                             </div>
-                            <div class="brokers-item-content">
-                                <div class="d-flex justify-content-between font-weight-bold py-3">
-                                    <span>#Trượt giá</span>
-                                    <span class="mb-2">
-                                        <span class="text-grey">Số tiền liên quan</span>
-                                        <span>{{ $complaint->money }}$</span>
-                                    </span>
+                            <div class="col-md-10 col-sm-10 col-9">
+                                <div class="font-weight-bold">{{ $complaint->readname ?? "Ẩn danh" }}</div>
+                                <div class="font-weight-bold">{{ $complaint->nickname ?? " " }}</div>
+                                <div class="brokers-item-time text-grey">
+                                    <span>{{ $complaint->created_at->format('H:i:s') }}</span>&nbsp;
+                                    <span>{{ $complaint->created_at->format('d/m/Y') }}</span>
                                 </div>
-                                <p>
-                                    {!! $complaint->content !!}
-                                </p>
+                                <div class="brokers-item-content">
+                                    <div class="d-flex justify-content-between font-weight-bold py-3">
+                                        <span>#{{ $complaint->complaintName ?? " " }}</span>
+                                        <span class="mb-2">
+                                            <span class="text-grey">Số tiền liên quan</span>
+                                            <span>{{ $complaint->money ?? " " }}$</span>
+                                        </span>
+                                    </div>
+                                    <p>
+                                        {!! $complaint->content ?? " " !!}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="triangle-box">
-                        <div class="triangle-box-text">đợi đã</div>
-                        <div class="triangle-box-bg"></div>
-                    </div>
-                </a>
-            </div>
+                        <div class="triangle-box">
+                            <div class="triangle-box-text">đợi đã</div>
+                            <div class="triangle-box-bg"></div>
+                        </div>
+                    </a>
+                </div>
             @endforeach
         </div>
     </div>

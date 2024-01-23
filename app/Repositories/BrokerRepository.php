@@ -36,5 +36,10 @@ class BrokerRepository implements BrokerRepositoryInterface
     {
         return Broker::find($id);
     }
+    public function getLastedBroker($limit)
+    {
+        return Broker::orderBy('created_at', 'desc')->take($limit)->get();
+
+    }
 
 }

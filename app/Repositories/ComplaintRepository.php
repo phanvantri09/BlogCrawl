@@ -37,4 +37,14 @@ class ComplaintRepository implements ComplaintRepositoryInterface
         return Complaint::find($id);
     }
 
+    public function getLatestComplaint($limit)
+    {
+        return Complaint::orderBy('created_at', 'desc')->take($limit)->get();
+
+    }
+    public function getFirstComplaint()
+    {
+        return Complaint::orderBy('created_at', 'desc')->first();
+    }
+
 }

@@ -10,15 +10,40 @@
         </svg>&nbsp;<span>Trang chủ</span>
     </div>
     <div class="main-content-container px-3 py-2">
-        @foreach ($posts as $post)
-            <div class="article-container-box">
-                <a href="">
-                    <div class="article-container-box-time">{{ $post->created_at->format('H:i:s') }}</div>
-                    <div class="article-container-box-title">
-                        {!! $post->content ?? " " !!}
+    @foreach ($posts as $post)
+        <div class="calendar-container-box mt-2">
+                <div class="d-flex">
+                    <div class="calendar-container-box-time">{{ $post->created_at->format('H:i:s') }}</div>
+                    <div class="star-rating pl-3">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
                     </div>
-                </a>
-            </div>
+                </div>
+                <div class="d-flex align-items-center pt-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
+                        alt="">
+                    <div class="calendar-container-box-title pl-2">
+                        {!! $post->content ?? '' !!}
+                    </div>
+                </div>
+                <div class="calendar-container-card d-flex justify-content-between">
+                    <div>
+                        Trước đó:
+                        <span class="font-weight-bold">0.90%</span>
+                    </div>
+                    <div>
+                        Kỳ vọng:
+                        <span class="font-weight-bold">-0%</span>
+                    </div>
+                    <div>
+                        Thực tế:
+                        <span class="font-weight-bold text-red">-0.90%</span>
+                    </div>
+                </div>
+        </div>
         @endforeach
         <div class="brokers-container-top p-3">
             <div class="d-flex justify-content-between">
@@ -35,7 +60,6 @@
                     <span>What's hero broker?</span>
                 </div>
             </div>
-            @foreach ($brokers as $broker )
             <div class="slider-box pt-2">
                 <div class="slider-box-item mx-1">
                     <div class="image">
@@ -67,8 +91,157 @@
                         </div>
                     </div>
                 </div>
+                <div class="slider-box-item mx-1">
+                    <div class="image">
+                        <a href="">
+                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slider-box-item-content px-2 py-3">
+                        <div class="title">
+                            <span>RoboForex</span> &nbsp;
+                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
+                            <span>FSC</span>
+                        </div>
+                        <div class="box">
+                            <span class="box-text">Tỉ lệ giải quyết</span>
+                            <span class="text-red font-weight-bold">0%</span>
+                        </div>
+                        <div class="broker-link">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                    <path
+                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                </svg>
+                                <span>https://gorobo.pro/lw92</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-box-item mx-1">
+                    <div class="image">
+                        <a href="">
+                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slider-box-item-content px-2 py-3">
+                        <div class="title">
+                            <span>RoboForex</span> &nbsp;
+                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
+                            <span>FSC</span>
+                        </div>
+                        <div class="box">
+                            <span class="box-text">Tỉ lệ giải quyết</span>
+                            <span class="text-red font-weight-bold">0%</span>
+                        </div>
+                        <div class="broker-link">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                    <path
+                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                </svg>
+                                <span>https://gorobo.pro/lw92</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-box-item mx-1">
+                    <div class="image">
+                        <a href="">
+                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slider-box-item-content px-2 py-3">
+                        <div class="title">
+                            <span>RoboForex</span> &nbsp;
+                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
+                            <span>FSC</span>
+                        </div>
+                        <div class="box">
+                            <span class="box-text">Tỉ lệ giải quyết</span>
+                            <span class="text-red font-weight-bold">0%</span>
+                        </div>
+                        <div class="broker-link">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                    <path
+                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                </svg>
+                                <span>https://gorobo.pro/lw92</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-box-item mx-1">
+                    <div class="image">
+                        <a href="">
+                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slider-box-item-content px-2 py-3">
+                        <div class="title">
+                            <span>RoboForex</span> &nbsp;
+                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
+                            <span>FSC</span>
+                        </div>
+                        <div class="box">
+                            <span class="box-text">Tỉ lệ giải quyết</span>
+                            <span class="text-red font-weight-bold">0%</span>
+                        </div>
+                        <div class="broker-link">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                    <path
+                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                </svg>
+                                <span>https://gorobo.pro/lw92</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-box-item mx-1">
+                    <div class="image">
+                        <a href="">
+                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="slider-box-item-content px-2 py-3">
+                        <div class="title">
+                            <span>RoboForex</span> &nbsp;
+                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
+                            <span>FSC</span>
+                        </div>
+                        <div class="box">
+                            <span class="box-text">Tỉ lệ giải quyết</span>
+                            <span class="text-red font-weight-bold">0%</span>
+                        </div>
+                        <div class="broker-link">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                    <path
+                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                </svg>
+                                <span>https://gorobo.pro/lw92</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            @endforeach
         </div>
 
         <div class="futures-box p-3">
@@ -307,6 +480,46 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="article-container-box">
+            <a href="">
+                <div class="article-container-box-time">21:05:57</div>
+                <div class="article-container-box-title">
+                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá rủi ro
+                    đối
+                    với tàu thuyền.
+                </div>
+            </a>
+        </div>
+        <div class="article-container-box">
+            <a href="">
+                <div class="article-container-box-time">21:05:57</div>
+                <div class="article-container-box-title">
+                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá rủi ro
+                    đối
+                    với tàu thuyền.
+                </div>
+            </a>
+        </div>
+        <div class="article-container-box">
+            <a href="">
+                <div class="article-container-box-time">21:05:57</div>
+                <div class="article-container-box-title">
+                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá rủi ro
+                    đối
+                    với tàu thuyền.
+                </div>
+            </a>
+        </div>
+        <div class="article-container-box">
+            <a href="">
+                <div class="article-container-box-time">21:05:57</div>
+                <div class="article-container-box-title">
+                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá rủi ro
+                    đối
+                    với tàu thuyền.
+                </div>
+            </a>
         </div>
     </div>
 @endsection

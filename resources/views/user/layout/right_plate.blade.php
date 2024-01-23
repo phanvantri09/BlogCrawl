@@ -90,7 +90,6 @@
         </div>
         @endforeach
     </div>
-
     <div class="complaint-box mt-3 px-3 py-4">
         <div class="d-flex justify-content-between">
             <div>Khiếu nại mới</div>
@@ -113,24 +112,22 @@
                             alt="">
                     </div>
                     <div class="pl-2">
-                        <div class="font-weight-bold">User390245</div>
-                        <div class="font-weight-bold">Exness</div>
+                        <div class="font-weight-bold">{{ $firstComplaint->readname ?? "Ẩn danh" }}</div>
+                        <div class="font-weight-bold">{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="complaint-box-info-container-time">
-                            <span>20:55</span>&nbsp;
-                            <span>02/12/2022</span>
+                            <span>{{ $firstComplaint->created_at->format('H:i:s') }}</span>&nbsp;
+                            <span>{{ $firstComplaint->created_at->format('d/m/Y') }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="complaint-box-pointer-content">
-                    <div>#Trượt giá</div>
+                    <div>#{{ $firstComplaint->complaintName ?? " " }}</div>
                     <div class="mb-2">
                         <span class="text-grey">Số tiền liên quan</span>
-                        <span>$100u</span>
+                        <span>${{ $firstComplaint->money ?? " " }}</span>
                     </div>
                     <div class="text-grey">
-                        tôi bị đặt lệnh nhưng bị hệ thống xoá lệnh và không khớp, mà hệ thống đã báo
-                        là
-                        lệnh tôi khớp rồi , vậy tại sao lệnh trên mt5 bị xoá
+                        {!! $firstComplaint->content ?? " " !!}
                     </div>
                 </div>
             </a>
@@ -166,7 +163,7 @@
 
     <div class="ytb-container mt-3 p-3">
         <iframe width="100%" height="160px"
-            src="https://www.youtube.com/embed/fTDv68llRcg?si=7jlie-GAEDdSPCOm"
+        src="{{ str_replace('watch', 'embed',$firstVideo->videoFileName)}}"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
