@@ -30,6 +30,7 @@ class ConstCommon {
             'videos'=>'https://vnwallstreet.top/api/inter/video/list?uid=-1',
             'licenses'=>'',
             'complaint'=>'https://vnwallstreet.top/api/inter/complaint/list?limit=20&start=0&uid=-1',
+            'economic_calendar' => 'https://www.fxtin.com/page/finance/calendarEvents?important=0&date='
         ];
 
     public static function getAllCategory(){
@@ -57,4 +58,23 @@ class ConstCommon {
         $mail = new SendLinkMail($content);
         return Mail::to($email)->queue($mail);
     }
+
+    public static function getSevenDayEconomiCalender(){
+        // Lấy ngày hiện tại
+        $currentDate = Carbon::now();
+        $currentDate->setTimezone('Asia/Ho_Chi_Minh');
+        // Trừ 2 ngày từ ngày hiện tại
+        $startDate = $currentDate->subDays(2);
+
+        // Tạo mảng chứa 7 ngày
+        $dates = [];
+
+        // Loop để thêm 7 ngày vào mảng
+        for ($i = 0; $i < 7; $i++) {
+            $dates[$i] = urlencode($startDate->format('Y/m/d'));
+            $startDate->addDay();
+        }
+        return $dates;
+    }
+
 }
