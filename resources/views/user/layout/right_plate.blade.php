@@ -84,7 +84,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
                     alt="">
                 <div class="calendar-box-item-title pl-2">
-                    {!! $post->content !!}
+                    {!! $post->content ?? " " !!}
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
             <a href="">
                 <div class="d-flex align-items-center mb-3">
                     <div class="avatar-box">
-                        <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                        <img src="{{ $firstComplaint->headImg }}"
                             alt="">
                     </div>
                     <div class="pl-2">
@@ -124,7 +124,7 @@
                     <div>#{{ $firstComplaint->complaintName ?? " " }}</div>
                     <div class="mb-2">
                         <span class="text-grey">Số tiền liên quan</span>
-                        <span>${{ $firstComplaint->money ?? " " }}</span>
+                        <span>{{ $firstComplaint->money ?? " " }}</span>
                     </div>
                     <div class="text-grey">
                         {!! $firstComplaint->content ?? " " !!}
@@ -136,14 +136,14 @@
             <a href="">
                 <div class="row">
                     <div class="col-md-4 complaint-box-container-image">
-                        <img src="https://img.wsbird.com/upload/2022/02/14/102748646.jpg"
+                        <img src="{{ $firstComplaint->img }}"
                             alt="">
                     </div>
                     <div class="col-md-8 px-1">
                         <div>{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="d-flex align-items-center">
                             <div class="images-box">
-                                <img src="https://img.wsbird.com/upload/2022/02/14/185417389.png"
+                                <img src=""
                                     alt="">
                             </div>
                             &nbsp;

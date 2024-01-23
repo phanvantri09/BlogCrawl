@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="video-info-title">{{ $video->videoName }}</div>
+                            <div class="video-info-title">{{ $video->videoName ?? " " }}</div>
                         </div>
                     </a>
                 </div>
