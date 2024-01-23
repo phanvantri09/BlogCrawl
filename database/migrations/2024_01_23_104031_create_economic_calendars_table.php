@@ -31,10 +31,9 @@ class CreateEconomicCalendarsTable extends Migration
             $table->string('tz')->nullable();
 
             // content
-            $table->integer('id_content')->nullable(); //  khóa chính  => id 
+            $table->integer('id_content')->nullable(); //  khóa chính  => id
             $table->integer('influence')->default(1);
 
-            $table->string('country_flag')->nullable();
             $table->string('previous')->nullable();
             $table->string('consensus')->nullable();
             $table->string('actual')->nullable();

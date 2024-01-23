@@ -25,10 +25,9 @@ class EconomicCalendar extends Model
         'tz',
 
         // content
-        'id_content', //  khóa chính  => id 
+        'id_content', //  khóa chính  => id
         'influence',
 
-        'country_flag',
         'previous',
         'consensus',
         'actual',
