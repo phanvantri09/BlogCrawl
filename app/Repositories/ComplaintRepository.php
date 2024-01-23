@@ -1,40 +1,40 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Complaint;
+use App\Models\complaint;
 
 class ComplaintRepository implements ComplaintRepositoryInterface
 {
     public function all()
     {
-        return Complaint::all();
+        return complaint::all();
     }
 
     public function create(array $data)
     {
-        return Complaint::create($data);
+        return complaint::create($data);
     }
 
     public function update(array $data, $id)
     {
-        $user = Complaint::findOrFail($id);
+        $user = complaint::findOrFail($id);
         $user->update($data);
         return $user;
     }
 
     public function delete($id)
     {
-        $user = Complaint::findOrFail($id);
+        $user = complaint::findOrFail($id);
         $user->delete();
     }
     public function edit($id)
     {
-        return Complaint::findOrFail($id);
+        return complaint::findOrFail($id);
     }
 
     public function find($id)
     {
-        return Complaint::find($id);
+        return complaint::find($id);
     }
 
     public function getLatestComplaint($limit)

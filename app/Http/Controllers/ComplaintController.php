@@ -108,8 +108,8 @@ class ComplaintController extends Controller
                 $data[$field] = implode(',', $imageNames);
             }
         }
-
         $data['id_user_update'] = auth()->user()->id;
+
         $this->complaintRepository->update($data, $id);
         return back()->with('success', 'Thành công');
     }
