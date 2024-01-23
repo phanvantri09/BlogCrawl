@@ -141,6 +141,7 @@ class CrawlEconomicCalendar implements ShouldQueue
                     } catch (\Throwable $th) {
                         DB::rollBack();
                         // dd($th);
+                        dd($th);
                     }
 
                 }
