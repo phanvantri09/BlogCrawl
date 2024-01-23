@@ -4,12 +4,12 @@
         <span class="bar"></span>
         <span class="bar"></span>
     </div>
-    <a href="#" class="nav-branding">J.K.</a>
+    <a href="{{ route('home')}}" class="nav-branding">J.K.</a>
 
 
     <ul class="nav-menu">
         <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
+            <a href="{{ route('home')}}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('complain') }}" class="nav-link">Khiếu nại</a>

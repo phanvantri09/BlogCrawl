@@ -15,7 +15,7 @@
         @foreach ($videos as $video)
             <div class="video-item">
                 <div class="video-view-container">
-                    <a href="">
+                    <a href="{{ $video->linkUrl ?? " " }}">
                         <div class="video-box">
                             <iframe src="{{ str_replace('watch', 'embed',$video->videoFileName)}}" title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -24,7 +24,7 @@
                         <div class="video-info p-3">
                             <div class="d-flex align-items-center py-2">
                                 <div class="video-info-avatar-box">
-                                    <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                                    <img src="{{ $video->headImg ?? "https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}}"
                                         alt="">
                                 </div>
                                 <div class="pl-1">
