@@ -21,6 +21,8 @@ use App\Repositories\LicenseRepository;
 use App\Repositories\LicenseRepositoryInterface;
 use App\Repositories\ComplaintRepository;
 use App\Repositories\ComplaintRepositoryInterface;
+use App\Repositories\EconomicCalendarRepository;
+use App\Repositories\EconomicCalendarRepositoryInterface;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -41,6 +43,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ComplaintRepositoryInterface::class, ComplaintRepository::class);
         $this->app->bind(BrokerRepositoryInterface::class, BrokerRepository::class);
         $this->app->bind(LicenseRepositoryInterface::class, LicenseRepository::class);
+        $this->app->bind(EconomicCalendarRepositoryInterface::class, EconomicCalendarRepository::class);
     }
     /**
      * Bootstrap services.

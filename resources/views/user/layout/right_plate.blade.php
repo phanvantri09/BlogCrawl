@@ -68,10 +68,10 @@
                 <span class="text-danger">07:33:12</span>
             </div>
         </div>
-        @foreach ($posts as $post )
+        @foreach ($economics as $economic )
         <div class="carlender-box-item">
             <div class="d-flex">
-                <div class="carlendar-box-item-time">{{ $post->created_at->format('H:i:s') }}</div>
+                <div class="carlendar-box-item-time">{{ $economic->created_at->format('H:i:s') }}</div>
                 <div class="star-rating pl-3">
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -81,10 +81,10 @@
                 </div>
             </div>
             <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
+                <img src="{{ $economic->country_flag}}"
                     alt="">
                 <div class="calendar-box-item-title pl-2">
-                    {!! $post->content ?? " " !!}
+                    {{ $economic->translate ?? " " }}
                 </div>
             </div>
         </div>
