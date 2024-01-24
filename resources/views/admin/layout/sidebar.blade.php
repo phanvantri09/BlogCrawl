@@ -277,7 +277,7 @@
                 {{-- add menu broker --}}
                 <li class="nav-item">
                     <a class="nav-link">
-                        <i class="fas fa-news"></i>
+                        <i class="fas fa-medal"></i>
                         <p>
                             Broker
                             <i class="right fas fa-angle-left"></i>
@@ -301,7 +301,7 @@
                 {{-- add menu economic calendar --}}
                 <li class="nav-item">
                     <a class="nav-link">
-                        <i class="fas fa-news"></i>
+                        <i class="far fa-calendar"></i>
                         <p>
                             Economic calendar
                             <i class="right fas fa-angle-left"></i>
