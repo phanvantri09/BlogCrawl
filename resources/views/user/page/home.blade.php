@@ -79,7 +79,7 @@
                     <div class="image">
                         <a href="{{ $broker->facebookLink ?? " " }}">
                             @if ($broker->img)
-                            <img src="{{ $broker->img }}" alt="">
+                            <img src="{{ App\Helpers\ConstCommon::getLinkIMG($broker->img) }}" alt="">
                             @endif
                         </a>
                     </div>

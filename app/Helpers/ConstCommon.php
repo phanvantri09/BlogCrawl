@@ -30,7 +30,8 @@ class ConstCommon {
             'videos'=>'https://vnwallstreet.top/api/inter/video/list?uid=-1',
             'licenses'=>'',
             'complaint'=>'https://vnwallstreet.top/api/inter/complaint/list?limit=20&start=0&uid=-1',
-            'economic_calendar' => 'https://www.fxtin.com/page/finance/calendarEvents?important=0&date='
+            'economic_calendar' => 'https://www.fxtin.com/page/finance/calendarEvents?important=0&date=',
+            'blogs'=>'https://vnwallstreet.top/api/inter/article/list?limit=20&start=0&uid=-1'
         ];
 
     public static function getAllCategory(){
@@ -76,5 +77,20 @@ class ConstCommon {
         }
         return $dates;
     }
+    public static function getLinkIMG($data){
+        $needle = 'http';
+        $check = 1;
 
+        if(!empty($data)){
+            if (strpos($data, $needle) !== false) {
+                $check = 1;
+            } else {
+                $check = 0;
+            }
+            if($check == 0){
+                return self::getLinkImageToStorage($data);
+            }
+        }
+        return $data;
+    }
 }

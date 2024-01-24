@@ -70,6 +70,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('article_detail','article_detail')->name('article_detail');
         Route::get('brokers','brokers')->name('brokers');
         Route::get('article','article')->name('article');
+        Route::get('economic','economic')->name('economic');
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');

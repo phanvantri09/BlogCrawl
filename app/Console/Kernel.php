@@ -9,6 +9,7 @@ use App\Jobs\CrawlVideo;
 use App\Jobs\CrawlComplaint;
 use App\Jobs\CrawlBroker;
 use App\Jobs\CrawlEconomicCalendar;
+use App\Jobs\CrawlBlogs;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -25,6 +26,8 @@ class Kernel extends ConsoleKernel
         $schedule->job(new CrawlComplaint)->everyMinute();
         $schedule->job(new CrawlBroker)->everyMinute();
         $schedule->job(new CrawlEconomicCalendar)->everyMinute();
+        $schedule->job(new CrawlBlogs)->everyMinute();
+
     }
 
     /**
