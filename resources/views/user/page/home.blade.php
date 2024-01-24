@@ -10,6 +10,7 @@
         </svg>&nbsp;<span>Trang chủ</span>
     </div>
     <div class="main-content-container px-3 py-2">
+        {{-- hiển thị bài post --}}
         @foreach ($posts as $post)
             <div class="article-container-box">
                 <a href="">
@@ -20,6 +21,43 @@
                 </a>
             </div>
         @endforeach
+        {{-- hiển thị lịch kinh tế --}}
+        @foreach ($economics as $economic )
+        <div class="carlender-box-item mt-3">
+            <div class="d-flex">
+                <div class="carlendar-box-item-time">{{ $economic->created_at->format('H:i:s') }}</div>
+                <div class="star-rating pl-3">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center pt-2">
+                <img src="{{$economic->country_flag}}"
+                    alt="">
+                <div class="calendar-box-item-title pl-2">
+                    {{ $economic->events_translate }}
+                </div>
+            </div>
+            <div class="calendar-container-card d-flex justify-content-between">
+                <div>
+                    Trước đó:
+                    <span class="font-weight-bold">{{ $economic->previous ?? " " }}%</span>
+                </div>
+                <div>
+                    Kỳ vọng:
+                    <span class="font-weight-bold">{{ $economic->consensus ?? " " }}%</span>
+                </div>
+                <div>
+                    Thực tế:
+                    <span class="font-weight-bold text-red">{{ $economic->actual ?? " " }}%</span>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        {{-- hiển thị broker --}}
         <div class="brokers-container-top p-3">
             <div class="d-flex justify-content-between">
                 <div class="d-flex">
@@ -51,11 +89,11 @@
                             @if ($broker->firstCountryLogo)
                             <img src="{{ $broker->firstCountryLogo }}" alt="">
                             @endif &nbsp;
-                            <span>{{ $broker->licenseName ?? " " }}</span>
+                            <span class="text-truncate">{{ $broker->licenseName ?? " " }}</span>
                         </div>
                         <div class="box">
                             <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
+                            <span class="text-red font-weight-bold">{{ $broker->resolutionRate ?? " " }}</span>
                         </div>
                         <div class="broker-link">
                             <a href="">
@@ -66,7 +104,7 @@
                                     <path
                                         d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
                                 </svg>
-                                <span>{{ $broker->website ?? " " }}</span>
+                                <span class="overflow-hidden">{{ $broker->website ?? " " }}</span>
                             </a>
                         </div>
                     </div>

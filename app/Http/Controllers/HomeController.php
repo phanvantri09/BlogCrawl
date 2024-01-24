@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\BrokerRepositoryInterface;
 use App\Repositories\ComplaintRepositoryInterface;
+use App\Repositories\EconomicCalendarRepository;
+use App\Repositories\EconomicCalendarRepositoryInterface;
 use App\Repositories\PostRepositoryInterface;
 use App\Repositories\VideoRepositoryInterface;
 use Hashids\Hashids;
@@ -22,6 +24,7 @@ class HomeController extends Controller
     protected $videoRepository;
     protected $complaintRepository;
     protected $brokerRepository;
+    protected $economicRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -29,7 +32,8 @@ class HomeController extends Controller
         PostRepositoryInterface $postRepository,
         VideoRepositoryInterface $videoRepository,
         ComplaintRepositoryInterface $complaintRepository,
-        BrokerRepositoryInterface $brokerRepository
+        BrokerRepositoryInterface $brokerRepository,
+        EconomicCalendarRepositoryInterface $economicRepository
     ) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
@@ -37,6 +41,7 @@ class HomeController extends Controller
         $this->videoRepository = $videoRepository;
         $this->complaintRepository = $complaintRepository;
         $this->brokerRepository = $brokerRepository;
+        $this->economicRepository = $economicRepository;
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +54,8 @@ class HomeController extends Controller
         $firstVideo = $this->videoRepository->getFirstVideo();
         $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.home', compact(['posts', 'firstComplaint','firstVideo','brokers']));
+        $economics = $this->economicRepository->getLatestEconomic(5);
+        return view('user.page.home', compact(['posts', 'firstComplaint','firstVideo','brokers', 'economics']));
     }
 
     public function chatbox()

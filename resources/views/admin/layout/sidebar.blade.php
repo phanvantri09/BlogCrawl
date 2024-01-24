@@ -298,6 +298,30 @@
                         </li>
                     </ul>
                 </li>
+                {{-- add menu economic calendar --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-news"></i>
+                        <p>
+                            Economic calendar
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('economic.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('economic.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
