@@ -708,3 +708,115 @@ a:hover {
 .comment-item-content{
     width: calc(100% - 50px);
 }
+.brokers-view-container{
+    background-color: #192734;
+    border-radius: 10px;
+    position: relative;
+}
+.brokers-view-container:hover{
+    background-color: #253e55;
+}
+.brokers-item-container-top{
+    display: flex;
+    font-weight: bold;
+}
+.brokers-item-container-top-image{
+    width: 135px;
+    height: 135px;
+}
+.brokers-item-container-top-image img{
+    width: 100%;
+    height: 100%;
+}
+.brokers-item-container-top-content{
+    width: calc(100% - 135px);
+}
+.brokers-item-container-top-content-img{
+    width: 30px;
+    height: 20px;
+}
+.brokers-item-container-top-content-img img{
+    width: 100%;
+    height: 100%;
+}
+.schedule-view span{
+    font-size: 12px;
+    color: #81929f;
+}
+.schedule-view .rank-bar {
+    width: 85%;
+    border-radius: 6px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    background-color: #ffffffc9;
+    margin-right: 5px;
+}
+.schedule-view .rank-progress {
+    height: 100%;
+    background-color: #7c00b6;
+    border-radius: 2px;
+}
+.schedule-view .d-flex span{
+    font-size: 20px;
+}
+.brokers-item-container-data{
+    border-top: 1px solid #3d4c5c;
+}
+.brokers-item-container-data .text-grey{
+    font-size: 10px;
+    font-weight: bold;
+}
+.brokers-item-container-icon{
+    position: absolute;
+    top: 0;
+    right: 2%;
+    color: #ffd000;
+}
+.article-view-container{
+    border-bottom: 1px solid #3d4c5c;
+    font-weight: bold;
+}
+.author-container-box-time{
+    padding: 3px;
+    background: #284464;
+    width: 60px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 5px;
+}
+.author-container-box-title{
+    color: #9fafff;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    line-height: 20px;
+}
+.author-container-box-label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+.author-container-box-ad{
+    color: rgb(37, 150, 190);
+    background: rgba(37, 150, 190, 0.2);
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+.author-container-box-content{
+    font-size: 13px;
+    width: calc(100% - 128px);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+.author-container-box-img{
+    width: 118px;
+    height: 80px;
+}
+.author-container-box-img img{
+    width: 100%;
+    height: 100%;
+}

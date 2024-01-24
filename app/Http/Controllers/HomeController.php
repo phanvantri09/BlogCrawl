@@ -78,8 +78,24 @@ class HomeController extends Controller
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.video', compact(['posts', 'videos','firstComplaint','firstVideo']));
     }
-    public function article()
+    public function article_detail()
     {
         return view('user.page.article_detail', compact([]));
+    }
+    public function brokers()
+    {
+        $firstVideo = $this->videoRepository->getFirstVideo();
+        $firstComplaint = $this->complaintRepository->getFirstComplaint();
+        $videos = $this->videoRepository->getLastedVideo(10);
+        $posts = $this->postRepository->getLatestPosts(30);
+        return view('user.page.broker', compact(['posts', 'videos','firstComplaint','firstVideo']));
+    }
+    public function article()
+    {
+        $firstVideo = $this->videoRepository->getFirstVideo();
+        $firstComplaint = $this->complaintRepository->getFirstComplaint();
+        $videos = $this->videoRepository->getLastedVideo(10);
+        $posts = $this->postRepository->getLatestPosts(30);
+        return view('user.page.article_view', compact(['posts', 'videos','firstComplaint','firstVideo']));
     }
 }
