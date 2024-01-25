@@ -64,11 +64,12 @@ class HomeController extends Controller
     }
     public function complain()
     {
+        $economics = $this->economicRepository->getLatestEconomic(3);
         $firstVideo = $this->videoRepository->getFirstVideo();
         $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $complaints = $this->complaintRepository->getLatestComplaint(20);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.complain', compact(['posts', 'complaints', 'firstComplaint','firstVideo']));
+        return view('user.page.complain', compact(['posts', 'complaints', 'firstComplaint','firstVideo','economics']));
     }
     public function video()
     {
@@ -84,11 +85,13 @@ class HomeController extends Controller
     }
     public function brokers()
     {
+        $brokers = $this->brokerRepository->getLastedBroker(20);
+        $economics = $this->economicRepository->getLatestEconomic(5);
         $firstVideo = $this->videoRepository->getFirstVideo();
         $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.broker', compact(['posts', 'videos','firstComplaint','firstVideo']));
+        return view('user.page.broker', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
     }
     public function article()
     {
