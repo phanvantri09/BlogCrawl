@@ -51,7 +51,7 @@
                             @if ($video->headImg)
                             <div class="col-sm-6">
                                 <img id="headImg_preview" style="max-width: 100%; max-height: 200px;"
-                                    src="{{ asset('storage/images/' . $video->headImg) }}">
+                                src="{{ App\Helpers\ConstCommon::getLinkIMG($video->headImg) }}">
                             </div>
                             @endif
                         </div>

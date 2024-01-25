@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <img id="image_preview" style="max-width: 100%; max-height: 200px;" src="{{ asset('storage/images/' . $license->image) }}">
+                                <img id="image_preview" style="max-width: 100%; max-height: 200px;" src="{{ App\Helpers\ConstCommon::getLinkIMG($license->image) }}">
                             </div>
                         </div>
                         <div class="row">

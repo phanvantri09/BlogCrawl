@@ -170,7 +170,7 @@
                             </div>
                             @if ($blog->headImg)
                                 <div class="col-sm-6">
-                                    <img id="headImg_preview" src="{{ asset('storage/images/' . $blog->headImg) }}"
+                                    <img id="headImg_preview" src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->headImg) }}"
                                         style="max-width: 100%; max-height: 200px;">
                                 </div>
                             @endif
@@ -187,7 +187,7 @@
                             </div>
                             @if ($blog->img)
                                 <div class="col-sm-6">
-                                    <img id="img_preview" src="{{ asset('storage/images/' . $blog->img) }}"
+                                    <img id="img_preview" src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->img) }}"
                                         style="max-width: 100%; max-height: 200px;">
                                 </div>
                             @endif
@@ -205,7 +205,7 @@
                             @if ($blog->likeImgList)
                                 <div class="col-sm-6">
                                     <img id="likeImgList_preview"
-                                        src="{{ asset('storage/images/' . $blog->likeImgList) }}"
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->likeImgList) }}"
                                         style="max-width: 100%; max-height: 200px;">
                                 </div>
                             @endif
@@ -223,7 +223,7 @@
                             @if ($blog->lookImgList)
                                 <div class="col-sm-6">
                                     <img id="lookImgList_preview"
-                                        src="{{ asset('storage/images/' . $blog->lookImgList) }}"
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->lookImgList) }}"
                                         style="max-width: 100%; max-height: 200px;">
                                 </div>
                             @endif

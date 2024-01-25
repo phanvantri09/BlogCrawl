@@ -48,7 +48,7 @@ class BrokerController extends Controller
     {
         //
         $data = $request->all();
-        $imageFields = ['firstCountryLogo', 'img', 'logo'];
+        $imageFields = ['firstCountryLogo', 'img', 'logo', 'lookImgList'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
@@ -94,7 +94,7 @@ class BrokerController extends Controller
     {
         //
         $data = $request->all();
-        $imageFields = ['firstCountryLogo', 'img', 'logo'];
+        $imageFields = ['firstCountryLogo', 'img', 'logo','lookImgList'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
