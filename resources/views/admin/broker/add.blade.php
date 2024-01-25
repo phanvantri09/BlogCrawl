@@ -235,10 +235,15 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>lookImgList</label>
-                                    <textarea class="form-control" name="lookImgList" rows="3" placeholder="Enter ...">{{ empty(old('lookImgList')) ? '' : old('lookImgList') }}</textarea>
+                                    <div class="custom-file">
+                                        <input onchange="readURL3(this)" multiple="" name="lookImgList[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
+                                    </div>
                                     @error('lookImgList')
-                                        <div class="alert alert-danger">{{ $errors->first('lookImgList') }}</div>
+                                    <div class="alert alert-danger">{{ $errors->first('lookImgList') }}</div>
                                     @enderror
+                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    </div>
                                 </div>
                             </div>
                         </div>

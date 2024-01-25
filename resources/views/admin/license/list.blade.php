@@ -37,7 +37,7 @@
                                         <td>{{ $license->name }}</td>
                                         @if($license->image)
                                         <td><img style="max-width: 100%; max-height: 200px;"
-                                            src="{{ asset('storage/images/' . $license->image) }}">
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($license->image) }}">
                                         </td>
                                         @else
                                         <td></td>

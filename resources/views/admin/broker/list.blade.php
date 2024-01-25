@@ -46,41 +46,26 @@
                                 <td>{{ $broker->leverMax }}</td>
                                 <td>{{ $broker->facebookLink }}</td>
                                 @if ($broker->firstCountryLogo)
-                                @php
-                                $images = explode(',', $broker->firstCountryLogo);
-                                @endphp
                                 <<td>
-                                    @foreach ($images as $image)
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . trim($image)) }}">
-                                    @endforeach
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($broker->firstCountryLogo) }}">
                                 </td>
                                 @else
                                 <td></td>
                                 @endif
                                 @if ($broker->img)
-                                @php
-                                $images = explode(',', $broker->img);
-                                @endphp
                                 <td>
-                                    @foreach ($images as $image)
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . trim($image)) }}">
-                                    @endforeach
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($broker->img) }}">
                                 </td>
                                 @else
                                 <td></td>
                                 @endif
                                 <td>{{ $broker->licenseName }}</td>
                                 @if ($broker->logo)
-                                @php
-                                $images = explode(',', $broker->logo);
-                                @endphp
-                                <td>
-                                    @foreach ($images as $image)
+                                <td>  
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . trim($image)) }}">
-                                    @endforeach
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($broker->logo) }}">
                                 </td>
                                 @else
                                 <td></td>

@@ -55,7 +55,7 @@
                                 @if ($economic->country_flag)
                                 <td>
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $economic->country_flag ) }}">
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($economic->country_flag) }}">
                                 </td>
                                 @else
                                 <td></td>

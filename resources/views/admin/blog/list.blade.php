@@ -50,7 +50,7 @@
                                 @if ($blog->headImg)
                                 <td>
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $blog->headImg ) }}">
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->headImg) }}">
                                 </td>
                                 @else
                                 <td></td>
@@ -58,7 +58,7 @@
                                 @if ($blog->img)
                                 <td>
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $blog->img ) }}">
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->img) }}">
                                 </td>
                                 @else
                                 <td></td>
@@ -74,7 +74,7 @@
                                 @if ($blog->likeImgList)
                                 <td>
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $blog->likeImgList ) }}">
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->listImgList) }}">
                                 </td>
                                 @else
                                 <td></td>
@@ -82,7 +82,7 @@
                                 @if ($blog->lookImgList)
                                 <td>
                                     <img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ asset('storage/images/' . $blog->lookImgList ) }}">
+                                    src="{{ App\Helpers\ConstCommon::getLinkIMG($blog->lookImgList) }}">
                                 </td>
                                 @else
                                 <td></td>

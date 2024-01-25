@@ -61,7 +61,7 @@
                             @if ($post->headImg)
                             <div class="col-sm-6">
                                 <img id="headImg_preview" style="max-width: 100%; max-height: 200px;"
-                                    src="{{ asset('storage/images/' . $post->headImg) }}">
+                                src="{{ App\Helpers\ConstCommon::getLinkIMG($post->headImg) }}">
                             </div>
                             @endif
                         </div>

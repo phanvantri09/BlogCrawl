@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <img id="country_flag_preview" src="{{ asset('storage/images/' . $economic->country_flag) }}" style="max-width: 100%; max-height: 200px;">
+                                <img id="country_flag_preview"src="{{ App\Helpers\ConstCommon::getLinkIMG($economic->country_flag) }}" style="max-width: 100%; max-height: 200px;">
                             </div>
                         </div>
                         <div class="card-footer">

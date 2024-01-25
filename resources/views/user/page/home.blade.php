@@ -110,7 +110,7 @@ $postCount = 0;
                             <div class="title">
                                 <span>{{ $broker->nickname ?? ' ' }}</span> &nbsp;
                                 @if ($broker->firstCountryLogo)
-                                    <img src="{{ $broker->firstCountryLogo }}" alt="">
+                                    <img src="{{ App\Helpers\ConstCommon::getLinkIMG($broker->firstCountryLogo) }}" alt="">
                                 @endif &nbsp;
                                 <span class="text-truncate">{{ $broker->licenseName ?? ' ' }}</span>
                             </div>
