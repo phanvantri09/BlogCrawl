@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Repositories\BlogRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Helpers\ConstCommon;
 
 class BlogController extends Controller
 {
+    protected $blogRepository;
+    public function __construct(BlogRepositoryInterface $blogRepository)
+    {
+        $this->blogRepository = $blogRepository;
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
+        $data = $this->blogRepository->all();
+        return view('admin.blog.list', compact('data'));
     }
 
     /**
@@ -25,6 +33,7 @@ class BlogController extends Controller
     public function create()
     {
         //
+        return view('admin.blog.add');
     }
 
     /**
@@ -36,28 +45,34 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
-    }
+        $data = $request->all();
+        $imageFields = ['headImg', 'img', 'likeImgList', 'lookImgList'];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Blog $blog)
-    {
-        //
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                $image = $request->file($field);
+                $imageName = 'blog_' . ConstCommon::getCurrentTime() . '_' . $field .'.'. $image->extension();
+                ConstCommon::addImageToStorage($image, $imageName);
+                $data[$field] = $imageName;
+            }
+        }
+
+        $data['id_user_create'] = auth()->user()->id;
+        $this->blogRepository->create($data);
+        return redirect()->route('blog.index')->with('success', 'Data created successfully');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Blog  $blog
+     * @param  \App\Models\Blog  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit($id)
     {
         //
+        $blog = $this->blogRepository->edit($id);
+        return view('admin.blog.edit', compact('blog'));
     }
 
     /**
@@ -67,9 +82,28 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $imageFields = ['headImg', 'img', 'likeImgList', 'lookImgList'];
+
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                $image = $request->file($field);
+                $imageName = 'blog_' . ConstCommon::getCurrentTime() . '_' . $field .'.'. $image->extension();
+                ConstCommon::addImageToStorage($image, $imageName);
+                $data[$field] = $imageName;
+            }else {
+                $blog = $this->blogRepository->find($id);
+                $imageName = $blog->image; // Lấy giá trị của ảnh hiện tại
+                $data[$field] = $imageName;
+            }
+        }
+
+        $data['id_user_update'] = auth()->user()->id;
+        $this->blogRepository->update($data, $id);
+        return back()->with('success', 'Thành công');
     }
 
     /**
@@ -78,8 +112,10 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
         //
+        $this->blogRepository->delete($id);
+        return back()->with('success', 'Thành công');
     }
 }
