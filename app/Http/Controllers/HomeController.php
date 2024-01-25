@@ -55,7 +55,12 @@ class HomeController extends Controller
         $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $posts = $this->postRepository->getLatestPosts(30);
         $economics = $this->economicRepository->getLatestEconomic(5);
-        return view('user.page.home', compact(['posts', 'firstComplaint','firstVideo','brokers', 'economics']));
+        return view('user.page.home', compact(
+            [
+                'posts', 'firstComplaint','firstVideo','brokers', 
+                'economics'
+            ]
+        ));
     }
 
     public function chatbox()

@@ -68,27 +68,34 @@
                 <span class="text-danger">07:33:12</span>
             </div>
         </div>
-        @foreach ($economics as $economic )
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">{{ $economic->created_at->format('H:i:s') }}</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+        @php
+            use Illuminate\Support\Facades\DB;
+            use App\Models\EconomicCalendar;
+            $economicsShowRight = EconomicCalendar::orderBy('created_at')->limit(5)->get();
+        @endphp
+        @if (count($economicsShowRight) > 0)
+            @foreach ($economicsShowRight as $economic )
+                <div class="carlender-box-item">
+                    <div class="d-flex">
+                        <div class="carlendar-box-item-time">{{ $economic->created_at->format('H:i:s') }}</div>
+                        <div class="star-rating pl-3">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center pt-2">
+                        <img src="{{ $economic->country_flag}}"
+                            alt="">
+                        <div class="calendar-box-item-title pl-2">
+                            {{ $economic->translate ?? " " }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="{{ $economic->country_flag}}"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    {{ $economic->translate ?? " " }}
-                </div>
-            </div>
-        </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
     <div class="complaint-box mt-3 px-3 py-4">
         <div class="d-flex justify-content-between">
