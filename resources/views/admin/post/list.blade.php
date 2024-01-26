@@ -42,7 +42,7 @@
                                         <td>{{ $post->facebookUrl }}</td>
                                         <td>{!! $post->linkUrl !!}</td>
                                         @if ($post->headImg)
-                                            <td><img style="max-width: 100%; max-height: 200px;"
+                                            <td><img style="max-width: 100%; max-height: 200px;" alt=""
                                             src="{{ App\Helpers\ConstCommon::getLinkIMG($post->headImg) }}">
                                             </td>
                                         @else

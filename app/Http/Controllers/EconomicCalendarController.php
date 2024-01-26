@@ -84,10 +84,10 @@ class EconomicCalendarController extends Controller
             ConstCommon::addImageToStorage($image, $imageName);
             $data['country_flag'] = $imageName;
         }
-        else {
+        elseif (!isset($data["country_flag"])) { 
             $economic = $this->economicRepository->find($id);
-            $imageName = $economic->image; // Lấy giá trị của ảnh hiện tại
-            $data['country_flag'] = $imageName;
+            $imageName = $economic->country_flag; // Lấy giá trị của ảnh hiện tại
+            $data['country_flag'] = $imageName;  
         }
         $this->economicRepository->update($data, $id);
         return back()->with('success', 'Thành công');

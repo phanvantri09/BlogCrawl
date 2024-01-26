@@ -61,32 +61,13 @@
                                 @enderror
                                 <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
                                     @if ($complaint->headImg)
-                                    @php
-                                    $images = explode(',', $complaint->headImg);
-                                    @endphp
-                                    @foreach ($images as $image)
-
-                                    <img style="max-width: 100px; max-height: 100px; margin-right: 10px;"
-                                        src="{{ asset('storage/images/' . trim($image)) }}">
-                                    @endforeach
+                                    <img style="max-width: 100px; max-height: 100px; margin-right: 10px;" alt=""
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($complaint->headImg) }}">
                                     @else
                                     @endif
                                 </div>
                             </div>
                             <div class="d-flex flex-row mb-3 mt-3">
-                                {{-- @if(count($getAllByIDProductItem))
-                                @foreach ($getAllByIDProductItem as $key => $item)
-                                <div class="d-flex flex-column justify-content-center text-center">
-                                    <img style="width: 200px;height: 200px; object-fit: cover; margin-bottom: 5px;"
-                                        class="rounded mr-3"
-                                        src="{{\App\Helpers\ConstCommon::getLinkImageToStorage( $item->link_image ?? null)}}">
-                                    <a class="text-danger"
-                                        href="{{ route('product.deleteImage', ['id' => $item->id]) }}">
-                                        <i class="fas fa-trash-alt">&nbsp; Xóa ảnh</i>
-                                    </a>
-                                </div>
-                                @endforeach
-                                @endif --}}
                             </div>
                         </div>
                     </div>
@@ -198,38 +179,43 @@
                                     @endphp
                                     @foreach ($images as $image)
                                     <img style="max-width: 100px; max-height: 100px; margin-right: 10px;"
-                                        src="{{ asset('storage/images/' . trim($image)) }}">
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG(trim($image)) }}">
                                     @endforeach
                                     @else
                                     @endif
                                 </div>
                             </div>
                             <div class="d-flex flex-row mb-3 mt-3">
-                                {{-- @if(count($getAllByIDProductItem))
-                                @foreach ($getAllByIDProductItem as $key => $item)
-                                <div class="d-flex flex-column justify-content-center text-center">
-                                    <img style="width: 200px;height: 200px; object-fit: cover; margin-bottom: 5px;"
-                                        class="rounded mr-3"
-                                        src="{{\App\Helpers\ConstCommon::getLinkImageToStorage( $item->link_image ?? null)}}">
-                                    <a class="text-danger"
-                                        href="{{ route('product.deleteImage', ['id' => $item->id]) }}">
-                                        <i class="fas fa-trash-alt">&nbsp; Xóa ảnh</i>
-                                    </a>
-                                </div>
-                                @endforeach
-                                @endif --}}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
+                            <!-- select -->
                             <div class="form-group">
                                 <label>replenishImg</label>
-                                <textarea class="form-control" name="replenishImg" rows="3"
-                                    placeholder="Enter ...">{{ empty(old('replenishImg', $complaint->replenishImg)) ? '' : old('replenishImg', $complaint->replenishImg) }}</textarea>
+                                <div class="custom-file">
+                                    <input onchange="readURL3(this)" multiple="" name="replenishImg[]" type="file"
+                                        class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                    <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
+                                </div>
                                 @error('replenishImg')
                                 <div class="alert alert-danger">{{ $errors->first('replenishImg') }}</div>
                                 @enderror
+                                <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    @if ($complaint->replenishImg)
+                                    @php
+                                    $images = explode(',', $complaint->replenishImg);
+                                    @endphp
+                                    @foreach ($images as $image)
+                                    <img style="max-width: 100px; max-height: 100px; margin-right: 10px;"
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG(trim($image)) }}">
+                                    @endforeach
+                                    @else
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row mb-3 mt-3">
                             </div>
                         </div>
                     </div>
