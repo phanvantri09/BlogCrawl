@@ -25,24 +25,48 @@
                             <thead>
                                 <tr>
                                     <th>stt</th>
-                                    <th>Tên</th>
-                                    <th>image</th>
-                                    <th>Mô tả</th>
+                                    <th>Address</th>
+                                    <th>country logo</th>
+                                    <th>Email</th>
+                                    <th>Fax</th>
+                                    <th>License logo</th>
+                                    <th>licenseName</th>
+                                    <th>organizationName</th>
+                                    <th>registrationCode</th>
+                                    <th>regulatoryEffectiveTime</th>
+                                    <th>regulatoryLicense</th>
+                                    <th>tel</th>
+                                    <th>website</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $key => $license)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $license->name }}</td>
-                                        @if($license->image)
-                                        <td><img style="max-width: 100%; max-height: 200px;"
-                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($license->image) }}">
+                                        <td>{{ $license->address }}</td>
+                                        @if($license->countryLogo)
+                                        <td><img style="max-width: 100%; max-height: 200px;" alt=""
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($license->countryLogo) }}">
                                         </td>
                                         @else
                                         <td></td>
                                         @endif
-                                        <td>{!! $license->description !!}</td>
+                                        <td>{{ $license->email }}</td>
+                                        <td>{{ $license->fax }}</td>
+                                        @if($license->licenseLogo)
+                                        <td><img style="max-width: 100%; max-height: 200px;" alt=""
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($license->licenseLogo) }}">
+                                        </td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                        <td>{{ $license->licenseName }}</td>
+                                        <td>{{ $license->organizationName }}</td>
+                                        <td>{{ $license->registrationCode }}</td>
+                                        <td>{{ $license->regulatoryEffectiveTime }}</td>
+                                        <td>{{ $license->regulatoryLicense }}</td>
+                                        <td>{{ $license->tel }}</td>
+                                        <td>{{ $license->website }}</td>
                                         <td>
                                             <a href="{{ route('license.edit', ['id' => $license->id]) }}"
                                                 class="btn btn-app">
@@ -56,7 +80,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>

@@ -85,7 +85,7 @@
                                 <div class="form-group">
                                     <label>nickname</label>
                                     <input class="form-control" name="nickname" rows="3"
-                                        value="{{ empty(old('nickname', $blog->nickName)) ? '' : old('nickname', $blog->nickName) }}"
+                                        value="{{ empty(old('nickname', $blog->nickname)) ? '' : old('nickname', $blog->nickname) }}"
                                         placeholder="Enter ...">
                                     @error('nickname')
                                         <div class="alert alert-danger">{{ $errors->first('nickname') }}</div>

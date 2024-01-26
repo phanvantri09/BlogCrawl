@@ -43,7 +43,7 @@ class VideoController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(CreateRequestVideo $request)
+    public function store(Request $request)
     {
         //
         $data = $request->all();
@@ -76,7 +76,7 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Video  $video
      */
-    public function update(UpdateRequestVideo $request, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
         if ($request->hasFile('headImg')) {
@@ -87,7 +87,7 @@ class VideoController extends Controller
         }
         else {
             $video = $this->videoRepository->find($id);
-            $imageName = $video->image; // Lấy giá trị của ảnh hiện tại
+            $imageName = $video->headImg; // Lấy giá trị của ảnh hiện tại
             $data['headImg'] = $imageName;
         }
         $this->videoRepository->update($data, $id);

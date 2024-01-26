@@ -278,7 +278,7 @@
                                     $images = explode(',', $broker->lookImgList);
                                     @endphp
                                     @foreach ($images as $image)
-                                    <img style="max-width: 100px; max-height: 100px; margin-right: 10px;"
+                                    <img style="max-width: 100px; max-height: 100px; margin-right: 10px;" alt=""
                                        src="{{ App\Helpers\ConstCommon::getLinkIMG( trim($image)) }}">
                                     @endforeach
                                     @else
