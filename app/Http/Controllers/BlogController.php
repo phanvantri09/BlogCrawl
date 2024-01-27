@@ -51,7 +51,7 @@ class BlogController extends Controller
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
                 $image = $request->file($field);
-                $imageName = 'blog_' . ConstCommon::getCurrentTime() . '_' . $field .'.'. $image->extension();
+                $imageName = 'blog_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
                 ConstCommon::addImageToStorage($image, $imageName);
                 $data[$field] = $imageName;
             }
@@ -91,12 +91,14 @@ class BlogController extends Controller
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
                 $image = $request->file($field);
-                $imageName = 'blog_' . ConstCommon::getCurrentTime() . '_' . $field .'.'. $image->extension();
+                $imageName = 'blog_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
                 ConstCommon::addImageToStorage($image, $imageName);
                 $data[$field] = $imageName;
-            }else {
+            } elseif (!isset($data[$field])) {
+                // Nếu trường không được cập nhật trong request và không có file ảnh mới,
+                // giữ nguyên giá trị từ bản ghi cũ
                 $blog = $this->blogRepository->find($id);
-                $imageName = $blog->image; // Lấy giá trị của ảnh hiện tại
+                $imageName = $blog->$field; // Lấy giá trị của trường từ bản ghi hiện tại
                 $data[$field] = $imageName;
             }
         }
@@ -104,6 +106,7 @@ class BlogController extends Controller
         $data['id_user_update'] = auth()->user()->id;
         $this->blogRepository->update($data, $id);
         return back()->with('success', 'Thành công');
+
     }
 
     /**

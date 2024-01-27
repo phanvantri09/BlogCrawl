@@ -43,15 +43,19 @@ class LicenseController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(CreateRequestLicense $request)
+    public function store(Request $request)
     {
         //
         $data = $request->all();
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'license_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
-            ConstCommon::addImageToStorage($image, $imageName);
-            $data['image'] = $imageName;
+        $imageFields = ['countryLogo','licenseLogo'];
+
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                $image = $request->file($field);
+                $imageName = 'license_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
+                ConstCommon::addImageToStorage($image, $imageName);
+                $data[$field] = $imageName;
+            }
         }
         $this->licenseRepository->create($data);
         return redirect()->route('license.index')->with('success', 'data created successfully');
@@ -59,7 +63,7 @@ class LicenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\License  $license
+     * @param  \App\Models\License 
      */
     public function edit($id)
     {
@@ -74,20 +78,24 @@ class LicenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\License  $license
      */
-    public function update(UpdateRequestLicense $request, $id)
+    public function update(Request $request, $id)
     {
         //
         $data = $request->all();
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'license_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
-            ConstCommon::addImageToStorage($image, $imageName);
-            $data['image'] = $imageName;
-        }
-        else {
-            $post = $this->licenseRepository->find($id);
-            $imageName = $post->image; // Lấy giá trị của ảnh hiện tại
-            $data['image'] = $imageName;
+        $imageFields = ['countryLogo','licenseLogo'];
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                $image = $request->file($field);
+                $imageName = 'license_' . ConstCommon::getCurrentTime() . '_' . $field . '.' . $image->extension();
+                ConstCommon::addImageToStorage($image, $imageName);
+                $data[$field] = $imageName;
+            } elseif (!isset($data[$field])) {
+                // Nếu trường không được cập nhật trong request và không có file ảnh mới,
+                // giữ nguyên giá trị từ bản ghi cũ
+                $license = $this->licenseRepository->find($id);
+                $imageName = $license->$field; // Lấy giá trị của trường từ bản ghi hiện tại
+                $data[$field] = $imageName;
+            }
         }
     
         $this->licenseRepository->update($data, $id);

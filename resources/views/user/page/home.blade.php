@@ -13,7 +13,6 @@
         @php
             $rand = rand(5, count($posts));
         @endphp
-
         @foreach ($posts as $key => $post)
             @if ($post->content)
                 <div class="article-container-box">

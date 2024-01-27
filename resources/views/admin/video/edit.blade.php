@@ -59,8 +59,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Link</label>
-                                    <input type="text" name="linkUrl" class="form-control"  value="{{ $video->linkUrl }} placeholder="Enter ..."
-                                        value="{{ old('linkUrl, $video->title') }}">
+                                    <input type="text" name="linkUrl" class="form-control" placeholder="Enter ..."
+                                    value="{{ old('linkUrl, $video->linkUrl') }}">
                                     @error('linkUrl')
                                         <div class="alert alert-danger">{{ $errors->first('linkUrl') }}</div>
                                     @enderror
@@ -71,7 +71,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Video name</label>
-                                    <input type="text" name="videoName" class="form-control"  value="{{ $video->videoName }} placeholder="Enter ..."
+                                    <input type="text" name="videoName" class="form-control" placeholder="Enter ..."
                                         value="{{ old('videoName, $video->videoName') }}">
                                     @error('videoName')
                                         <div class="alert alert-danger">{{ $errors->first('videoName') }}</div>
@@ -94,8 +94,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Url</label>
-                                    <input type="text" name="url" class="form-control"  value="{{ $video->url }} placeholder="Enter ..."
-                                        value="{{ old('url') }}">
+                                    <input type="text" name="url" class="form-control"
+                                        value="{{ old('url',$video->url) }}">
                                     @error('url')
                                         <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                                     @enderror
