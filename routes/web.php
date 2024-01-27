@@ -71,6 +71,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('brokers','brokers')->name('brokers');
         Route::get('article','article')->name('article');
         Route::get('economic','economic')->name('economic');
+        Route::get('brokers_detail','brokers_detail')->name('brokers_detail');
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');

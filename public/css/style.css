@@ -820,3 +820,63 @@ a:hover {
     width: 100%;
     height: 100%;
 }
+.brokers-detail-container-banner{
+    width: 100%;
+    height: 360px;
+}
+.brokers-detail-container-banner img{
+    width: 100%;
+    height: 100%;
+}
+.brokers-detail-container-social{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.brokers-detail-container-social svg{
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+.brokers-detail-container-social-logo{
+    width: 104px;
+    height: 104px;
+    position: absolute;
+    top: -52px;
+    right: 40px;
+}
+.brokers-detail-container-social-logo img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.brokers-detail-container-content .content-info .content-main{
+    background: #1a2e45;
+    color: #d9d9d9;
+    font-size: 14px;
+}
+.brokers-detail-container-content .content-info .row{
+    font-size: 12px;
+    font-weight: bold;
+}
+.license-items{
+    background-color: #1a2e45;
+    padding: 10px 5px;
+    margin: 5px 0;
+}
+.license-items-brokers-img{
+    width: 36px;
+    height: 20px;
+}
+.license-items-brokers-img img{
+    width: 100%;
+    height: 100%;
+}
+.license-items-brokers-normal{
+    width: 87px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 10px 0 10px 0;
+    font-weight: bold;
+}
