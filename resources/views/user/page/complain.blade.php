@@ -42,10 +42,21 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($complaint->status == 1)
                         <div class="triangle-box">
+                            <div class="triangle-box-text">Đợi đã</div>
+                            <div class="triangle-box-bg triangle-box-bg-1"></div>
+                        </div>
+                        @else
+                        <div class="triangle-box">
+                            <div class="triangle-box-text">Xong</div>
+                            <div class="triangle-box-bg triangle-box-bg-4"></div>
+                        </div>
+                        @endif
+                        {{-- <div class="triangle-box">
                             <div class="triangle-box-text">đợi đã</div>
                             <div class="triangle-box-bg"></div>
-                        </div>
+                        </div> --}}
                     </a>
                 </div>
             @endforeach

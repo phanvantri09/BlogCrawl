@@ -51,13 +51,11 @@ class HomeController extends Controller
     public function index()
     {
         $brokers = $this->brokerRepository->getLastedBroker(10);
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $posts = $this->postRepository->getLatestPosts(30);
         $economics = $this->economicRepository->getLatestEconomic(5);
         return view('user.page.home', compact(
             [
-                'posts', 'firstComplaint','firstVideo','brokers', 
+                'posts','brokers', 
                 'economics'
             ]
         ));
@@ -70,49 +68,46 @@ class HomeController extends Controller
     public function complain()
     {
         $economics = $this->economicRepository->getLatestEconomic(3);
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $complaints = $this->complaintRepository->getLatestComplaint(20);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.complain', compact(['posts', 'complaints', 'firstComplaint','firstVideo','economics']));
+        return view('user.page.complain', compact(['posts', 'complaints','economics']));
     }
     public function video()
     {
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.video', compact(['posts', 'videos','firstComplaint','firstVideo']));
+        return view('user.page.video', compact(['posts', 'videos']));
     }
     public function article_detail()
     {
         return view('user.page.article_detail', compact([]));
     }
-    public function brokers()
+    public function brokers(Request $request)
     {
+        if ($request->has('hero')) {
+            $brokers = $this->brokerRepository->getBrokerHero(20);
+            $economics = $this->economicRepository->getLatestEconomic(5);
+            $videos = $this->videoRepository->getLastedVideo(10);
+            $posts = $this->postRepository->getLatestPosts(30);
+            return view('user.page.broker', compact(['posts', 'videos','economics','brokers']));
+        }
         $brokers = $this->brokerRepository->getLastedBroker(20);
         $economics = $this->economicRepository->getLatestEconomic(5);
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.broker', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
+        return view('user.page.broker', compact(['posts', 'videos','economics','brokers']));
     }
     public function article()
     {
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.article_view', compact(['posts', 'videos','firstComplaint','firstVideo']));
+        return view('user.page.article_view', compact(['posts', 'videos']));
     }
     public function economic(Request $request)
     {
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.article_view', compact(['posts', 'videos','firstComplaint','firstVideo']));
+        return view('user.page.economic', compact(['posts', 'videos']));
     }
 
     public function brokers_detail()
