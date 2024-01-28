@@ -114,8 +114,8 @@
         <div class="pointer py-3">
             <a href="">
                 @php
-                    use App\Models\Complaint;
-                    $firstComplaint = Complaint::orderBy('created_at')->get()->first();
+                    use App\Models\complaint;
+                    $firstComplaint = complaint::orderBy('created_at')->get()->first();
                 @endphp
                 <div class="d-flex align-items-center mb-3">
                     <div class="avatar-box">
