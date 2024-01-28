@@ -113,17 +113,21 @@
         </div>
         <div class="pointer py-3">
             <a href="">
+                @php
+                    use App\Models\Complaint;
+                    $firstComplaint = Complaint::orderBy('created_at')->get()->first();
+                @endphp
                 <div class="d-flex align-items-center mb-3">
                     <div class="avatar-box">
-                        <img src="{{ $firstComplaint->headImg }}"
+                        <img src="{{ $firstComplaint->headImg ?? '' }}"
                             alt="">
                     </div>
                     <div class="pl-2">
                         <div class="font-weight-bold">{{ $firstComplaint->realname ?? "Ẩn danh" }}</div>
                         <div class="font-weight-bold">{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="complaint-box-info-container-time">
-                            <span>{{ $firstComplaint->created_at->format('H:i:s') }}</span>&nbsp;
-                            <span>{{ $firstComplaint->created_at->format('d/m/Y') }}</span>
+                            <span>{{ $firstComplaint->created_at ? $firstComplaint->created_at->format('H:i:s') : ''}}</span>&nbsp;
+                            <span>{{ $firstComplaint->created_at ? $firstComplaint->created_at->format('d/m/Y') : '' }}</span>
                         </div>
                     </div>
                 </div>
@@ -143,7 +147,7 @@
             <a href="">
                 <div class="row">
                     <div class="col-md-4 complaint-box-container-image">
-                        <img src="{{ $firstComplaint->img }}"
+                        <img src="{{ $firstComplaint->img ?? '' }}"
                             alt="">
                     </div>
                     <div class="col-md-8 px-1">
@@ -169,8 +173,12 @@
     </div>
 
     <div class="ytb-container mt-3 p-3">
+        @php
+            use App\Models\Video;
+            $firstVideo = Video::orderBy('created_at')->get()->first;
+        @endphp
         <iframe width="100%" height="160px"
-        src="{{ str_replace('watch', 'embed',$firstVideo->videoFileName)}}"
+        src="{{ str_replace('watch', 'embed',$firstVideo->videoFileName ?? '')}}"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>

@@ -590,14 +590,20 @@ a:hover {
     font-size: 12px;
     text-align: center;
 }
-.triangle-box-bg{
+.triangle-box-bg-1{
     border-color: #878787  #878787  transparent transparent;
+}
+.triangle-box-bg-4{
+    border-color: #2b9a8b  #2b9a8b   transparent transparent;
+}
+.triangle-box-bg{
     border-style: solid;
     border-width: 35px;
     position: absolute;
     right: 0;
     top: 0;
 }
+
 .video-item{
     padding: 1rem 1rem 2rem 1rem;
     border-bottom: 1px solid #38444d;

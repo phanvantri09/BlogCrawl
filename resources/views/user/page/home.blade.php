@@ -135,7 +135,7 @@
                         </div>
                         <div class="slider-box pt-2">
                             @foreach ($brokers as $broker)
-                                <div class="slider-box-item mx-1">
+                                <div class="slider-box-item mx-1 mb-2">
                                     <div class="image">
                                         <a href="{{ $broker->facebookLink ?? ' ' }}">
                                             @if ($broker->img)

@@ -41,5 +41,10 @@ class BrokerRepository implements BrokerRepositoryInterface
         return Broker::orderBy('created_at', 'desc')->take($limit)->get();
 
     }
+    public function getBrokerHero($limit)
+    {
+        return Broker::where('isHero', 1)->orderBy('created_at', 'desc')->take($limit)->get();
+
+    }
 
 }
