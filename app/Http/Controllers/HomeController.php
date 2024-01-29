@@ -120,4 +120,16 @@ class HomeController extends Controller
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.broker_detail', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
     }
+    public function abc()
+    {
+        return view('user.page.login', compact([]));
+    }
+    public function def()
+    {
+        return view('user.page.register', compact([]));
+    }
+    public function og()
+    {
+        return view('user.page.infouser', compact([]));
+    }
 }
