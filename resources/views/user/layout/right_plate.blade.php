@@ -175,7 +175,7 @@
     <div class="ytb-container mt-3 p-3">
         @php
             use App\Models\Video;
-            $firstVideo = Video::orderBy('created_at')->get()->first;
+            $firstVideo = Video::orderBy('created_at')->get()->first();
         @endphp
         <iframe width="100%" height="160px"
         src="{{ str_replace('watch', 'embed',$firstVideo->videoFileName ?? '')}}"
