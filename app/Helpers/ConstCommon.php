@@ -93,4 +93,28 @@ class ConstCommon {
         }
         return $data;
     }
+
+    public static function formatTimeCmt($value){
+        $dateTime = Carbon::parse($value);
+        $formattedDateTime = $dateTime->format('H:i:s d/m/Y');
+        return $formattedDateTime;
+    }
+
+    public static function formatTimeblogSeconMinusHour($value){
+        $dateTime = Carbon::parse($value);
+        $formattedDateTime = $dateTime->format('H:i:s');
+        return $formattedDateTime;
+    }
+    public static function formatTimeblogDateMonth($value){
+        $dateTime = Carbon::parse($value);
+        $formattedDateTime = $dateTime->format('d/m');
+        return $formattedDateTime;
+    }
+
+    public static function limitString($string, $limit) {
+        if (strlen($string) > $limit) {
+            $string = substr(strip_tags($string), 0, $limit) . '...';
+        }
+        return $string;
+    }
 }

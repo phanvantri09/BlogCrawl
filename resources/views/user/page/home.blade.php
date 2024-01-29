@@ -16,7 +16,7 @@
         @foreach ($posts as $key => $post)
             @if ($post->content)
                 <div class="article-container-box">
-                    <a href="">
+                    <a href="{{ route('article_detail', ['id'=>$post->id]) }}">
                         <div style="{{ $post->important == 1 ? 'color:white; background-color:red' : '' }}"
                             class="article-container-box-time">{{ $post->created_at->format('H:i:s') }}</div>
                         <div style="{{ $post->important == 1 ? 'color:red' : '' }}" class="article-container-box-title">

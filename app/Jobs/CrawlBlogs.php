@@ -67,6 +67,7 @@ class CrawlBlogs implements ShouldQueue
                                     'details' => $item["details"],
                                     'likeImgList' => !empty($item["likeImgList"]) ? implode(",", $item["likeImgList"]) : '',
                                     'lookImgList' => !empty($item["lookImgList"]) ? implode(",", $item["lookImgList"]) : '' ,
+                                    'content' => $item["content"],
                                 ]
                             )){
                                 // dd($item);
