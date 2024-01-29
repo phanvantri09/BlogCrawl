@@ -12,6 +12,8 @@ use Hashids\Hashids;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\ImageRepositoryInterface;
+use App\Repositories\CommentRepositoryInterface;
+use App\Repositories\BlogRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +27,8 @@ class HomeController extends Controller
     protected $complaintRepository;
     protected $brokerRepository;
     protected $economicRepository;
+    protected $commentRepository;
+    protected $blogsRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -33,7 +37,9 @@ class HomeController extends Controller
         VideoRepositoryInterface $videoRepository,
         ComplaintRepositoryInterface $complaintRepository,
         BrokerRepositoryInterface $brokerRepository,
-        EconomicCalendarRepositoryInterface $economicRepository
+        EconomicCalendarRepositoryInterface $economicRepository,
+        CommentRepositoryInterface $commentRepository,
+        BlogRepositoryInterface $blogsRepository
     ) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
@@ -42,6 +48,8 @@ class HomeController extends Controller
         $this->complaintRepository = $complaintRepository;
         $this->brokerRepository = $brokerRepository;
         $this->economicRepository = $economicRepository;
+        $this->commentRepository = $commentRepository;
+        $this->blogsRepository = $blogsRepository;
     }
     /**
      * Display a listing of the resource.
@@ -78,10 +86,30 @@ class HomeController extends Controller
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.video', compact(['posts', 'videos']));
     }
-    public function article_detail()
+    public function article_detail(Request $request)
     {
-        return view('user.page.article_detail', compact([]));
+        if ($request->has('id')) {
+            $data = $this->postRepository->find($request->id);
+            $comment =  $this->commentRepository->getCommentPostByid($request->id);
+            return view('user.page.article_detail', compact(['data', 'comment']));
+        } else {
+            return redirect()->back();
+        }
     }
+
+    public function commentPost(Request $request){
+        if (Auth::check()) {
+            $id_user = Auth::user()->id;
+            $data = array_merge($request->all(), ["id_user" =>$id_user]);
+            $this->commentRepository->create($data);
+            return redirect()->back()->with('success', "Bình luận thành công");
+        } else {
+            return redirect()->back()->with('error', "Cần phải đăng nhập");
+        }
+        
+        
+    }
+
     public function brokers(Request $request)
     {
         if ($request->has('hero')) {
@@ -119,5 +147,21 @@ class HomeController extends Controller
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.broker_detail', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
+    }
+
+    public function blogs(Request $request)
+    {
+        $data = $this->blogsRepository->all();
+        return view('user.page.blogs', compact(['data']));
+    }
+    public function blogs_detail(Request $request)
+    {
+        if ($request->has('id')) {
+            $data = $this->blogsRepository->find($request->id);
+            $comment =  $this->commentRepository->getCommentBlogByid($request->id);
+            return view('user.page.blog_detail', compact(['data', 'comment']));
+        } else {
+            return redirect()->back();
+        }
     }
 }

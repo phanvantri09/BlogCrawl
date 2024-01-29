@@ -886,3 +886,18 @@ a:hover {
     border-radius: 10px 0 10px 0;
     font-weight: bold;
 }
+
+
+
+
+/* trí code */
+
+.article-detail-container{
+    width: 100%;
+}
+.article-detail-container-content {
+    width: 100%;
+}
+.article-detail-container-content img, .article-detail-container-content span, .article-detail-container-content p , .article-detail-container-content i{
+    max-width: 100%; 
+}

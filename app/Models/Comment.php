@@ -17,5 +17,21 @@ class Comment extends Model
         'id_post',
         'content',
         'id_user',
+        'id_blog'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'id_post');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'id_coment');
+    }
 }
