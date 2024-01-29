@@ -37,7 +37,7 @@ Route::group(['prefix' => '/'], function () {
         //border
         Route::get('brokers','brokers')->name('brokers');
         Route::get('brokers_detail','brokers_detail')->name('brokers_detail');
-       
+      
         // post
         Route::get('article_detail','article_detail')->name('article_detail');
         Route::get('article','article')->name('article');
@@ -48,6 +48,12 @@ Route::group(['prefix' => '/'], function () {
         // blogs
         Route::get('blogs','blogs')->name('blogs');
         Route::get('blogs_detail','blogs_detail')->name('blogs_detail');
+      
+        //oanh code form
+        Route::get('abc','abc')->name('abc');
+        Route::get('def','def')->name('def');
+        Route::get('og','og')->name('og');
+      
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');

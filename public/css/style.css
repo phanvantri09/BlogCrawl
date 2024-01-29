@@ -887,8 +887,14 @@ a:hover {
     font-weight: bold;
 }
 
-
-
+.form-img img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.form-control.form-img-input{
+    height: auto;
 
 /* trí code */
 

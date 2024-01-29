@@ -1,0 +1,64 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Montserrat";
+}
+
+@media (min-width: 1200px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
+        max-width: 1200px;
+    }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+    .container,
+    .container-sm {
+        max-width: 100%;
+    }
+}
+h1{
+    font-weight: bold;
+}
+.bg-account{
+    background: url("/dist/img/bg-login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.text-register, .text-register button{
+    font-size: 32px;
+}
+.form-login{
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-login button{
+    font-size: 20px;
+}
+@media (max-width: 768px) {
+    h1{
+        font-size: 28px;
+    }
+    .text-register, .text-register button{
+        font-size: 22px;
+    }
+}
+#show_eye {
+    display: block;
+}
+
+#hide_eye {
+    display: none;
+}
