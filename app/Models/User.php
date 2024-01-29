@@ -96,4 +96,9 @@ class User extends Authenticatable
         return $referringUsers;
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_user','id');
+    }
+
 }

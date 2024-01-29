@@ -25,7 +25,8 @@ use App\Repositories\EconomicCalendarRepository;
 use App\Repositories\EconomicCalendarRepositoryInterface;
 use App\Repositories\BlogRepository;
 use App\Repositories\BlogRepositoryInterface;
-
+use App\Repositories\CommentRepository;
+use App\Repositories\CommentRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(LicenseRepositoryInterface::class, LicenseRepository::class);
         $this->app->bind(EconomicCalendarRepositoryInterface::class, EconomicCalendarRepository::class);
         $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
+        $this->app->bind(CommentRepositoryInterface::class, CommentRepository::class);
     }
     /**
      * Bootstrap services.

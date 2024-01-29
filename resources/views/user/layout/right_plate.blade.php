@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center pt-2">
-                        <img src="{{ $economic->country_flag}}"
+                        <img src="{{ App\Helpers\ConstCommon::getLinkIMG($economic->country_flag)}}"
                             alt="">
                         <div class="calendar-box-item-title pl-2">
                             {{ $economic->translate ?? " " }}
@@ -114,8 +114,8 @@
         <div class="pointer py-3">
             <a href="">
                 @php
-                    use App\Models\Complaint;
-                    $firstComplaint = Complaint::orderBy('created_at')->get()->first();
+                    use App\Models\complaint;
+                    $firstComplaint = complaint::orderBy('created_at')->get()->first();
                 @endphp
                 <div class="d-flex align-items-center mb-3">
                     <div class="avatar-box">
@@ -175,7 +175,7 @@
     <div class="ytb-container mt-3 p-3">
         @php
             use App\Models\Video;
-            $firstVideo = Video::orderBy('created_at')->get()->first;
+            $firstVideo = Video::orderBy('created_at')->get()->first();
         @endphp
         <iframe width="100%" height="160px"
         src="{{ str_replace('watch', 'embed',$firstVideo->videoFileName ?? '')}}"

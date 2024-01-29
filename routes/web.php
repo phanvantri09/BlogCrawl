@@ -19,45 +19,9 @@ use Illuminate\Support\Facades\Http;
 
 // cmd  php -i | grep cURL
 // php -i | grep curl
-
-Route::get('/crawl-post', function () {
-    $response = Http::get('https://vnwallstreet.top/api/inter/newsFlash/page?limit=10&start=0&uid=-1');
-
-    if ($response->successful()) {
-        $data = $response->json();
-        if ($data['code'] != 200 ) {
-            foreach ($data['data'] as $item) {
-                $newArray[] = [
-                    "id_category" => 0,
-                    "content" => $item["content"],
-                    "createtime" => $item["createtime"],
-                    "facebookUrl" => $item["facebookUrl"],
-                    "headImg" => $item["headImg"],
-                    "important" => $item["important"],
-                    "influence" => $item["influence"],
-                    "linkUrl" => $item["linkUrl"],
-                    "lookNum" => $item["lookNum"],
-                    "messageid" => $item["messageid"],
-                    "otherId" => $item["otherId"],
-                    "status" => $item["status"],
-                    "title" => $item["title"],
-                    "type" => $item["type"],
-                    "youtubeUrl" => $item["youtubeUrl"],
-                    "id_user_create" => 0,
-                    "id_user_update" => 0,
-                ];
-            }
-        }
-        // dd($newArray);
-        return response()->json($data); // Trả về dữ liệu dạng JSON
-    } else {
-        abort($response->status());
-    }
-});
-
 // trang chủ ở đây
 Route::fallback(function () {
-    return redirect('/')->with('error', "Bạn đã nhập sai đường dẫn");
+    return redirect('/');
 });
 
 Route::group(['prefix' => '/'], function () {
@@ -67,14 +31,29 @@ Route::group(['prefix' => '/'], function () {
 
         Route::get('khieu-nai','complain')->name('complain');
         Route::get('video','video')->name('video');
-        Route::get('article_detail','article_detail')->name('article_detail');
-        Route::get('brokers','brokers')->name('brokers');
-        Route::get('article','article')->name('article');
+
         Route::get('economic','economic')->name('economic');
+        
+        //border
+        Route::get('brokers','brokers')->name('brokers');
         Route::get('brokers_detail','brokers_detail')->name('brokers_detail');
+      
+        // post
+        Route::get('article_detail','article_detail')->name('article_detail');
+        Route::get('article','article')->name('article');
+
+        // comment
+        Route::post('commentPost','commentPost')->name('commentPost');
+
+        // blogs
+        Route::get('blogs','blogs')->name('blogs');
+        Route::get('blogs_detail','blogs_detail')->name('blogs_detail');
+      
+        //oanh code form
         Route::get('abc','abc')->name('abc');
         Route::get('def','def')->name('def');
         Route::get('og','og')->name('og');
+      
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');
