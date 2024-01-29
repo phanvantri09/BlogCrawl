@@ -36,8 +36,7 @@
             <a href="#" class="nav-link">Gold ETF</a>
         </li>
         @auth
-            <li class="w-100">
-                <div class="dropdown w-100">
+                <li class="dropdown w-100">
                     <button class="w-100 btn btn-secondary dropdown-toggle d-flex flex-column align-items-center"
                         type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="comment-replay-avatar-box">
@@ -51,8 +50,7 @@
                         <a class="dropdown-item" href="#">Bài đăng</a>
                         <a class="dropdown-item" href="#">Tạo bài đăng</a>
                     </div>
-                </div>
-            </li>
+                </li>
             <li class="nav-item bg-danger w-100 p-2 text-center">
                 <a href="{{ route('login') }}">
                     Đăng Xuất

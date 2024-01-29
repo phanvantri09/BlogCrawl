@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center pt-2">
-                        <img src="{{ $economic->country_flag}}"
+                        <img src="{{ App\Helpers\ConstCommon::getLinkIMG($economic->country_flag)}}"
                             alt="">
                         <div class="calendar-box-item-title pl-2">
                             {{ $economic->translate ?? " " }}
