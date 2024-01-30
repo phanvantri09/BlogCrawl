@@ -46,7 +46,7 @@ class ComplaintController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $imageFields = ['headImg', 'img'];
+        $imageFields = ['headImg', 'img', 'replenishImg'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
@@ -92,7 +92,7 @@ class ComplaintController extends Controller
     {
         //
         $data = $request->all();
-        $imageFields = ['headImg', 'img'];
+        $imageFields = ['headImg', 'img','replenishImg'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {

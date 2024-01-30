@@ -37,43 +37,19 @@
                                 <div class="form-group">
                                     <label>Head image</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="headImg[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this,1)" multiple="" name="headImg[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
                                     @error('headImg')
                                     <div class="alert alert-danger">{{ $errors->first('headImg') }}</div>
                                     @enderror
-                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    <div id="image-preview-container1" class="d-flex flex-row mb-3 mt-3">
                                     </div>
                                     <div class="d-flex flex-row mb-3 mt-3">
-                                        {{-- @if(count($getAllByIDProductItem))
-                                            @foreach ($getAllByIDProductItem as $key => $item)
-                                                <div class="d-flex flex-column justify-content-center text-center">
-                                                    <img style="width: 200px;height: 200px; object-fit: cover; margin-bottom: 5px;" class="rounded mr-3" src="{{\App\Helpers\ConstCommon::getLinkImageToStorage( $item->link_image ?? null)}}">
-                                                    <a class="text-danger" href="{{ route('product.deleteImage', ['id' => $item->id]) }}">
-                                                        <i class="fas fa-trash-alt">&nbsp; Xóa ảnh</i>
-                                                    </a>
-                                                </div>
-                                                @endforeach
-                                        @endif --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>Head image</label>
-                                    <label class="btn btn-primary btn-md btn-file">
-                                        Tải ảnh<input name="headImg[]" type="file"
-                                            onchange="previewImage('headImg','headImg_preview')" multiple>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="headImg_preview"></div>
-                            </div>
-                        </div> --}}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -142,57 +118,41 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>image</label>
-                                    <label class="btn btn-primary btn-md btn-file">
-                                        Tải ảnh<input name="img[]" type="file" accept=".jpg, .png" multiple
-                                            onchange="previewImage('img', 'img_preview')">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="img_preview"></div>
-                            </div>
-                        </div> -->
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- select -->
                                 <div class="form-group">
                                     <label>Image</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="img[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this,2)" multiple="" name="img[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
                                     @error('img')
                                     <div class="alert alert-danger">{{ $errors->first('img') }}</div>
                                     @enderror
-                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    <div id="image-preview-container2" class="d-flex flex-row mb-3 mt-3">
                                     </div>
                                     <div class="d-flex flex-row mb-3 mt-3">
-                                        {{-- @if(count($getAllByIDProductItem))
-                                            @foreach ($getAllByIDProductItem as $key => $item)
-                                                <div class="d-flex flex-column justify-content-center text-center">
-                                                    <img style="width: 200px;height: 200px; object-fit: cover; margin-bottom: 5px;" class="rounded mr-3" src="{{\App\Helpers\ConstCommon::getLinkImageToStorage( $item->link_image ?? null)}}">
-                                                    <a class="text-danger" href="{{ route('product.deleteImage', ['id' => $item->id]) }}">
-                                                        <i class="fas fa-trash-alt">&nbsp; Xóa ảnh</i>
-                                                    </a>
-                                                </div>
-                                                @endforeach
-                                        @endif --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
+                                <!-- select -->
                                 <div class="form-group">
                                     <label>replenishImg</label>
-                                    <textarea class="form-control" name="replenishImg" rows="3" placeholder="Enter ...">{{ empty(old('replenishImg')) ? '' : old('replenishImg') }}</textarea>
-                                    @error('replenishImg')
-                                        <div class="alert alert-danger">{{ $errors->first('replenishImg') }}</div>
+                                    <div class="custom-file">
+                                        <input onchange="readURL3(this,3)" multiple="" name="replenishImg[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
+                                    </div>
+                                    @error('img')
+                                    <div class="alert alert-danger">{{ $errors->first('replenishImg') }}</div>
                                     @enderror
+                                    <div id="image-preview-container3" class="d-flex flex-row mb-3 mt-3">
+                                    </div>
+                                    <div class="d-flex flex-row mb-3 mt-3">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -288,8 +248,8 @@
     </script>
     <script>
         $(document).ready(function() {
-            var max_fields_limit = 100; //set limit for maximum input fields
-
+            var max_fields_limit = 100; 
+            
             var html = '';
             $('.add_more_button').click(function(e) {
                 var index = $('.imageItemcount').length + 1; //initialize counter for text box
@@ -326,7 +286,7 @@
                     var file = $(this).parents().find(".headImg" + index);
                     file.trigger("click");
                 });
-                $('input[name="headImg' + index + '"]').change(function(e) {
+                $('input[name="img' + index + '"]').change(function(e) {
                     var fileName = e.target.files[0].name;
                     $("#fileImageItem" + index).val(fileName);
 
@@ -339,9 +299,7 @@
                     // read the image file as a data URL.
                     reader.readAsDataURL(this.files[0]);
                 });
-            });
-
-            //image
+            });//set limit for maximum input fields
 
             $('.add_more_button').click(function(e) {
                 var index = $('.imageItemcount').length + 1; //initialize counter for text box
@@ -392,6 +350,7 @@
                     reader.readAsDataURL(this.files[0]);
                 });
             });
+
         });
     </script>
 @endsection
@@ -410,36 +369,8 @@
         let noimage =
             "https://ami-sni.com/wp-content/themes/consultix/images/no-image-found-360x250.png";
 
-        function readURL(input) {
-            console.log(input.files);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#img-preview").attr("src", e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                $("#img-preview").attr("src", noimage);
-            }
-        }
-
-        function readURL2(input) {
-            console.log(input.files);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#img-preview2").attr("src", e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                $("#img-preview2").attr("src", noimage);
-            }
-        }
-
-        function readURL3(input) {
-            $("#image-preview-container").empty();
+        function readURL3(input, index) {
+            $("#image-preview-container"+index).empty();
 
             if (input.files && input.files.length > 0) {
                 for (let i = 0; i < input.files.length; i++) {
@@ -447,7 +378,7 @@
                     reader.onload = function (e) {
                         let imgPreview = $('<img style="width: 200px;height: 200px; object-fit: cover;" class="rounded mr-3"  />');
                         imgPreview.attr("src", e.target.result);
-                        $("#image-preview-container").append(imgPreview);
+                        $("#image-preview-container"+index).append(imgPreview);
                     };
 
                     reader.readAsDataURL(input.files[i]);
@@ -455,7 +386,7 @@
             } else {
                 let imgPreview = $('<img style="width: 200px;height: 200px; object-fit: cover;" class="rounded mr-3"  />');
                 imgPreview.attr("src", noimage);
-                $("#image-preview-container").append(imgPreview);
+                $("#image-preview-container"+index).append(imgPreview);
             }
         }
     </script>
