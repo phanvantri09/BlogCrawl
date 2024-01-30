@@ -8,15 +8,15 @@ use App\Repositories\EconomicCalendarRepository;
 use App\Repositories\EconomicCalendarRepositoryInterface;
 use App\Repositories\PostRepositoryInterface;
 use App\Repositories\VideoRepositoryInterface;
-use Hashids\Hashids;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\ImageRepositoryInterface;
 use App\Repositories\CommentRepositoryInterface;
 use App\Repositories\BlogRepositoryInterface;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\ConstCommon;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -149,13 +149,25 @@ class HomeController extends Controller
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.broker_detail', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
     }
+
     public function login()
     {
         return view('user.page.login', compact([]));
     }
+
     public function register()
     {
         return view('user.page.register', compact([]));
+    }
+
+    public function addUserRegister( Request $request )
+    { 
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+        $data['code'] = Str::random(8);
+        $this->userRepository->create($data);
+        return redirect()->route('userLogin')->with('success', 'Thành công');
+
     }
     public function userinfo()
     {
