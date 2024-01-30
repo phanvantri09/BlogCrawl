@@ -17,6 +17,8 @@ use App\Repositories\BlogRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+use App\Helpers\ConstCommon;
+
 class HomeController extends Controller
 {
     //
@@ -133,9 +135,10 @@ class HomeController extends Controller
     }
     public function economic(Request $request)
     {
-        $videos = $this->videoRepository->getLastedVideo(10);
-        $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.economic', compact(['posts', 'videos']));
+        $date = ConstCommon::getSevenDayEconomiCalender();
+        // dd($date);
+        $data = $this->economicRepository->getconomicByDate($request->date);
+        return view('user.page.economic', compact(['data']));
     }
 
     public function brokers_detail()

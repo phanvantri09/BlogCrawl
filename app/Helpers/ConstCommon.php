@@ -60,6 +60,23 @@ class ConstCommon {
         return Mail::to($email)->queue($mail);
     }
 
+    public static function getListDateEcomecy(){
+        $dateArray = [];
+
+        $currentDatePrev = Carbon::now();
+        for ($i = 1; $i <= 50; $i++) {
+            $dateArray[] = $currentDatePrev->subDay()->format('Y-m-d');
+        }
+
+        $currentDatePlus = Carbon::now();
+        for ($i = 1; $i <= 50; $i++) {
+            $dateArray[] = $currentDatePlus->addDay()->format('Y-m-d');
+        }
+        
+        sort($dateArray);
+        return $dateArray;
+    }
+
     public static function getSevenDayEconomiCalender(){
         // Lấy ngày hiện tại
         $currentDate = Carbon::now();
