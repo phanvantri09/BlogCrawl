@@ -51,9 +51,13 @@ Route::group(['prefix' => '/'], function () {
       
         //oanh code form
         //login
-        Route::get('login','login')->name('login');
+        Route::get('user/login','login')->name('userLogin');
+        Route::post('user/login', function () {
+            return redirect()->route('login');
+        })->name('user.login');
         //đăng ký
-        Route::get('register','register')->name('register');
+        Route::get('user/register','register')->name('userRegister');
+        Route::post('user/register','addUserRegister')->name('addUserRegister');
         // thông tin user
         Route::get('userinfo','userinfo')->name('userinfo');
         Route::post('userinfo','updateUserInfo')->name('update');

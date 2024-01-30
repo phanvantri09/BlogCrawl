@@ -52,13 +52,13 @@
                     </div>
                 </li>
             <li class="nav-item bg-danger w-100 p-2 text-center">
-                <a href="{{ route('login') }}">
+                <a href="{{ route('logout') }}">
                     Đăng Xuất
                 </a>
             </li>
         @else
             <li class="nav-item w-100 p-2 bg-primary text-center">
-                <a href="{{ route('login') }}">
+                <a href="{{ route('userLogin') }}">
                     Đăng Nhập
                 </a>
             </li>

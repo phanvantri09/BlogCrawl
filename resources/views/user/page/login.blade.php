@@ -24,14 +24,19 @@
                 <div class="col-md-6 col-sm-12 col-12 text-register text-md-left text-center">
                     <div>Bạn chưa đăng ký?</div>
                     <button class="btn btn-secondary py-3 px-4 my-2 rounded-pill">
-                        <a href="" class="text-white text-decoration-none">Đăng Ký Ngay</a>
+                        <a href="{{ route('userRegister') }}" class="text-white text-decoration-none">Đăng Ký Ngay</a>
                     </button>
                 </div>
                 <div class="col-md-6 col-sm-12 col-12">
                     <div class="bg-white border rounded p-md-5 p-3 text-center">
                         <h4>Đăng nhập</h4>
-                        <form action="">
-                            <input type="email" class="form-control my-3" id="inputEmail3" placeholder="Email">
+                        <form action="{{ route('login') }}" method="post">
+                            @csrf
+                            <input type="email" id="" placeholder="Email" class="form-control"
+                                name="email" value="{{ old('email') }}" required>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="input-group my-3">
                                 <input id="password" type="password" placeholder="Nhập mật khẩu" class="form-control"
                                     id="password" name="password" required="true" aria-label="password"

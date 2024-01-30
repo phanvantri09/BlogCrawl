@@ -22,15 +22,34 @@
             <h1 class="text-md-left text-center py-2">TinFXGold</h1>
             <div class="bg-white p-3 border rounded">
                 <h2>Đăng Ký</h2>
-                <form action="" class="">
+                <form action="{{ route('addUserRegister') }}" method="post">
+                    @csrf
                     <div class="form-group">
                         <label for="formGroupExampleInput">Tên</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput"
-                            placeholder="Nhập tên của bạn">
+                        <input type="text" name="name" class="form-control" id="formGroupExampleInput"
+                            value="{{ empty(old('name')) ? '' : old('name') }}" placeholder="Nhập tên của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Ngày sinh</label>
+                        <input type="date" name="birthday" class="form-control" id="formGroupExampleInput"
+                            value="{{ empty(old('birthday')) ? '' : old('birthday') }}" placeholder="Birthday">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email</label>
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        <input type="email" name="email" value="{{ empty(old('email')) ? '' : old('email') }}"
+                            class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Số điện thoại</label>
+                        <input type="text" name="number_phone" class="form-control"
+                            value="{{ empty(old('number_phone')) ? '' : old('number_phone') }}" id="inputEmail3"
+                            placeholder="phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Địa chỉ</label>
+                        <input type="text" name="address" class="form-control"
+                            value="{{ empty(old('addredd')) ? '' : old('address') }}"
+                            placeholder="Nhập địa chỉ của bạn">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -61,7 +80,10 @@
                     <button class="btn btn-info">Đăng Ký</button>
                     <div class="text-center py-2">
                         <span>Bạn đã có tài khoản?</span>
-                        <span><a href="" class="text-decoration-none font-weight-bold">Đăng nhập</a></span>
+                        <span>
+                            <a href="{{ route('userLogin') }}" class="text-decoration-none font-weight-bold">Đăng
+                                nhập</a>
+                        </span>
                     </div>
                 </form>
             </div>
