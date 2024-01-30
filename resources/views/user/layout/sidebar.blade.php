@@ -46,7 +46,7 @@
                         Tài Khoản
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="{{ route('updateInfo') }}">Thông tin người dùng</a>
+                        <a class="dropdown-item" href="{{ route('userinfo') }}">Thông tin người dùng</a>
                         <a class="dropdown-item" href="#">Bài đăng</a>
                         <a class="dropdown-item" href="#">Tạo bài đăng</a>
                     </div>
