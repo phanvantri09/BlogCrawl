@@ -23,7 +23,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link d-flex flex-column">
-        <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image  elevation-3" style="opacity: .8">
+        <h3 class="text-center">TinFXGold</h3>
     </a>
 
     <!-- Sidebar -->
@@ -80,14 +80,14 @@
                     </ul>
                 </li>
 
-                <li class="nav-item border-bottom">
+                {{-- <li class="nav-item border-bottom">
                     <a href="{{ route('chat.index') }}" class="nav-link">
                         <i class="fas fa-comment-alt"></i>
                         <p>
                             Trò chuyện
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link">
                         <i class="fas fa-users"></i>

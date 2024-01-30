@@ -32,34 +32,21 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>Head image</label>
-                                    <label class="btn btn-primary btn-md btn-file">
-                                        Tải ảnh<input name="headImg[]" type="file" accept=".jpg, .png"
-                                            onchange="previewImage('headImg')">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="headImg_preview"></div>
-                            </div>
-                        </div> -->
+                    
                     <div class="row">
                         <div class="col-sm-12">
                             <!-- select -->
                             <div class="form-group">
                                 <label>Head image</label>
                                 <div class="custom-file">
-                                    <input onchange="readURL3(this)" multiple="" name="headImg[]" type="file"
+                                    <input onchange="readURL3(this,1)" multiple="" name="headImg[]" type="file"
                                         class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                     <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                 </div>
                                 @error('headImg')
                                 <div class="alert alert-danger">{{ $errors->first('headImg') }}</div>
                                 @enderror
-                                <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                <div id="image-preview-container1" class="d-flex flex-row mb-3 mt-3">
                                     @if ($complaint->headImg)
                                     <img style="max-width: 100px; max-height: 100px; margin-right: 10px;" alt=""
                                         src="{{ App\Helpers\ConstCommon::getLinkIMG($complaint->headImg) }}">
@@ -145,34 +132,20 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label>image</label>
-                                <label class="btn btn-primary btn-md btn-file">
-                                    Tải ảnh<input name="img[]" type="file" accept=".jpg, .png" multiple
-                                        onchange="previewImage('img', 'img_preview')">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div id="img_preview"></div>
-                        </div>
-                    </div> -->
                     <div class="row">
                         <div class="col-sm-12">
                             <!-- select -->
                             <div class="form-group">
                                 <label>Image</label>
                                 <div class="custom-file">
-                                    <input onchange="readURL3(this)" multiple="" name="img[]" type="file"
+                                    <input onchange="readURL3(this,2)" multiple="" name="img[]" type="file"
                                         class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                     <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                 </div>
                                 @error('img')
                                 <div class="alert alert-danger">{{ $errors->first('img') }}</div>
                                 @enderror
-                                <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                <div id="image-preview-container2" class="d-flex flex-row mb-3 mt-3">
                                     @if ($complaint->img)
                                     @php
                                     $images = explode(',', $complaint->img);
@@ -195,14 +168,14 @@
                             <div class="form-group">
                                 <label>replenishImg</label>
                                 <div class="custom-file">
-                                    <input onchange="readURL3(this)" multiple="" name="replenishImg[]" type="file"
+                                    <input onchange="readURL3(this,3)" multiple="" name="replenishImg[]" type="file"
                                         class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                     <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                 </div>
                                 @error('replenishImg')
                                 <div class="alert alert-danger">{{ $errors->first('replenishImg') }}</div>
                                 @enderror
-                                <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                <div id="image-preview-container3" class="d-flex flex-row mb-3 mt-3">
                                     @if ($complaint->replenishImg)
                                     @php
                                     $images = explode(',', $complaint->replenishImg);
@@ -241,7 +214,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#summernote').summernote();
     });
 
@@ -256,17 +229,17 @@
 </script>
 
 <script>
-    $(".browseImageMain").on("click", function () {
+    $(".browseImageMain").on("click", function() {
         var file = $(this).parents().find(".imageMain");
         file.trigger("click");
         console.log(123);
     });
-    $('input[name="imageMain"]').change(function (e) {
+    $('input[name="imageMain"]').change(function(e) {
         var fileName = e.target.files[0].name;
         $("#fileImageMain").val(fileName);
 
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             // get loaded data and render thumbnail.
             document.getElementById("previewImageMain").src = e.target.result;
         };
@@ -275,16 +248,16 @@
     });
 </script>
 <script>
-    $(document).on("click", ".browseImageSlide", function () {
+    $(document).on("click", ".browseImageSlide", function() {
         var file = $(this).parents().find(".imageSlide");
         file.trigger("click");
     });
-    $('input[name="imageSlide"]').change(function (e) {
+    $('input[name="imageSlide"]').change(function(e) {
         var fileName = e.target.files[0].name;
         $("#fileImageSlide").val(fileName);
 
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             // get loaded data and render thumbnail.
             document.getElementById("previewImageSlide").src = e.target.result;
         };
@@ -293,16 +266,16 @@
     });
 </script>
 <script>
-    $(document).on("click", ".browseImageItem0", function () {
+    $(document).on("click", ".browseImageItem0", function() {
         var file = $(this).parents().find(".imageItem0");
         file.trigger("click");
     });
-    $('input[name="imageItem0"]').change(function (e) {
+    $('input[name="imageItem0"]').change(function(e) {
         var fileName = e.target.files[0].name;
         $("#fileImageItem0").val(fileName);
 
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             // get loaded data and render thumbnail.
             document.getElementById("previewImageItem0").src = e.target.result;
         };
@@ -311,11 +284,11 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
-        var max_fields_limit = 100; //set limit for maximum input fields
-
+    $(document).ready(function() {
+        var max_fields_limit = 100; 
+        
         var html = '';
-        $('.add_more_button').click(function (e) {
+        $('.add_more_button').click(function(e) {
             var index = $('.imageItemcount').length + 1; //initialize counter for text box
             var indexX = index + 1;
             e.preventDefault();
@@ -346,16 +319,16 @@
 
             $('.imageAllItem').append(html);
 
-            $(document).on("click", ".browseImageItem" + index, function () {
+            $(document).on("click", ".browseImageItem" + index, function() {
                 var file = $(this).parents().find(".headImg" + index);
                 file.trigger("click");
             });
-            $('input[name="headImg' + index + '"]').change(function (e) {
+            $('input[name="img' + index + '"]').change(function(e) {
                 var fileName = e.target.files[0].name;
                 $("#fileImageItem" + index).val(fileName);
 
                 var reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     // get loaded data and render thumbnail.
                     document.getElementById("previewImageItem" + index).src = e.target
                         .result;
@@ -363,11 +336,9 @@
                 // read the image file as a data URL.
                 reader.readAsDataURL(this.files[0]);
             });
-        });
+        });//set limit for maximum input fields
 
-        //image
-
-        $('.add_more_button').click(function (e) {
+        $('.add_more_button').click(function(e) {
             var index = $('.imageItemcount').length + 1; //initialize counter for text box
             var indexX = index + 1;
             e.preventDefault();
@@ -398,16 +369,16 @@
 
             $('.imageAllItem').append(html);
 
-            $(document).on("click", ".browseImageItem" + index, function () {
+            $(document).on("click", ".browseImageItem" + index, function() {
                 var file = $(this).parents().find(".img" + index);
                 file.trigger("click");
             });
-            $('input[name="img' + index + '"]').change(function (e) {
+            $('input[name="img' + index + '"]').change(function(e) {
                 var fileName = e.target.files[0].name;
                 $("#fileImageItem" + index).val(fileName);
 
                 var reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     // get loaded data and render thumbnail.
                     document.getElementById("previewImageItem" + index).src = e.target
                         .result;
@@ -416,6 +387,7 @@
                 reader.readAsDataURL(this.files[0]);
             });
         });
+
     });
 </script>
 @endsection
@@ -434,36 +406,8 @@
     let noimage =
         "https://ami-sni.com/wp-content/themes/consultix/images/no-image-found-360x250.png";
 
-    function readURL(input) {
-        console.log(input.files);
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $("#img-preview").attr("src", e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            $("#img-preview").attr("src", noimage);
-        }
-    }
-
-    function readURL2(input) {
-        console.log(input.files);
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $("#img-preview2").attr("src", e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            $("#img-preview2").attr("src", noimage);
-        }
-    }
-
-    function readURL3(input) {
-        $("#image-preview-container").empty();
+    function readURL3(input, index) {
+        $("#image-preview-container"+index).empty();
 
         if (input.files && input.files.length > 0) {
             for (let i = 0; i < input.files.length; i++) {
@@ -471,7 +415,7 @@
                 reader.onload = function (e) {
                     let imgPreview = $('<img style="width: 200px;height: 200px; object-fit: cover;" class="rounded mr-3"  />');
                     imgPreview.attr("src", e.target.result);
-                    $("#image-preview-container").append(imgPreview);
+                    $("#image-preview-container"+index).append(imgPreview);
                 };
 
                 reader.readAsDataURL(input.files[i]);
@@ -479,7 +423,7 @@
         } else {
             let imgPreview = $('<img style="width: 200px;height: 200px; object-fit: cover;" class="rounded mr-3"  />');
             imgPreview.attr("src", noimage);
-            $("#image-preview-container").append(imgPreview);
+            $("#image-preview-container"+index).append(imgPreview);
         }
     }
 </script>
