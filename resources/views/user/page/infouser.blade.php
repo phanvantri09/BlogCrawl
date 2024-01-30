@@ -14,28 +14,36 @@
     </div>
     <div class="main-content-container px-3 py-2">
         <h4 class="text-center">Cập nhật thông tin cá nhân</h4>
-        <form action="">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('update') }}" >
+            @csrf
             <div class="form-img">
-                <img src="" id="img-avt" alt="">
-                <br><label for="img" class="pt-2">Chọn ảnh</label>
-                <input style="display: none" type="file" class="form-control form-img-input" id="img" name="img"
-                    accept="image/*">
-                    
+                <img src="{{ App\Helpers\ConstCommon::getLinkIMG($data->image) }}" id="image_preview" alt="">
+                <br>
+                <label for="img" class="pt-2">Chọn ảnh</label>
+                <input style="display: none" type="file" class="form-control form-img-input" id="img" name="image"
+                accept=".jpg, .png" onchange="previewImage('image')">
             </div>
-
-
-
             <div class="form-group">
                 <label for="formGroupExampleInput">Họ tên</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nhập đầy đủ họ tên">
+                <input type="text" name="name" value="{{ empty(old('name', $data->name)) ? '' : old('name', $data->name) }}" class="form-control" id="formGroupExampleInput" placeholder="Nhập đầy đủ họ tên">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Ngày sinh</label>
+                <input type="date" class="form-control" name="birthday" value="{{$data->birthday}}" id="formGroupExampleInput2"
+                    placeholder="Vui lòng nhập số điện thoại">
             </div>
             <div class="form-group">
                 <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                <input type="email" name="email" class="form-control" value="{{$data->email}}" id="inputEmail" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Số điện thoại</label>
-                <input type="tel" class="form-control" id="formGroupExampleInput2"
+                <input type="tel" class="form-control" name="number_phone" value="{{$data->number_phone}}" id="formGroupExampleInput2"
+                    placeholder="Vui lòng nhập số điện thoại">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Địa chỉ</label>
+                <input type="tel" class="form-control" name="address" value="{{$data->address}}" id="formGroupExampleInput2"
                     placeholder="Vui lòng nhập số điện thoại">
             </div>
 
@@ -114,5 +122,25 @@
                 ]
             });
         });
+    </script>
+    <script>
+        function previewImage(typeImage) {
+            var fileImage = document.querySelector('input[name=' + typeImage + ']').files[0];
+            if (fileImage) {
+                var mediabase64data;
+                getBase64(fileImage).then(
+                    mediabase64data => $('#' + typeImage + '_preview').attr('src', mediabase64data)
+                );
+            }
+        }
+
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
     </script>
 @endsection

@@ -50,9 +50,13 @@ Route::group(['prefix' => '/'], function () {
         Route::get('blogs_detail','blogs_detail')->name('blogs_detail');
       
         //oanh code form
-        Route::get('abc','abc')->name('abc');
-        Route::get('def','def')->name('def');
-        Route::get('og','og')->name('og');
+        //login
+        Route::get('login','login')->name('login');
+        //đăng ký
+        Route::get('register','register')->name('register');
+        // thông tin user
+        Route::get('userinfo','userinfo')->name('userinfo');
+        Route::post('userinfo','updateUserInfo')->name('update');
       
     });
     Route::controller(AuthController::class)->group(function () {

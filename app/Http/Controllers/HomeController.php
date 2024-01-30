@@ -16,6 +16,7 @@ use App\Repositories\CommentRepositoryInterface;
 use App\Repositories\BlogRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\ConstCommon;
 
 class HomeController extends Controller
 {
@@ -148,17 +149,39 @@ class HomeController extends Controller
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.broker_detail', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
     }
-    public function abc()
+    public function login()
     {
         return view('user.page.login', compact([]));
     }
-    public function def()
+    public function register()
     {
         return view('user.page.register', compact([]));
     }
-    public function og()
+    public function userinfo()
     {
-        return view('user.page.infouser', compact([]));
+        $user = auth()->id();
+        $data = $this->userRepository->find($user);
+        return view('user.page.infouser', compact('data'));
+    }
+    //update userinfo
+    public function updateUserInfo(Request $request)
+    {
+        $id_user = auth()->id();
+        $user = $this->userRepository->find($id_user);
+        $data = $request->all();
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+            ConstCommon::addImageToStorage($image, $imageName);
+            $data['image'] = $imageName;
+        }
+        else {
+            $imageName = $user->image; // Lấy giá trị của ảnh hiện tại
+            $data['image'] = $imageName;
+        }
+
+        $this->userRepository->update($data, $id_user);
+        return back()->with('success', 'Thành công');
     }
 
     public function blogs(Request $request)
