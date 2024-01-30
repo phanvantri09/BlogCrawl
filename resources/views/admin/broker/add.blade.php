@@ -61,13 +61,13 @@
                                 <div class="form-group">
                                     <label>firstCountryLogo</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="firstCountryLogo[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this, 1)" multiple="" name="firstCountryLogo[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
                                     @error('firstCountryLogo')
                                     <div class="alert alert-danger">{{ $errors->first('firstCountryLogo') }}</div>
                                     @enderror
-                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    <div id="image-preview-container1" class="d-flex flex-row mb-3 mt-3">
                                     </div>
                                 </div>
                             </div>
@@ -77,13 +77,13 @@
                                 <div class="form-group">
                                     <label>Image</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="img[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this, 2)" multiple="" name="img[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
                                     @error('img')
                                     <div class="alert alert-danger">{{ $errors->first('img') }}</div>
                                     @enderror
-                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    <div id="image-preview-container2" class="d-flex flex-row mb-3 mt-3">
                                     </div>
                                 </div>
                             </div>
@@ -105,13 +105,13 @@
                                 <div class="form-group">
                                     <label>logo</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="logo[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this, 3)" multiple="" name="logo[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
                                     @error('logo')
                                     <div class="alert alert-danger">{{ $errors->first('logo') }}</div>
                                     @enderror
-                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    <div id="image-preview-container3" class="d-flex flex-row mb-3 mt-3">
                                     </div>
                                 </div>
                             </div>
@@ -236,13 +236,13 @@
                                 <div class="form-group">
                                     <label>lookImgList</label>
                                     <div class="custom-file">
-                                        <input onchange="readURL3(this)" multiple="" name="lookImgList[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
+                                        <input onchange="readURL3(this, 4)" multiple="" name="lookImgList[]" type="file" class="custom-file-input" id="inputFileImageItem" accept="image/*">
                                         <label class="custom-file-label" for="inputFileImageItem">Chọn ảnh</label>
                                     </div>
                                     @error('lookImgList')
                                     <div class="alert alert-danger">{{ $errors->first('lookImgList') }}</div>
                                     @enderror
-                                    <div id="image-preview-container" class="d-flex flex-row mb-3 mt-3">
+                                    <div id="image-preview-container4" class="d-flex flex-row mb-3 mt-3">
                                     </div>
                                 </div>
                             </div>
@@ -449,36 +449,8 @@
         let noimage =
             "https://ami-sni.com/wp-content/themes/consultix/images/no-image-found-360x250.png";
 
-        function readURL(input) {
-            console.log(input.files);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#img-preview").attr("src", e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                $("#img-preview").attr("src", noimage);
-            }
-        }
-
-        function readURL2(input) {
-            console.log(input.files);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#img-preview2").attr("src", e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                $("#img-preview2").attr("src", noimage);
-            }
-        }
-
-        function readURL3(input) {
-            $("#image-preview-container").empty();
+        function readURL3(input, index) {
+            $("#image-preview-container"+index).empty();
 
             if (input.files && input.files.length > 0) {
                 for (let i = 0; i < input.files.length; i++) {
@@ -486,7 +458,7 @@
                     reader.onload = function (e) {
                         let imgPreview = $('<img style="width: 200px;height: 200px; object-fit: cover;" class="rounded mr-3"  />');
                         imgPreview.attr("src", e.target.result);
-                        $("#image-preview-container").append(imgPreview);
+                        $("#image-preview-container"+index).append(imgPreview);
                     };
 
                     reader.readAsDataURL(input.files[i]);
@@ -494,7 +466,7 @@
             } else {
                 let imgPreview = $('<img style="width: 200px;height: 200px; object-fit: cover;" class="rounded mr-3"  />');
                 imgPreview.attr("src", noimage);
-                $("#image-preview-container").append(imgPreview);
+                $("#image-preview-container"+index).append(imgPreview);
             }
         }
     </script>

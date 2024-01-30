@@ -6,7 +6,7 @@
     <meta name="google-site-verification" content="rl9JD04KBYYNOg7JDiZBzygfodJw_BPAOMY6cyXUK9o" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Clone</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('/dist/img/logo.png')}}">
+    {{-- <link rel="icon" type="image/x-icon" href="{{asset('/dist/img/logo.png')}}"> --}}
     <base href="{{ URL::asset('/') }}" target="_top">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="refresh" content="{{ config('session.lifetime') * 60 }}">
