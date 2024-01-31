@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ChangPassOTP;
+use App\Http\Requests\Auth\ChangPassOTPDone;
+use App\Models\User;
 use App\Repositories\BrokerRepositoryInterface;
 use App\Repositories\ComplaintRepositoryInterface;
 use App\Repositories\EconomicCalendarRepository;
@@ -241,9 +243,9 @@ class HomeController extends Controller
     //quên mật khẩu
     public function vertifyEmail()
     {
-        // if (!Auth::check()) {
-        //     return redirect()->route('userLogin')->with('info','Bạn chưa đăng nhập');
-        // }
+        if (!Auth::check()) {
+            return redirect()->route('userLogin')->with('info','Bạn chưa đăng nhập');
+        }
         return view('user.page.vertify');
     }
     public function vertify(ChangPassOTP $request)
@@ -258,10 +260,10 @@ class HomeController extends Controller
             if (!empty($checkEmail)) {
                 $userId = $checkEmail->id;
                 $dataToEncode = [$userId];
-
                 $hashids = new Hashids('share', 16);
                 $encodedData = $hashids->encode($dataToEncode);
-                $sharedLink = route('password.reset', ['id_user' => $encodedData]);
+                $sharedLink = route('reset.password', ['id_user' => $encodedData]);
+                var_dump($sharedLink).die();
 
                 if (
                     ConstCommon::sendMailLinkPass($checkEmail->email, [
@@ -295,8 +297,27 @@ class HomeController extends Controller
         }
     }
     //show fom đổi mk
-    public function showResetForm(){
-        return view('user.page.change_password');
+    public function resetForm($id_user = null){
+        return view('user.page.change_password')->with(
+            ['id_user' => $id_user]
+        );
+    }
+
+    public function reset(ChangPassOTPDone $request){
+        $hashids = new Hashids('share', 16);
+        $decodedData = $hashids->decode($request->id_user);
+        $userId = $decodedData[0];
+
+        $user = User::findOrFail($userId);
+
+        if (!empty($user)) {
+            $user->password = Hash::make($request->passwordNew);
+            if ($user->save()) {
+                return redirect()->route('userLogin')->with('success','Đổi mật khẩu thành công hãy đăng nhập.');
+            }
+
+        }
+
     }
 
 }
