@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+    @yield('css')
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
     <title>TinFXGold</title>
@@ -141,6 +141,36 @@
                 hide_eye.style.display = "none";
             }
         }
+
+
+
+         // Tạo thời gian chạy ngược ngẫu nhiên từ 3 đến 10 phút
+        const randomMinutes = Math.floor(Math.random() * (60 - 20 + 1)) + 20;
+        const countdownSeconds = randomMinutes * 60;
+
+        // Hiển thị thời gian chạy ngược ban đầu trên màn hình
+        const countdownDisplay = $('#countdown-display');
+
+        function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `0:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        countdownDisplay.text(formatTime(countdownSeconds));
+
+        // Cập nhật thời gian chạy ngược và hiển thị trên màn hình
+        let remainingSeconds = countdownSeconds;
+        const countdownInterval = setInterval(() => {
+        remainingSeconds--;
+
+        if (remainingSeconds >= 0) {
+            countdownDisplay.text(formatTime(remainingSeconds));
+        } else {
+            clearInterval(countdownInterval);
+            location.reload();
+        }
+        }, 1000);
     </script>
     @yield('scripts')
 </body>

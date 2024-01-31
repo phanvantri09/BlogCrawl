@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Helpers\ConstCommon;
 use Illuminate\Support\Str;
 
+use App\Helpers\ConstCommon;
+
 class HomeController extends Controller
 {
     //
@@ -134,9 +136,27 @@ class HomeController extends Controller
     }
     public function economic(Request $request)
     {
-        $videos = $this->videoRepository->getLastedVideo(10);
-        $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.economic', compact(['posts', 'videos']));
+        // dd($request->all());
+        $chuthich = 0;
+        $star = 0;
+
+        $date = ConstCommon::getListDateEcomecy();
+        $dateSelect = Carbon::now()->format('Y-m-d');
+        if ($request->has('date')) {
+            $dateSelect = $request->date ?? Carbon::now()->format('Y-m-d');
+        }
+        if ($request->has('chuthich')) {
+            $chuthich = $request->chuthich;
+        }
+        if ($request->has('star')) {
+            $star = $request->star;
+            $data = $this->economicRepository->getbydate($dateSelect, $star);
+            return view('user.page.economic', compact(['data', 'date', 'dateSelect', 'chuthich', 'star']));
+        }
+        $data = $this->economicRepository->getbydate($dateSelect);
+        // $data = $this->economicRepository->getconomicByDate($request->date);
+        return view('user.page.economic', compact(['data', 'date', 'dateSelect', 'chuthich', 'star']));
+
     }
 
     public function brokers_detail()
