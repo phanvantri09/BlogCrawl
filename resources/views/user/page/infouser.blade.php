@@ -17,7 +17,7 @@
         <form method="POST" enctype="multipart/form-data" action="{{ route('update') }}" >
             @csrf
             <div class="form-img">
-                <img src="{{ App\Helpers\ConstCommon::getLinkIMG($data->image) }}" id="image_preview" alt="">
+                <img src="{{ App\Helpers\ConstCommon::getLinkIMG($data->image) ?? '' }}" id="image_preview" alt="">
                 <br>
                 <label for="img" class="pt-2">Chọn ảnh</label>
                 <input style="display: none" type="file" class="form-control form-img-input" id="img" name="image"
