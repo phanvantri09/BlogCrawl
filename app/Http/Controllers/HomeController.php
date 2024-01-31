@@ -20,8 +20,6 @@ use App\Helpers\ConstCommon;
 use Illuminate\Support\Str;
 use Hashids\Hashids;
 
-use App\Helpers\ConstCommon;
-
 class HomeController extends Controller
 {
     //
