@@ -15,13 +15,13 @@
             @foreach ($complaints as $complaint)
                 <div class="brokers-item p-2 mb-2">
                     <a href="">
-                        <div class="row p-2">
-                            <div class="col-md-2 col-sm-2 col-3 brokers-item-avatar-box px-1">
+                        <div class="row justify-content-between p-2">
+                            <div class="brokers-item-avatar-box">
                                 @if ($complaint->headImg)
                                     <img src="{{ App\Helpers\ConstCommon::getLinkIMG($complaint->headImg) }}" alt="">
                                 @endif
                             </div>
-                            <div class="col-md-10 col-sm-10 col-9">
+                            <div class="brokers-item-content-box">
                                 <div class="font-weight-bold">{{ $complaint->readname ?? "Ẩn danh" }}</div>
                                 <div class="font-weight-bold">{{ $complaint->nickname ?? " " }}</div>
                                 <div class="brokers-item-time text-grey">
