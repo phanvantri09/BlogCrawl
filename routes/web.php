@@ -68,7 +68,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('vertify','vertifyEmail')->name('vertifyEmail');
         Route::post('vertify','vertify')->name('vertify');
 
-        Route::get('reset-password/', 'showResetForm')->name('passwordResset');
+        Route::get('reset-password/{id_user}', 'resetForm')->name('reset.password');
         Route::post('reset-password', 'reset')->name('passwordUpdate');
 
 
@@ -91,8 +91,8 @@ Route::group(['prefix' => '/'], function () {
 
         Route::get('forgot-password', 'showLinkRequestForm')->name('password.request');
         Route::post('forgot-password', 'sendResetLinkEmail')->name('password.email');
-        Route::get('reset-password/{id_user}', 'showResetForm')->name('password.reset');
-        Route::post('reset-password', 'reset')->name('password.update');
+        // Route::get('reset-password/{id_user}', 'showResetForm')->name('password.reset');
+        // Route::post('reset-password', 'reset')->name('password.update');
 
     });
 

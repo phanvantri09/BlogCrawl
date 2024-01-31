@@ -24,13 +24,13 @@
                 <div class="col-md-6 col-sm-12 col-12">
                     <div class="bg-white border rounded p-md-5 p-3 text-center">
                         <h4>Thay đổi mật khẩu</h4>
-                        <form action="" method="post">
+                        <form action="{{ route('passwordUpdate')}}" method="post" enctype= "multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <div class="row">
                                     <label for="psw"><b class="text-danger">*</b> Mật khẩu mới</label>
                                     <div class="input-group mb-3">
-                                        <input type="hidden" name="id_user" />
+                                        <input type="hidden" name="id_user" value="{{ $id_user }}" />
                                         <input type="password" placeholder="Nhập mật khẩu mới" class="form-control"
                                             id="passwordNew" name="passwordNew" required="true" aria-label="password"
                                             aria-describedby="basic-addon1" />
