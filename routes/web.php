@@ -55,12 +55,23 @@ Route::group(['prefix' => '/'], function () {
         Route::post('user/login', function () {
             return redirect()->route('login');
         })->name('user.login');
+
         //đăng ký
         Route::get('user/register','register')->name('userRegister');
         Route::post('user/register','addUserRegister')->name('addUserRegister');
+
         // thông tin user
         Route::get('userinfo','userinfo')->name('userinfo');
         Route::post('userinfo','updateUserInfo')->name('update');
+
+        // tuấn làm forgot password
+        Route::get('vertify','vertifyEmail')->name('vertifyEmail');
+        Route::post('vertify','vertify')->name('vertify');
+
+        Route::get('reset-password/', 'showResetForm')->name('passwordResset');
+        Route::post('reset-password', 'reset')->name('passwordUpdate');
+
+
       
     });
     Route::controller(AuthController::class)->group(function () {

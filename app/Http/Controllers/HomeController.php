@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\ChangPassOTP;
 use App\Repositories\BrokerRepositoryInterface;
 use App\Repositories\ComplaintRepositoryInterface;
 use App\Repositories\EconomicCalendarRepository;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\ConstCommon;
 use Illuminate\Support\Str;
+use Hashids\Hashids;
 
 class HomeController extends Controller
 {
@@ -64,10 +66,12 @@ class HomeController extends Controller
         $economics = $this->economicRepository->getLatestEconomic(5);
         return view('user.page.home', compact(
             [
-                'posts','brokers', 
+                'posts',
+                'brokers',
                 'economics'
             ]
-        ));
+        )
+        );
     }
 
     public function chatbox()
@@ -79,7 +83,7 @@ class HomeController extends Controller
         $economics = $this->economicRepository->getLatestEconomic(3);
         $complaints = $this->complaintRepository->getLatestComplaint(20);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.complain', compact(['posts', 'complaints','economics']));
+        return view('user.page.complain', compact(['posts', 'complaints', 'economics']));
     }
     public function video()
     {
@@ -91,24 +95,25 @@ class HomeController extends Controller
     {
         if ($request->has('id')) {
             $data = $this->postRepository->find($request->id);
-            $comment =  $this->commentRepository->getCommentPostByid($request->id);
+            $comment = $this->commentRepository->getCommentPostByid($request->id);
             return view('user.page.article_detail', compact(['data', 'comment']));
         } else {
             return redirect()->back();
         }
     }
 
-    public function commentPost(Request $request){
+    public function commentPost(Request $request)
+    {
         if (Auth::check()) {
             $id_user = Auth::user()->id;
-            $data = array_merge($request->all(), ["id_user" =>$id_user]);
+            $data = array_merge($request->all(), ["id_user" => $id_user]);
             $this->commentRepository->create($data);
             return redirect()->back()->with('success', "Bình luận thành công");
         } else {
             return redirect()->back()->with('error', "Cần phải đăng nhập");
         }
-        
-        
+
+
     }
 
     public function brokers(Request $request)
@@ -118,13 +123,13 @@ class HomeController extends Controller
             $economics = $this->economicRepository->getLatestEconomic(5);
             $videos = $this->videoRepository->getLastedVideo(10);
             $posts = $this->postRepository->getLatestPosts(30);
-            return view('user.page.broker', compact(['posts', 'videos','economics','brokers']));
+            return view('user.page.broker', compact(['posts', 'videos', 'economics', 'brokers']));
         }
         $brokers = $this->brokerRepository->getLastedBroker(20);
         $economics = $this->economicRepository->getLatestEconomic(5);
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.broker', compact(['posts', 'videos','economics','brokers']));
+        return view('user.page.broker', compact(['posts', 'videos', 'economics', 'brokers']));
     }
     public function article()
     {
@@ -147,7 +152,7 @@ class HomeController extends Controller
         $firstComplaint = $this->complaintRepository->getFirstComplaint();
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.broker_detail', compact(['posts', 'videos','firstComplaint','firstVideo','economics','brokers']));
+        return view('user.page.broker_detail', compact(['posts', 'videos', 'firstComplaint', 'firstVideo', 'economics', 'brokers']));
     }
 
     public function login()
@@ -160,8 +165,8 @@ class HomeController extends Controller
         return view('user.page.register', compact([]));
     }
 
-    public function addUserRegister( Request $request )
-    { 
+    public function addUserRegister(Request $request)
+    {
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
         $data['code'] = Str::random(8);
@@ -171,6 +176,9 @@ class HomeController extends Controller
     }
     public function userinfo()
     {
+        if (!Auth::check()) {
+            return redirect()->route('userLogin')->with('info', 'Bạn chưa đăng nhập');
+        }
         $user = auth()->id();
         $data = $this->userRepository->find($user);
         return view('user.page.infouser', compact('data'));
@@ -186,8 +194,7 @@ class HomeController extends Controller
             $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
             $data['image'] = $imageName;
-        }
-        else {
+        } else {
             $imageName = $user->image; // Lấy giá trị của ảnh hiện tại
             $data['image'] = $imageName;
         }
@@ -205,10 +212,72 @@ class HomeController extends Controller
     {
         if ($request->has('id')) {
             $data = $this->blogsRepository->find($request->id);
-            $comment =  $this->commentRepository->getCommentBlogByid($request->id);
+            $comment = $this->commentRepository->getCommentBlogByid($request->id);
             return view('user.page.blog_detail', compact(['data', 'comment']));
         } else {
             return redirect()->back();
         }
     }
+
+    //quên mật khẩu
+    public function vertifyEmail()
+    {
+        // if (!Auth::check()) {
+        //     return redirect()->route('userLogin')->with('info','Bạn chưa đăng nhập');
+        // }
+        return view('user.page.vertify');
+    }
+    public function vertify(ChangPassOTP $request)
+    {
+        $emailOrPhone = $request->input('email');
+
+        if (filter_var($emailOrPhone, FILTER_VALIDATE_EMAIL)) {
+            // Xử lý cho email
+            $credentials['email'] = $emailOrPhone;
+            $checkEmail = $this->userRepository->checkByEmail($emailOrPhone);
+
+            if (!empty($checkEmail)) {
+                $userId = $checkEmail->id;
+                $dataToEncode = [$userId];
+
+                $hashids = new Hashids('share', 16);
+                $encodedData = $hashids->encode($dataToEncode);
+                $sharedLink = route('password.reset', ['id_user' => $encodedData]);
+
+                if (
+                    ConstCommon::sendMailLinkPass($checkEmail->email, [
+                        'email' => $checkEmail->email,
+                        'type' => "Đổi mật khẩu",
+                        'status' => "Thành công",
+                        'link' => $sharedLink
+                    ])
+                ) {
+                    return redirect()->back()->with('error', 'Email này chưa được đăng ký!');
+                } else {
+                    return redirect()->back()->with('success', 'Đã gửi liên kết đổi mật khẩu của bạn về mail');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Email này chưa được đăng ký!');
+            }
+        } else {
+            // Xử lý cho số điện thoại
+            $checkNumberPhone = $this->userRepository->checkByNumberPhone($emailOrPhone);
+
+            if (!empty($checkNumberPhone)) {
+                // Tạo mã OTP
+                $otp = mt_rand(100000, 999999);
+                // Gửi OTP về số điện thoại
+                // Code gửi OTP ở đây
+                // Sau khi gửi OTP, chuyển hướng về trang nhập OTP
+                return view('auth.OTP', compact(['checkNumberPhone', 'otp']));
+            } else {
+                return redirect()->back()->with('error', 'Số điện thoại này chưa được đăng ký!');
+            }
+        }
+    }
+    //show fom đổi mk
+    public function showResetForm(){
+        return view('user.page.change_password');
+    }
+
 }
