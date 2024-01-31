@@ -135,10 +135,27 @@ class HomeController extends Controller
     }
     public function economic(Request $request)
     {
-        $date = ConstCommon::getSevenDayEconomiCalender();
-        // dd($date);
-        $data = $this->economicRepository->getconomicByDate($request->date);
-        return view('user.page.economic', compact(['data']));
+        // dd($request->all());
+        $chuthich = 0;
+        $star = 0;
+
+        $date = ConstCommon::getListDateEcomecy();
+        $dateSelect = Carbon::now()->format('Y-m-d');
+        if ($request->has('date')) {
+            $dateSelect = $request->date ?? Carbon::now()->format('Y-m-d');
+        }
+        if ($request->has('chuthich')) {
+            $chuthich = $request->chuthich;
+        }
+        if ($request->has('star')) {
+            $star = $request->star;
+            $data = $this->economicRepository->getbydate($dateSelect, $star);
+            return view('user.page.economic', compact(['data', 'date', 'dateSelect', 'chuthich', 'star']));
+        }
+        $data = $this->economicRepository->getbydate($dateSelect);
+        // $data = $this->economicRepository->getconomicByDate($request->date);
+        return view('user.page.economic', compact(['data', 'date', 'dateSelect', 'chuthich', 'star']));
+
     }
 
     public function brokers_detail()

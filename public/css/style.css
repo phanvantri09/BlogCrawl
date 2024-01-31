@@ -254,6 +254,28 @@ a:hover {
     color: orange;
 }
 
+.checked-yelow {
+    color: orange;
+}
+
+.checked-red {
+    color: rgb(230, 78, 70);
+}
+
+.text-color-red {
+    color: rgb(230, 78, 70) !important;
+}
+
+.date-of-week {
+    font-size: 13px;
+    color: black;
+}
+.date {
+    font-size: 15px;
+    color: black;
+    font-weight: 700;
+}
+
 .calendar-container-box-title {
     color: #dfdfdf;
     font-size: 14px;

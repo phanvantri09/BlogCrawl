@@ -12,7 +12,7 @@
             <a href="{{ route('home') }}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">Lịch kinh tế</a>
+            <a href="{{ route('economic', ['date' => \Carbon\Carbon::now()->format('Y-m-d'), 'chuthich' => 1]) }}" class="nav-link">Lịch kinh tế</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('complain') }}" class="nav-link">Khiếu nại</a>

@@ -1,303 +1,142 @@
 @extends('user.layout.index')
 @section('css')
+    <style>
+        .date-box-active {
+            &.slick-slide {
+                background-color: #6955dc;
+            }
+
+            .date-of-week,
+            .date {
+                color: white !important;
+            }
+        }
+
+        .date-box-content {
+            padding: 2px;
+        }
+
+        .slick-list {
+            margin: 0 50px;
+        }
+
+        .slick-slide {
+            background: #d9d9d9;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .slick-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            background: none;
+            overflow: hidden;
+        }
+
+        .slick-arrow i {
+            font-size: 50px;
+            color: #d9d9d9;
+        }
+
+        .slick-arrow.slick-prev {
+            left: 0;
+        }
+
+        .slick-arrow.slick-next {
+            right: 0;
+        }
+    </style>
 @endsection
 @section('content')
-    <div class="head-nav-box px-3">
+    @php
+        use Carbon\Carbon;
+    @endphp
+    <a href="{{ route('home') }}" class="head-nav-box px-3">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door"
             viewBox="0 0 16 16">
             <path
                 d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
         </svg>&nbsp;<span>Trang chủ</span>
+    </a>
+    <div class="d-flex flex-column align-items-center w-100 p-2">
+        <h4 class="w-100">{{ Carbon::parse(reset($date))->format('d/m/Y') }} ->
+            {{ Carbon::parse(end($date))->format('d/m/Y') }}</h4>
+        <div class="slider-box py-3 w-100">
+            @foreach ($date as $da)
+                <a href="{{ route('economic', ['date' => $da, 'chuthich' => 1]) }}" style="height: 48px; width: 69px;"
+                    class="date-box {{ $da == $dateSelect ? 'date-box-active' : '' }}">
+                    <div class="d-flex flex-column align-items-center justify-content-center date-box-content">
+                        <span class="date-of-week">
+                            @if (Carbon::parse($da)->dayOfWeek == 0)
+                                T7
+                            @elseif (Carbon::parse($da)->dayOfWeek == 1)
+                                CN
+                            @else
+                                T{{ Carbon::parse($da)->dayOfWeek }}
+                            @endif
+                        </span>
+                        <span class="date">{{ Carbon::parse($da)->format('d/m') }}</span>
+                    </div>
+                </a>
+            @endforeach
+        </div>
     </div>
+    <form class="form-group d-flex ml-4 mr-4" id="my-form" action="{{ route('economic', ['date' => $dateSelect]) }}"
+        method="get">
+        @csrf
+        <div>
+            <input type="checkbox" name="chuthich" id="chuthich" value="1" {{ $chuthich == 1 ? 'checked' : '' }}>
+            <label for="chuthich">Chú Thích</label>
+        </div>
+        <div class="ml-5">
+            <input type="checkbox" name="star" id="star" value="1" {{ $star == 1 ? 'checked' : '' }}>
+            <label for="star">Quan trọng</label>
+        </div>
+    </form>
+
     <div class="main-content-container px-3 py-2">
-    @foreach ($posts as $post)
-        <div class="calendar-container-box mt-2">
+        @foreach ($data as $item)
+            <div class="calendar-container-box mt-2">
                 <div class="d-flex">
-                    <div class="calendar-container-box-time">{{ $post->created_at->format('H:i:s') }}</div>
+                    <div class="calendar-container-box-time">
+                        {{ $item->pub_time_tz ? Carbon::parse($item->pub_time_tz)->format('H:i:s') : '' }}</div>
                     <div class="star-rating pl-3">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($item->star > $i)
+                                <span class="fa fa-star {{ $item->star >= 3 ? 'checked-red' : 'checked-yelow' }}"></span>
+                            @else
+                                <span class="fa fa-star"></span>
+                            @endif
+                        @endfor
                     </div>
                 </div>
                 <div class="d-flex align-items-center pt-2">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                        alt="">
-                    <div class="calendar-container-box-title pl-2">
-                        {!! $post->content ?? '' !!}
+                    <img src="{{ \App\Helpers\ConstCommon::getLinkIMG($item->country_flag) }}" alt="">
+                    <div class="calendar-container-box-title pl-2 {{ $item->star >= 3 ? 'text-color-red' : '' }}">
+                        {{ $item->events_translate ?? ($item->translate ?? '') }}
                     </div>
                 </div>
-                <div class="calendar-container-card d-flex justify-content-between">
-                    <div>
-                        Trước đó:
-                        <span class="font-weight-bold">0.90%</span>
-                    </div>
-                    <div>
-                        Kỳ vọng:
-                        <span class="font-weight-bold">-0%</span>
-                    </div>
-                    <div>
-                        Thực tế:
-                        <span class="font-weight-bold text-red">-0.90%</span>
-                    </div>
-                </div>
-        </div>
-        @endforeach
-        <div class="brokers-container-top p-3">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex">
-                    <div></div>
-                    <div>Hero Brokers</div>
-                </div>
-                <div class="d-flex align-items-center question">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-question-circle-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247m2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
-                    </svg> &nbsp;
-                    <span>What's hero broker?</span>
-                </div>
-            </div>
-            <div class="slider-box pt-2">
-                <div class="slider-box-item mx-1">
-                    <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slider-box-item-content px-2 py-3">
-                        <div class="title">
-                            <span>RoboForex</span> &nbsp;
-                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
+                @if ($item->is_event == 0)
+                    <div class="calendar-container-card d-flex justify-content-between">
+                        <div>
+                            Trước đó:
+                            <span class="font-weight-bold">{{ $item->previous }}</span>
                         </div>
-                        <div class="box">
-                            <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
+                        <div>
+                            Kỳ vọng:
+                            <span class="font-weight-bold">{{ $item->consensus }}</span>
                         </div>
-                        <div class="broker-link">
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-link-45deg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
-                                    <path
-                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
-                                </svg>
-                                <span>https://gorobo.pro/lw92</span>
-                            </a>
+                        <div>
+                            Thực tế:
+                            <span class="font-weight-bold text-red">{{ $item->actual }}</span>
                         </div>
                     </div>
-                </div>
-                <div class="slider-box-item mx-1">
-                    <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slider-box-item-content px-2 py-3">
-                        <div class="title">
-                            <span>RoboForex</span> &nbsp;
-                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
-                        </div>
-                        <div class="box">
-                            <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
-                        </div>
-                        <div class="broker-link">
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-link-45deg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
-                                    <path
-                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
-                                </svg>
-                                <span>https://gorobo.pro/lw92</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-box-item mx-1">
-                    <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slider-box-item-content px-2 py-3">
-                        <div class="title">
-                            <span>RoboForex</span> &nbsp;
-                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
-                        </div>
-                        <div class="box">
-                            <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
-                        </div>
-                        <div class="broker-link">
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-link-45deg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
-                                    <path
-                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
-                                </svg>
-                                <span>https://gorobo.pro/lw92</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-box-item mx-1">
-                    <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slider-box-item-content px-2 py-3">
-                        <div class="title">
-                            <span>RoboForex</span> &nbsp;
-                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
-                        </div>
-                        <div class="box">
-                            <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
-                        </div>
-                        <div class="broker-link">
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
-                                    <path
-                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
-                                </svg>
-                                <span>https://gorobo.pro/lw92</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-box-item mx-1">
-                    <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slider-box-item-content px-2 py-3">
-                        <div class="title">
-                            <span>RoboForex</span> &nbsp;
-                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
-                        </div>
-                        <div class="box">
-                            <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
-                        </div>
-                        <div class="broker-link">
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
-                                    <path
-                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
-                                </svg>
-                                <span>https://gorobo.pro/lw92</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-box-item mx-1">
-                    <div class="image">
-                        <a href="">
-                            <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="slider-box-item-content px-2 py-3">
-                        <div class="title">
-                            <span>RoboForex</span> &nbsp;
-                            <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt=""> &nbsp;
-                            <span>FSC</span>
-                        </div>
-                        <div class="box">
-                            <span class="box-text">Tỉ lệ giải quyết</span>
-                            <span class="text-red font-weight-bold">0%</span>
-                        </div>
-                        <div class="broker-link">
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
-                                    <path
-                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
-                                </svg>
-                                <span>https://gorobo.pro/lw92</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                @endif
 
-        <div class="futures-box p-3">
-            <div class="futures-box-top d-flex align-items-center">
-                <div class="futures-box-top-label">US</div> &nbsp;
-                <div class="futures-box-top-content font-weight-bold">Hợp đồng tương lai chứng khoán Mỹ
-                </div>
             </div>
-            <div class="futures-box-content d-flex pt-3">
-                <div class="col-md-4 text-center item font-weight-bold p-0">
-                    <div class="item-label">DOW FUT</div>
-                    <div class="item-value text-red">
-                        <span>126</span> &nbsp;
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </div>
-                    <div class="bahnschrift">
-                        <span class="">37553</span>
-                        <span class="text-red">-0.34%</span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center item font-weight-bold p-0">
-                    <div class="item-label">DOW FUT</div>
-                    <div class="item-value text-red">
-                        <span>126</span> &nbsp;
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </div>
-                    <div class="bahnschrift">
-                        <span class="">37553</span>
-                        <span class="text-red">-0.34%</span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center item font-weight-bold p-0">
-                    <div class="item-label">DOW FUT</div>
-                    <div class="item-value text-red">
-                        <span>126</span> &nbsp;
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </div>
-                    <div class="bahnschrift">
-                        <span class="">37553</span>
-                        <span class="text-red">-0.34%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 @section('scripts')
@@ -307,12 +146,14 @@
     <!-- Initialize and configure your Slick Slider -->
     <script>
         $(document).ready(function() {
+
             $('.slider-box').slick({
                 infinite: true,
-                slidesToShow: 3,
-                centerMode: true,
-                prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-                nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+                slidesToShow: 7,
+                slidesToScroll: 7,
+                initialSlide: 49,
+                prevArrow: "<button type='button' class='slick-prev '><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+                nextArrow: "<button type='button' class='slick-next '><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
                 responsive: [{
                         breakpoint: 1200,
                         settings: {
@@ -335,31 +176,14 @@
                     }
                 ]
             });
-            $('.slider-short-video-card').slick({
-                slidesToShow: 3,
-                prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-                nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-                responsive: [{
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 2
-
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 3,
-                        }
-                    },
-                    {
-                        breakpoint: 567,
-                        settings: {
-                            slidesToShow: 2,
-                        }
-                    }
-                ]
-            });
+        });
+        $('#chuthich').change(function() {
+            // Gửi biểu mẫu
+            $('#my-form').submit();
+        });
+        $('#star').change(function() {
+            // Gửi biểu mẫu
+            $('#my-form').submit();
         });
     </script>
 @endsection

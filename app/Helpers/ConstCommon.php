@@ -94,6 +94,12 @@ class ConstCommon {
         }
         return $dates;
     }
+
+    public static function formatdateURL($date){
+        $dates = urlencode($date->format('Y/m/d')); 
+        return $dates;
+    }
+
     public static function getLinkIMG($data){
         $needle = 'http';
         $check = 1;
