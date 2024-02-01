@@ -16,6 +16,7 @@ use App\Repositories\UserRepositoryInterface;
 use App\Repositories\ImageRepositoryInterface;
 use App\Repositories\CommentRepositoryInterface;
 use App\Repositories\BlogRepositoryInterface;
+use App\Repositories\GoldRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\ConstCommon;
@@ -35,6 +36,7 @@ class HomeController extends Controller
     protected $economicRepository;
     protected $commentRepository;
     protected $blogsRepository;
+    protected $goldRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -45,7 +47,8 @@ class HomeController extends Controller
         BrokerRepositoryInterface $brokerRepository,
         EconomicCalendarRepositoryInterface $economicRepository,
         CommentRepositoryInterface $commentRepository,
-        BlogRepositoryInterface $blogsRepository
+        BlogRepositoryInterface $blogsRepository,
+        GoldRepositoryInterface $goldRepository
     ) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
@@ -56,6 +59,7 @@ class HomeController extends Controller
         $this->economicRepository = $economicRepository;
         $this->commentRepository = $commentRepository;
         $this->blogsRepository = $blogsRepository;
+        $this->goldRepository = $goldRepository;
     }
     /**
      * Display a listing of the resource.
@@ -142,7 +146,6 @@ class HomeController extends Controller
     }
     public function economic(Request $request)
     {
-        // dd($request->all());
         $chuthich = 0;
         $star = 0;
 
@@ -160,9 +163,17 @@ class HomeController extends Controller
             return view('user.page.economic', compact(['data', 'date', 'dateSelect', 'chuthich', 'star']));
         }
         $data = $this->economicRepository->getbydate($dateSelect);
-        // $data = $this->economicRepository->getconomicByDate($request->date);
         return view('user.page.economic', compact(['data', 'date', 'dateSelect', 'chuthich', 'star']));
 
+    }
+    public function gold(Request $request)
+    {
+        $case = 10;
+        if ($request->has('case')) {
+            $case = $request->case;
+        }
+        $data = $this->goldRepository->getbycase($case);
+        return view('user.page.gold', compact(['data', 'case']));
     }
 
     public function brokers_detail()
