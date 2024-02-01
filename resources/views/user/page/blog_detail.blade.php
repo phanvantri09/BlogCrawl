@@ -14,7 +14,7 @@
     </div>
     <div class="main-content-container pt-2">
             <div data-v-1d38c9e0="" class="d-flex justify-content-center">
-                <img style="width: 608px; height: 360px; border-radius: 20px" src="{{ \App\Helpers\ConstCommon::getLinkIMG($data->img) }}" class="el-image__inner"
+                <img style="width: 96%; height: auto; border-radius: 20px" src="{{ \App\Helpers\ConstCommon::getLinkIMG($data->img) }}" class="el-image__inner"
                     style="object-fit: fill;">
             </div>
         <div class="article-detail-container p-3">
