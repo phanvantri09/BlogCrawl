@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gold;
+use App\Repositories\GoldRepositoryInterface;
 use Illuminate\Http\Request;
 
 class GoldController extends Controller
 {
+    protected $goldRepository;
+
+    public function __construct(GoldRepositoryInterface $goldRepository)
+    {
+        $this->goldRepository = $goldRepository;
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
+        $data = $this->goldRepository->all();
+        return view('admin.gold.list', compact('data'));
     }
 
     /**
@@ -25,6 +33,7 @@ class GoldController extends Controller
     public function create()
     {
         //
+        return view('admin.gold.add');
     }
 
     /**
@@ -36,17 +45,9 @@ class GoldController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Gold  $gold
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Gold $gold)
-    {
-        //
+        $data = $request->all();
+        $this->goldRepository->create($data);
+        return redirect()->route('gold.index')->with('success', 'data created successfully');
     }
 
     /**
@@ -55,9 +56,11 @@ class GoldController extends Controller
      * @param  \App\Models\Gold  $gold
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gold $gold)
+    public function edit($id)
     {
         //
+        $gold = $this->goldRepository->edit($id);
+        return view('admin.gold.edit', compact('gold'));
     }
 
     /**
@@ -67,9 +70,12 @@ class GoldController extends Controller
      * @param  \App\Models\Gold  $gold
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gold $gold)
+    public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $this->goldRepository->update($data, $id);
+        return back()->with('success', 'Thành công');
     }
 
     /**
@@ -78,8 +84,10 @@ class GoldController extends Controller
      * @param  \App\Models\Gold  $gold
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gold $gold)
+    public function destroy($id)
     {
         //
+        $this->goldRepository->delete($id);
+        return back()->with('success', 'Thành công');
     }
 }
