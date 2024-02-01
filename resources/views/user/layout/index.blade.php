@@ -29,7 +29,7 @@
     <div class="main-container">
         <div class="container">
             <div class="row">
-                <div class="sidebar w-md-20 px-md-0 px-3">
+                <div class="sidebar w-md-20 px-3">
                     @include('user.layout.sidebar')
                 </div>
                 <div class="main-content w-md-55">

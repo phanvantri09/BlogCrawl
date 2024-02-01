@@ -73,8 +73,8 @@ Route::group(['prefix' => '/'], function () {
 
         Route::get('reset-password/{id_user}', 'resetForm')->name('reset.password');
         Route::post('reset-password', 'reset')->name('passwordUpdate');
-        //oanh
-        Route::get('activity','activity')->name('activity');
+
+
       
     });
     Route::controller(AuthController::class)->group(function () {

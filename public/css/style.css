@@ -958,7 +958,7 @@ a:hover {
     bottom: 20px;
     right: 10%;
 }
-.el-backtop button {
+.el-backtop button{
     border: 2px solid #3d4c5c;
     outline: none;
     color: white;
@@ -974,25 +974,4 @@ a:hover {
 
 .el-backtop button:hover {
     background-color: #892eff;
-}
-
-/* //new */
-.activity-detail-container-img {
-    width: 100%;
-    height: 370px;
-}
-.activity-detail-container-img img {
-    width: 100%;
-    height: 100%;
-}
-@media (max-width: 567px) {
-    .activity-detail-container-img {
-        width: 100%;
-        height: 270px;
-    }
-}
-.activity-detail-container-social svg {
-    padding: 8px;
-    border-radius: 50%;
-    background-color: #fff;
 }

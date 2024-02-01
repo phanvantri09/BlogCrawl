@@ -330,11 +330,5 @@ class HomeController extends Controller
         }
 
     }
-    //oanhcode
-    public function activity()
-    {
-        return view('user.page.activity', compact([]));
-    }
-
 
 }
