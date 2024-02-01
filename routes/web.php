@@ -311,5 +311,23 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
 
         });
     });
+
+    Route::group(['prefix' => 'gold', 'as' =>'gold.'], function () {
+        Route::controller(GoldController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addGold');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editGold');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
 });
 

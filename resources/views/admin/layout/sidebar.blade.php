@@ -346,6 +346,30 @@
                         </li>
                     </ul>
                 </li>
+                {{-- add menu gold --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-coins"></i>
+                        <p>
+                            Gold
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('gold.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('gold.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
