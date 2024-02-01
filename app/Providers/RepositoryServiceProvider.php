@@ -27,6 +27,9 @@ use App\Repositories\BlogRepository;
 use App\Repositories\BlogRepositoryInterface;
 use App\Repositories\CommentRepository;
 use App\Repositories\CommentRepositoryInterface;
+use App\Repositories\GoldRepository;
+use App\Repositories\GoldRepositoryInterface;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -49,6 +52,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(EconomicCalendarRepositoryInterface::class, EconomicCalendarRepository::class);
         $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
         $this->app->bind(CommentRepositoryInterface::class, CommentRepository::class);
+        $this->app->bind(GoldRepositoryInterface::class, GoldRepository::class);
     }
     /**
      * Bootstrap services.

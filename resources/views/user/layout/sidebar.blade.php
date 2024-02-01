@@ -33,7 +33,7 @@
             <a href="{{ route('video') }}" class="nav-link">Video</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">Gold ETF</a>
+            <a href="{{ route('gold') }}" class="nav-link">Gold ETF</a>
         </li>
         @auth
                 <li class="dropdown w-100">

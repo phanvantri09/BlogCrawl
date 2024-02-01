@@ -49,6 +49,9 @@ Route::group(['prefix' => '/'], function () {
         Route::get('blogs','blogs')->name('blogs');
         Route::get('blogs_detail','blogs_detail')->name('blogs_detail');
       
+        //gold
+        Route::get('gold','gold')->name('gold');
+
         //oanh code form
         //login
         Route::get('user/login','login')->name('userLogin');
