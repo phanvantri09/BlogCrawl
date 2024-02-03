@@ -173,7 +173,19 @@ class HomeController extends Controller
             $case = $request->case;
         }
         $data = $this->goldRepository->getbycase($case);
-        return view('user.page.gold', compact(['data', 'case']));
+        // dd($data);
+        $date = $data->pluck('date')->toArray();
+        $date = json_encode(array_map(function ($da) {
+            return date('d-m', strtotime($da));
+        }, $date));
+        
+        $inc_or_dec = $data->pluck('inc_or_dec')->toArray();
+        $inc_or_dec = json_encode(array_map('floatval', $inc_or_dec));
+
+        $total_stock = $data->pluck('total_stock')->toArray();
+        $total_stock = json_encode(array_map('floatval', $total_stock));
+
+        return view('user.page.gold', compact(['data', 'case', 'date', 'inc_or_dec', 'total_stock']));
     }
 
     public function brokers_detail()
