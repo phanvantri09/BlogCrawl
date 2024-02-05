@@ -74,6 +74,7 @@ class CrawlPost implements ShouldQueue
                 } catch (\Throwable $th) {
                     DB::rollBack();
                     //throw $th;
+                    dd($th);
                 }
 
             }

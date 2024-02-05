@@ -36,5 +36,13 @@ class VideoRepository implements VideoRepositoryInterface
     {
         return Video::find($id);
     }
+    public function getLastedVideo($limit)
+    {
+        return Video::orderBy('created_at','desc')->take($limit)->get();
+    }
+    public function getFirstVideo()
+    {
+        return Video::orderBy('created_at','desc')->first();
+    }
 
 }

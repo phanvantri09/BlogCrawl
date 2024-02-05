@@ -45,10 +45,8 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->all();
-        // headImg => imageItem
-        $imageFields = ['headImg', 'img'];
+        $imageFields = ['headImg', 'img', 'replenishImg'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
@@ -79,7 +77,6 @@ class ComplaintController extends Controller
     public function edit($id)
     {
         //
-        $data['id_user_update'] = auth()->user()->id;
         $complaint = $this->complaintRepository->edit($id);
         return view('admin.complaint.edit', compact('complaint'));
     }
@@ -95,7 +92,7 @@ class ComplaintController extends Controller
     {
         //
         $data = $request->all();
-        $imageFields = ['headImg', 'img'];
+        $imageFields = ['headImg', 'img','replenishImg'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field)) {
@@ -111,6 +108,7 @@ class ComplaintController extends Controller
                 $data[$field] = implode(',', $imageNames);
             }
         }
+        $data['id_user_update'] = auth()->user()->id;
 
         $this->complaintRepository->update($data, $id);
         return back()->with('success', 'Thành công');

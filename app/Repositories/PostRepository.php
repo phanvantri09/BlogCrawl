@@ -37,4 +37,11 @@ class PostRepository implements PostRepositoryInterface
         return Post::find($id);
     }
 
+    //lấy bài theo thời gian mới nhất
+    public function getLatestPosts($limit)
+    {
+        return Post::orderBy('created_at','desc')->take($limit)->get();
+
+    }
+
 }

@@ -41,8 +41,8 @@
                                     <td>{{ $video->title }}</td>
                                     <td>{!! $video->content !!}</td>
                                     @if($video->headImg)
-                                        <td><img style="max-width: 100%; max-height: 200px;"
-                                            src="{{ asset('storage/images/' . $video->headImg) }}">
+                                        <td><img style="max-width: 100%; max-height: 200px;" alt=""
+                                        src="{{ App\Helpers\ConstCommon::getLinkIMG($video->headImg) }}">
                                         </td>
                                     @else
                                     <td></td>

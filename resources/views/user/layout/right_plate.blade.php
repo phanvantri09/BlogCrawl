@@ -65,121 +65,38 @@
                         d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1zm1.038 3.018a6 6 0 0 1 .924 0 6 6 0 1 1-.924 0M0 3.5c0 .753.333 1.429.86 1.887A8.04 8.04 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5M13.5 1c-.753 0-1.429.333-1.887.86a8.04 8.04 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1" />
                 </svg> &nbsp;
                 <span>Tiếp theo</span>&nbsp;
-                <span class="text-danger">07:33:12</span>
+                <span class="text-danger" id="countdown-display"></span>
             </div>
         </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+        @php
+            use Illuminate\Support\Facades\DB;
+            use App\Models\EconomicCalendar;
+            $economicsShowRight = EconomicCalendar::orderBy('created_at')->limit(5)->get();
+        @endphp
+        @if (count($economicsShowRight) > 0)
+            @foreach ($economicsShowRight as $economic )
+                <div class="carlender-box-item">
+                    <div class="d-flex">
+                        <div class="carlendar-box-item-time">{{ $economic->created_at->format('H:i:s') }}</div>
+                        <div class="star-rating pl-3">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center pt-2">
+                        <img src="{{ App\Helpers\ConstCommon::getLinkIMG($economic->country_flag)}}"
+                            alt="">
+                        <div class="calendar-box-item-title pl-2">
+                            {{ $economic->translate ?? " " }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
-        <div class="carlender-box-item">
-            <div class="d-flex">
-                <div class="carlendar-box-item-time">21:05:57</div>
-                <div class="star-rating pl-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png"
-                    alt="">
-                <div class="calendar-box-item-title pl-2">
-                    Tập đoàn thương mại Hoa Kỳ: Hoa Kỳ cho rằng eo biển Bab el-Mandeb vẫn còn quá
-                    rủi ro
-                    đối
-                    với tàu thuyền.
-                </div>
-            </div>
-        </div>
+            @endforeach
+        @endif
     </div>
-
     <div class="complaint-box mt-3 px-3 py-4">
         <div class="d-flex justify-content-between">
             <div>Khiếu nại mới</div>
@@ -196,30 +113,32 @@
         </div>
         <div class="pointer py-3">
             <a href="">
+                @php
+                    use App\Models\complaint;
+                    $firstComplaint = complaint::orderBy('created_at')->get()->first();
+                @endphp
                 <div class="d-flex align-items-center mb-3">
                     <div class="avatar-box">
-                        <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                        <img src="{{ $firstComplaint->headImg ?? '' }}"
                             alt="">
                     </div>
                     <div class="pl-2">
-                        <div class="font-weight-bold">User390245</div>
-                        <div class="font-weight-bold">Exness</div>
+                        <div class="font-weight-bold">{{ $firstComplaint->realname ?? "Ẩn danh" }}</div>
+                        <div class="font-weight-bold">{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="complaint-box-info-container-time">
-                            <span>20:55</span>&nbsp;
-                            <span>02/12/2022</span>
+                            <span>{{ $firstComplaint->created_at ? $firstComplaint->created_at->format('H:i:s') : ''}}</span>&nbsp;
+                            <span>{{ $firstComplaint->created_at ? $firstComplaint->created_at->format('d/m/Y') : '' }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="complaint-box-pointer-content">
-                    <div>#Trượt giá</div>
+                    <div>#{{ $firstComplaint->complaintName ?? " " }}</div>
                     <div class="mb-2">
                         <span class="text-grey">Số tiền liên quan</span>
-                        <span>$100u</span>
+                        <span>{{ $firstComplaint->money ?? " " }}</span>
                     </div>
                     <div class="text-grey">
-                        tôi bị đặt lệnh nhưng bị hệ thống xoá lệnh và không khớp, mà hệ thống đã báo
-                        là
-                        lệnh tôi khớp rồi , vậy tại sao lệnh trên mt5 bị xoá
+                        {!! $firstComplaint->content ?? " " !!}
                     </div>
                 </div>
             </a>
@@ -228,14 +147,14 @@
             <a href="">
                 <div class="row">
                     <div class="col-md-4 complaint-box-container-image">
-                        <img src="https://img.wsbird.com/upload/2022/02/14/102748646.jpg"
+                        <img src="{{ $firstComplaint->img ?? '' }}"
                             alt="">
                     </div>
                     <div class="col-md-8 px-1">
-                        <div>Exness</div>
+                        <div>{{ $firstComplaint->nickname ?? " " }}</div>
                         <div class="d-flex align-items-center">
                             <div class="images-box">
-                                <img src="https://img.wsbird.com/upload/2022/02/14/185417389.png"
+                                <img src=""
                                     alt="">
                             </div>
                             &nbsp;
@@ -254,8 +173,12 @@
     </div>
 
     <div class="ytb-container mt-3 p-3">
+        @php
+            use App\Models\Video;
+            $firstVideo = Video::orderBy('created_at')->get()->first();
+        @endphp
         <iframe width="100%" height="160px"
-            src="https://www.youtube.com/embed/fTDv68llRcg?si=7jlie-GAEDdSPCOm"
+        src="{{ str_replace('watch', 'embed',$firstVideo->videoFileName ?? '')}}"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>

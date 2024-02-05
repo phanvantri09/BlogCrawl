@@ -43,7 +43,7 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      */
-    public function store(CreateRequestPost $request)
+    public function store(Request $request)
     {
         //
         $data = $request->all();
@@ -78,7 +78,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
      */
-    public function update(UpdateRequestPost $request, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
         if ($request->hasFile('headImg')) {

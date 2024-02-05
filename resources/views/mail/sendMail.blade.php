@@ -22,7 +22,7 @@
                     <p style="color: #333333;">Chúng tôi xin thông báo rằng yêu cầu {{$type}} của bạn đã {{$status}}.</p>
                     <p style="color: #333333;">Thông tin chi tiết {{$type}}:</p>
                     <ul style="color: #333333;">
-                        <li>Số tiền: <b>{{number_format($balance).'VNĐ'}}</b></li>
+                        {{-- <li>Số tiền: <b>{{number_format($balance).'VNĐ'}}</b></li> --}}
                         {{-- <li>Tài khoản nhận: <b>{{$trans->card_number}}</b></li> --}}
                         <li>Thời gian thực hiện: <b>{{date('H:i:s Y-m-d')}}</b></li>
                         <li>Kiểm tra: <b><a href="{{$link}}"> Tại đây </a></b></li>
@@ -30,7 +30,7 @@
                     <p style="color: #333333;">Vui lòng <a href="{{ route('home') }}">Liên Hệ</a> với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu hỗ trợ.</p>
                     <p style="color: #333333;">Trân trọng,</p>
                     <p style="color: #333333;">Hotline: 1900159639 - 0795 710 839</p>
-                    <p style="color: #333333;">Email: cskh@luckboxvn.com</p>
+                    <p style="color: #333333;">Email: cskh@TinFXGold.com</p>
                 </td>
             </tr>
         </table>

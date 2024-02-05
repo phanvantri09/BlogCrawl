@@ -23,7 +23,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link d-flex flex-column">
-        <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image  elevation-3" style="opacity: .8">
+        <h3 class="text-center">TinFXGold</h3>
     </a>
 
     <!-- Sidebar -->
@@ -80,14 +80,14 @@
                     </ul>
                 </li>
 
-                <li class="nav-item border-bottom">
+                {{-- <li class="nav-item border-bottom">
                     <a href="{{ route('chat.index') }}" class="nav-link">
                         <i class="fas fa-comment-alt"></i>
                         <p>
                             Trò chuyện
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link">
                         <i class="fas fa-users"></i>
@@ -267,6 +267,103 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('complaint.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- add menu broker --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-medal"></i>
+                        <p>
+                            Broker
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('broker.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('broker.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- add menu economic calendar --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="far fa-calendar"></i>
+                        <p>
+                            Economic calendar
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('economic.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('economic.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                 {{-- add menu blog --}}
+                 <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-blog"></i>
+                        <p>
+                            Blog
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('blog.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('blog.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- add menu gold --}}
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-coins"></i>
+                        <p>
+                            Gold
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('gold.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('gold.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>

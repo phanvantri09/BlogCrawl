@@ -9,4 +9,6 @@ interface ComplaintRepositoryInterface
      public function delete($id);
      public function find($id);
      public function edit($id);
+     public function getLatestComplaint($limit);
+     public function getFirstComplaint();
 }
