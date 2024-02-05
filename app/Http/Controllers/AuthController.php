@@ -33,7 +33,7 @@ class AuthController extends Controller
             return redirect()->route('home')->with('info','Bạn đã đăng nhập rồi');
         }
         session(['url.intended' => url()->previous()]);
-        return view('auth.login');
+        return view('authhhhh.login');
     }
 
     public function login(LoginRequest $request)
@@ -76,12 +76,13 @@ class AuthController extends Controller
         }
         if ($request->has('type')){
             $type = $request->type;
-            return view('auth.register', compact(['type']));
+            return view('authhhhh.register', compact(['type']));
         }
-        return view('auth.register');
+        return view('authhhhh.register');
     }
-    public function register(RegisterRequest $request)
+    public function register(Request $request)
     {
+        // dd($request->all());
         $userGT = $id_user_GT = null;
         if ($request->has('code') && $request->code != null ) {
             $userGT = $this->userRepository->findUserByCode($request->code);
@@ -102,6 +103,11 @@ class AuthController extends Controller
             'id_user_referral' => $id_user_GT
         ]);
         if (User::create($request->all())) {
+            ConstCommon::sendMail($request->email,
+                    ['email' => $request->email . " - ". $request->number_phone,
+                    'type'=>"Đăng Ký tài khoản",
+                    'status'=> "Thành công",
+                    'link'=>'' ]);
             return redirect()->route('login')->with('message',"Đăng ký thành công, hãy đăng nhập ngay.");
         } else {
             return redirect()->back()->with('error', "Đã có 1 lỗi xảy ra vui lòng đăng ký lại!");
@@ -130,9 +136,9 @@ class AuthController extends Controller
         $userId = $decodedData[0];
         if ($request->has('type')){
             $type = $request->type;
-            return view('auth.registerShare', compact(['type', 'token', 'userId']));
+            return view('authhhhh.registerShare', compact(['type', 'token', 'userId']));
         }
-        return view('auth.registerShare', compact('userId','token'));
+        return view('authhhhh.registerShare', compact('userId','token'));
     }
 
     public function registerShare(RegisterRequest $request, $id)
@@ -208,7 +214,7 @@ class AuthController extends Controller
 
     public function showLinkRequestForm()
     {
-        return view('auth.email');
+        return view('authhhhh.vertify');
     }
 
     public function sendResetLinkEmail(ChangPassOTP $request)
@@ -251,7 +257,7 @@ class AuthController extends Controller
             if (!empty($checkNumberPhone)) {
                 // ở đây là phải gửi OTP về sđt trước nè xong mới chuyển hướng về DB
                 $otp = mt_srand(6);
-                return view('auth.OTP', compact(['checkNumberPhone','otp']));
+                return view('authhhhh.OTP', compact(['checkNumberPhone','otp']));
             } else {
                 return redirect()->back()->with('error', ' Số điện thoại này chưa được đăng ký!');
             }
@@ -265,7 +271,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('home');
         }
-        return view('auth.reset')->with(
+        return view('authhhhh.reset')->with(
             ['id_user' => $id_user]
         );
     }

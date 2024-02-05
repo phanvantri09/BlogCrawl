@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="./css/account.css">
+    <link rel="stylesheet" href="{{ asset('/css/account.css')}}">
     <title>TinFXGold</title>
 
 </head>
@@ -19,12 +19,12 @@
 <body>
     <div class="bg-account d-md-flex d-block">
         <div class="container d-flex flex-column">
-            <h1 class="text-md-left text-center py-2">TinFXGold</h1>
+            <a href="{{ route('home') }}"><h1 class="text-md-left text-center py-2">TinFXGold</h1></a>
             <div class="row flex-md-row flex-column-reverse align-items-center form-login">
                 <div class="col-md-6 col-sm-12 col-12">
                     <div class="bg-white border rounded p-md-5 p-3 text-center">
                         <h4>Xác thực tài khoản</h4>
-                        <form action="{{ route('vertify') }}" method="post">
+                        <form action="{{ route('password.email') }}" method="post">
                             @csrf
                             <div class="input-group my-3">
                                 <input type="text" placeholder="Email or number phone" class="form-control"
@@ -37,8 +37,7 @@
                             <button type="submit" class="btn btn-primary rounded-pill px-4"><b>Xác thực</b></button>
                         </form>
                         <div class="col-sm-12 pt-4"><b class="text-danger">Lưu ý:</b> <br>
-                            1. nhập email bạn sẽ nhận được liên kết đổi mật khẩu gửi về mail đã đăng ký. <br>
-                            2. Nhập số điện thoại bạn sẽ nhận dc OTP về Số điện thoại đã đăng ký.
+                            Nhập email bạn sẽ nhận được liên kết đổi mật khẩu gửi về mail đã đăng ký. <br>
                         </div>
                     </div>
                 </div>

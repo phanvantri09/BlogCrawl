@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="./css/account.css">
+    <link rel="stylesheet" href="{{ asset('/css/account.css') }}">
     <title>TinFXGold</title>
 
 </head>
@@ -19,12 +19,14 @@
 <body>
     <div class="bg-account d-md-flex d-block">
         <div class="container d-flex flex-column">
-            <h1 class="text-md-left text-center py-2">TinFXGold</h1>
+            <a href="{{ route('home') }}">
+                <h1 class="text-md-left text-center py-2">TinFXGold</h1>
+            </a>
             <div class="row flex-md-row flex-column-reverse align-items-center form-login">
                 <div class="col-md-6 col-sm-12 col-12 text-register text-md-left text-center">
                     <div>Bạn chưa đăng ký?</div>
                     <button class="btn btn-secondary py-3 px-4 my-2 rounded-pill">
-                        <a href="{{ route('userRegister') }}" class="text-white text-decoration-none">Đăng Ký Ngay</a>
+                        <a href="{{ route('register') }}" class="text-white text-decoration-none">Đăng Ký Ngay</a>
                     </button>
                 </div>
                 <div class="col-md-6 col-sm-12 col-12">
@@ -32,10 +34,10 @@
                         <h4>Đăng nhập</h4>
                         <form action="{{ route('login') }}" method="post">
                             @csrf
-                            <input type="email" id="" placeholder="Email" class="form-control"
-                                name="email" value="{{ old('email') }}" required>
+                            <input type="email" id="" placeholder="Email" class="form-control" name="email"
+                                value="{{ old('email') }}" required>
                             @error('email')
-                                <div class="text-danger">{{ $message }}</div>
+                                <div class="alert alert-danger mt-2">{{ $errors->first('email') }}</div>
                             @enderror
                             <div class="input-group my-3">
                                 <input id="password" type="password" placeholder="Nhập mật khẩu" class="form-control"
@@ -60,6 +62,9 @@
                                         </svg>
                                     </span>
                                 </div>
+                                @error('password')
+                                    <div class="alert alert-danger mt-2">{{ $errors->first('password') }}</div>
+                                @enderror
                             </div>
                             <div class="form-group row my-3">
                                 <div class="col-sm-6 text-left">
@@ -70,7 +75,9 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 text-right"><a href="">Quên mật khẩu</a></div>
+                                <div class="col-sm-6 text-right"><a class="text-primary" href="{{ route('register') }}">Đăng ký</a>
+                                    <br><a class="text-danger" href="{{ route('password.request') }}">Quên mật khẩu!</a>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary rounded-pill px-4"><b>Đăng nhập</b></button>
                         </form>

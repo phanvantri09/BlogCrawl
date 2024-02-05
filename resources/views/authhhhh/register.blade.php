@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="./css/account.css">
+    <link rel="stylesheet" href="{{ asset('/css/account.css')}}">
     <title>TinFXGold</title>
 
 </head>
@@ -19,31 +19,46 @@
 <body>
     <div class="bg-account d-md-flex d-block">
         <div class="container d-flex flex-column">
-            <h1 class="text-md-left text-center py-2">TinFXGold</h1>
+            <a href="{{ route('home') }}"><h1 class="text-md-left text-center py-2">TinFXGold</h1></a>
             <div class="bg-white p-3 border rounded">
                 <h2>Đăng Ký</h2>
-                <form action="{{ route('addUserRegister') }}" method="post">
+                <form action="{{ route('register') }}" method="post">
                     @csrf
+                    {{-- @php
+                        dd($errors);
+                    @endphp --}}
                     <div class="form-group">
                         <label for="formGroupExampleInput">Tên</label>
                         <input type="text" name="name" class="form-control" id="formGroupExampleInput"
                             value="{{ empty(old('name')) ? '' : old('name') }}" placeholder="Nhập tên của bạn">
+                        @error('name')
+                            <div class="alert alert-danger mt-2">{{ $errors->first('name') }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Ngày sinh</label>
                         <input type="date" name="birthday" class="form-control" id="formGroupExampleInput"
                             value="{{ empty(old('birthday')) ? '' : old('birthday') }}" placeholder="Birthday">
+                            @error('birthday')
+                                <div class="alert alert-danger mt-2">{{ $errors->first('birthday') }}</div>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email</label>
                         <input type="email" name="email" value="{{ empty(old('email')) ? '' : old('email') }}"
                             class="form-control" id="inputEmail3" placeholder="Email">
+                            @error('email')
+                                <div class="alert alert-danger mt-2">{{ $errors->first('email') }}</div>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Số điện thoại</label>
                         <input type="text" name="number_phone" class="form-control"
                             value="{{ empty(old('number_phone')) ? '' : old('number_phone') }}" id="inputEmail3"
                             placeholder="phone number">
+                            @error('number_phone')
+                                <div class="alert alert-danger mt-2">{{ $errors->first('number_phone') }}</div>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Địa chỉ</label>
@@ -74,6 +89,9 @@
                                     </svg>
                                 </span>
                             </div>
+                            @error('password')
+                                <div class="alert alert-danger mt-2">{{ $errors->first('password') }}</div>
+                            @enderror
 
                         </div>
                     </div>
@@ -81,7 +99,7 @@
                     <div class="text-center py-2">
                         <span>Bạn đã có tài khoản?</span>
                         <span>
-                            <a href="{{ route('userLogin') }}" class="text-decoration-none font-weight-bold">Đăng
+                            <a href="{{ route('login') }}" class="text-decoration-none font-weight-bold">Đăng
                                 nhập</a>
                         </span>
                     </div>

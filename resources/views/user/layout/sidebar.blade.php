@@ -58,7 +58,7 @@
             </li>
         @else
             <li class="nav-item w-100 p-2 bg-primary text-center">
-                <a href="{{ route('userLogin') }}">
+                <a href="{{ route('login') }}">
                     Đăng Nhập
                 </a>
             </li>

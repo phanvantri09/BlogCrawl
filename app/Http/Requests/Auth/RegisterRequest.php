@@ -23,9 +23,10 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
+        // dd(123);
         return [
             'email' => [
-                'required_without:number_phone',
+                'required',
                 'email',
                 'nullable',
                 Rule::unique('users', 'email')->ignore(null),
@@ -38,7 +39,7 @@ class RegisterRequest extends FormRequest
             ],
             'number_phone' =>
             [
-                'required_without:email',
+                'required',
                 'nullable',
                 Rule::unique('users', 'number_phone')->ignore(null),
                 'regex:/((\+84|0)[3|5|7|8|9])+([0-9]{8})/' ,
@@ -50,18 +51,16 @@ class RegisterRequest extends FormRequest
         public function messages()
     {
         return [
-            // 'email.required' => 'Vui lòng nhập địa chỉ email của bạn',
+            'email.required' => 'Vui lòng nhập địa chỉ email của bạn',
             'email.email' => 'Địa chỉ email không hợp lệ',
             'email.unique' => 'Địa chỉ email này đã được sử dụng',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password.min' => 'Mật khẩu phải có độ dài tối thiểu là 8 ký tự',
             'password.regex' => 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt',
-            // 'number_phone.required' => 'Vui lòng nhập số điện thoại của bạn',
+            'number_phone.required' => 'Vui lòng nhập số điện thoại của bạn',
             'number_phone.unique' => 'Số điện thoại này đã được sử dụng',
             'number_phone.digits_between' => 'Số điện thoại phải từ 10 đến 11',
             'number_phone.regex' => 'Không đúng định dạng',
-            'email.required_without' => 'Để đăng ký phải điền ít nhất email hoặc số điện thoại.',
-            'number_phone.required_without' => 'Để đăng ký phải điền ít nhất email hoặc số điện thoại.',
         ];
     }
 }

@@ -42,7 +42,7 @@ class SendMail extends Mailable
     public function build()
     {
         return $this->view('mail.sendMail')
-                    ->subject("Thông báo giao dịch")
+                    ->subject("Thông báo TinFXGold")
                     ->with($this->data);
     }
 }
