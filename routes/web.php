@@ -1,9 +1,10 @@
 <?php
 
 
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +16,66 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
+// cmd  php -i | grep cURL
+// php -i | grep curl
 // trang chủ ở đây
 Route::fallback(function () {
-    return redirect('/')->with('error', "Bạn đã nhập sai đường dẫn");
+    return redirect('/');
 });
 
 Route::group(['prefix' => '/'], function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/','index')->name('home');
         Route::get('/chatbox','chatbox');
+
+        Route::get('khieu-nai','complain')->name('complain');
+        Route::get('video','video')->name('video');
+
+        Route::get('economic','economic')->name('economic');
+        
+        //border
+        Route::get('brokers','brokers')->name('brokers');
+        Route::get('brokers_detail','brokers_detail')->name('brokers_detail');
+      
+        // post
+        Route::get('article_detail','article_detail')->name('article_detail');
+        Route::get('article','article')->name('article');
+
+        // comment
+        Route::post('commentPost','commentPost')->name('commentPost');
+
+        // blogs
+        Route::get('blogs','blogs')->name('blogs');
+        Route::get('blogs_detail','blogs_detail')->name('blogs_detail');
+      
+        //gold
+        Route::get('gold','gold')->name('gold');
+
+        //oanh code form
+        //login
+        Route::get('user/login','login')->name('userLogin');
+        Route::post('user/login', function () {
+            return redirect()->route('login');
+        })->name('user.login');
+
+        //đăng ký
+        Route::get('user/register','register')->name('userRegister');
+        Route::post('user/register','addUserRegister')->name('addUserRegister');
+
+        // thông tin user
+        Route::get('userinfo','userinfo')->name('userinfo');
+        Route::post('userinfo','updateUserInfo')->name('update');
+
+        // tuấn làm forgot password
+        Route::get('vertify','vertifyEmail')->name('vertifyEmail');
+        Route::post('vertify','vertify')->name('vertify');
+
+        Route::get('reset-password/{id_user}', 'resetForm')->name('reset.password');
+        Route::post('reset-password', 'reset')->name('passwordUpdate');
+
+
+      
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login','showLoginForm')->name('login');
@@ -42,8 +94,8 @@ Route::group(['prefix' => '/'], function () {
 
         Route::get('forgot-password', 'showLinkRequestForm')->name('password.request');
         Route::post('forgot-password', 'sendResetLinkEmail')->name('password.email');
-        Route::get('reset-password/{id_user}', 'showResetForm')->name('password.reset');
-        Route::post('reset-password', 'reset')->name('password.update');
+        // Route::get('reset-password/{id_user}', 'showResetForm')->name('password.reset');
+        // Route::post('reset-password', 'reset')->name('password.update');
 
     });
 
@@ -147,6 +199,131 @@ Route::group(['prefix' => 'admin', 'middleware'=>['CheckAdmin', 'CheckLoginUser'
             //sửa
             Route::get('edit/{id}','edit')->name('edit');
             Route::post('edit/{id}','update')->name('editSocial');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'video', 'as' =>'video.'], function () {
+        Route::controller(VideoController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addVideo');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editVideo');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'license', 'as' =>'license.'], function () {
+        Route::controller(LicenseController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addLicense');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editLicense');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'complaint', 'as' =>'complaint.'], function () {
+        Route::controller(ComplaintController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addComplaint');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editComplaint');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'broker', 'as' =>'broker.'], function () {
+        Route::controller(BrokerController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addBroker');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editBroker');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'economic', 'as' =>'economic.'], function () {
+        Route::controller(EconomicCalendarController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addEconomic');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editEconomic');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+    Route::group(['prefix' => 'blog', 'as' =>'blog.'], function () {
+        Route::controller(BlogController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addBlog');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editBlog');
+            // xóa
+            Route::get('/delete/{id}', 'destroy')->name('delete');
+
+        });
+    });
+
+    Route::group(['prefix' => 'gold', 'as' =>'gold.'], function () {
+        Route::controller(GoldController::class)->group(function () {
+            // danh sách
+            Route::get('/','index')->name('index');
+
+            // thêm
+            Route::get('/add', 'create')->name('add');
+            Route::post('/add', 'store')->name('addGold');
+
+            //sửa
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::post('edit/{id}','update')->name('editGold');
             // xóa
             Route::get('/delete/{id}', 'destroy')->name('delete');
 

@@ -17,7 +17,7 @@
         <table style="background-color: #ffffff; border-collapse: collapse; margin: auto; max-width: 600px; width: 100%;">
             <tr>
                 <td style="padding: 20px;">
-                    <h4 style="color: #333333; text-align: center">LuckBoxVN</h2>
+                    <h4 style="color: #333333; text-align: center">TinFXGold</h2>
                     <h3 style="color: #333333; text-align: center">Thông báo:{{$type}} </h4>
                     <p style="color: #333333;">Xin chào:   <b>{{$email}}</b> ,</p>
                     <p style="color: #333333;">Chúng tôi xin thông báo rằng yêu cầu {{$type}} của bạn đã {{$status}}.</p>
@@ -31,7 +31,7 @@
                     <p style="color: #333333;">Vui lòng <a href="{{ route('home') }}">Liên Hệ</a> với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu hỗ trợ.</p>
                     <p style="color: #333333;">Trân trọng,</p>
                     <p style="color: #333333;">Hotline: 1900159639 - 0795 710 839</p>
-                    <p style="color: #333333;">Email: cskh@luckboxvn.com</p>
+                    <p style="color: #333333;">Email: cskh@TinFXGold.com</p>
                 </td>
             </tr>
         </table>

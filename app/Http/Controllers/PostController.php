@@ -43,15 +43,15 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      */
-    public function store(CreateRequestPost $request)
+    public function store(Request $request)
     {
         //
         $data = $request->all();
-        if ($request->hasFile('avt_image')) {
-            $image = $request->file('avt_image');
+        if ($request->hasFile('headImg')) {
+            $image = $request->file('headImg');
             $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-            $data['avt_image'] = $imageName;
+            $data['headImg'] = $imageName;
         }
         $data['id_category'] = $request->id_category;
         $data['id_user_create'] = auth()->user()->id;
@@ -78,28 +78,22 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
      */
-    public function update(UpdateRequestPost $request, $id)
+    public function update(Request $request, $id)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'user_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
+        $data = $request->all();
+        if ($request->hasFile('headImg')) {
+            $image = $request->file('headImg');
+            $imageName = 'post_' . ConstCommon::getCurrentTime() . '.' . $image->extension();
             ConstCommon::addImageToStorage($image, $imageName);
-            $data['image'] = $imageName;
+            $data['headImg'] = $imageName;
         }
         else {
             $post = $this->postRepository->find($id);
-            $imageName = $post->avt_image; // Lấy giá trị của ảnh hiện tại
-            $data['image'] = $imageName;
+            $imageName = $post->headImg; // Lấy giá trị của ảnh hiện tại
+            $data['headImg'] = $imageName;
         }
-    
-        $data = [
-            'title' => $request->title,
-            'des_preview' => $request->des_preview,
-            'description' => $request->description,
-            'avt_image' => $imageName,
-            'id_category' => $request->id_category,
-            'id_user_update' => auth()->user()->id
-        ];
+
+        $data['type'] = $request->id_category;
     
         $this->postRepository->update($data, $id);
         return back()->with('success', 'Thành công');
