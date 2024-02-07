@@ -1,5 +1,6 @@
 <nav class="nav-bar">
-    <div class="hamburger">
+<img class="image-bar" src="https://m4m-website-production.s3.eu-central-1.amazonaws.com/m4m_islamic_300x700.jpg" alt="">    
+<div class="hamburger">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>

@@ -12,11 +12,11 @@
         <div class="carousel-inner">
             <div class="carousel-item carousel-item1 active">
                 <img
-                    src="https://www.cleanipedia.com/images/5iwkm8ckyw6v/5ZtLUJ1JtUez36Jz2Lqlor/a2a6557801b8bae97f8c36ccec86b418/Y2FjaC10cm9uZy1jYXktaG9hLW5oYWkuanBn/1200w/c%C3%A1ch-tr%E1%BB%93ng-c%C3%A2y-hoa-nh%C3%A0i.jpg">
+                    src="https://m4m-website-production.s3.eu-central-1.amazonaws.com/m4m_islamic_284x160.jpg">
             </div>
             <div class="carousel-item carousel-item1">
                 <img
-                    src="https://static.spacet.vn/image-resized/1024x10240_max/img/blog/2023-08-21/hoa-tulip-y-nghia-gia-thanh-va-cach-bo-tri-cho-noi-ngoai-that-64e2d8d17d477746faa14f0d.webp">
+                    src="https://m4m-website-production.s3.eu-central-1.amazonaws.com/m4m_islamic_284x160.jpg">
             </div>
             <div class="carousel-item carousel-item1">
                 <img
@@ -39,11 +39,11 @@
         <div class="carousel-inner">
             <div class="carousel-item carousel-item2 active">
                 <img
-                    src="https://www.cleanipedia.com/images/5iwkm8ckyw6v/5ZtLUJ1JtUez36Jz2Lqlor/a2a6557801b8bae97f8c36ccec86b418/Y2FjaC10cm9uZy1jYXktaG9hLW5oYWkuanBn/1200w/c%C3%A1ch-tr%E1%BB%93ng-c%C3%A2y-hoa-nh%C3%A0i.jpg">
+                    src="https://m4m-website-production.s3.eu-central-1.amazonaws.com/m4m_islamic_284x160.jpg">
             </div>
             <div class="carousel-item carousel-item2">
                 <img
-                    src="https://static.spacet.vn/image-resized/1024x10240_max/img/blog/2023-08-21/hoa-tulip-y-nghia-gia-thanh-va-cach-bo-tri-cho-noi-ngoai-that-64e2d8d17d477746faa14f0d.webp">
+                    src="https://m4m-website-production.s3.eu-central-1.amazonaws.com/m4m_islamic_284x160.jpg">
             </div>
             <div class="carousel-item carousel-item2">
                 <img

@@ -74,8 +74,13 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    position: relative;
 }
-
+.image-bar {
+    position: absolute;
+    left: -350px;
+    margin-top: 60px;
+}
 .nav-branding {
     font-size: 1.5rem;
     font-weight: 600;
@@ -149,10 +154,20 @@ a:hover {
 .sidebar {
     background: #6955dc;
 }
+@media (max-width: 992px) {
+    .nav-bar {
+        position: unset;
+    }
+    .image-bar {
+        display: none;
+        position: unset;
+    }
+}
 @media (min-width: 992px) {
     .w-md-55 {
         width: 55% !important;
     }
+    
 }
 @media (min-width: 768px) {
     .w-md-20 {
