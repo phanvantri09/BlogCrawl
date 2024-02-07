@@ -14,7 +14,7 @@
     </div>
     <div class="main-content-container p-3">
         <div class="brokers-detail-container-banner">
-            <img src="https://img.wsbird.com/upload/2022/05/22/173045152.jpg" alt="">
+            <img src="{{ \App\Helpers\ConstCommon::getLinkIMG($data->img) }}" alt="">
         </div>
         <div class="brokers-detail-container-social pt-3 pb-2">
             <div>
@@ -48,19 +48,17 @@
                 <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
             </div>
         </div>
-        <div><b>Website: <a href="" class="text-info">https://gorobo.pro/lw92</a></b></div>
+        <div><b>Website: <a href="" class="text-info">{{ $data->website ?? '' }}</a></b></div>
         <div class="brokers-detail-container-content">
             <div class="content-info">
                 <div><b>Giới thiệu công ty</b></div>
                 <div class="px-2 py-3 mt-1 content-main">
-                    <b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, alias ipsam! Voluptate quos
-                        blanditiis voluptas facere commodi vel, dolorem tempore quia laborum numquam repellendus praesentium
-                        dolores culpa? Incidunt, ex saepe!</b>
+                    <b>{!! $data->content !!}</b>
                 </div>
                 <div class="row py-2">
                     <div class="col-6 py-2">
                         <span class="text-grey">Thời gian phân giải trung bình </span>
-                        <span>0</span>
+                        {{-- <span>0</span> --}}
                     </div>
                     <div class="col-6 py-2">
                         <span class="text-grey">Đã được giải quyết </span>
@@ -72,24 +70,31 @@
                     </div>
                     <div class="col-6 py-2">
                         <span class="text-grey">Giám sát</span>
-                        <span>MM</span>
+                        <span>{{ $data->licenseName ?? '' }}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="brokers-detail-container-license">
             <div><b>Giấy phép</b></div>
-            <div class="license-items d-flex justify-content-between">
-                <div class="license-items-brokers-normal bg-info px-1">AA</div>
-                <div class="license-items-brokers-img px-1">
-                    <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt="">
+            @foreach ($license as $item)
+                <div class="license-items d-flex justify-content-between">
+                    <div class="d-flex justify-content-between">
+                        <div style="background-color: {{ strpos($item->licenseLevel, 'A') !== false ? '#2b9a8b' : (strpos($item->licenseLevel, 'B') !== false ? '#e6af46' : (strpos($item->licenseLevel, 'C') !== false ? '#e64e46' : 'gray')) }}"
+                            class="license-items-brokers-normal px-1">{{ $item->licenseLevel ?? '' }}
+                        </div>
+                        <div class="license-items-brokers-img px-1 pl-2">
+                            <img src="{{ \App\Helpers\ConstCommon::getLinkIMG($item->licenseLogo) }}" alt="">
+                        </div>
+                        <span class="font-weight-bold px-1 pl-2">{{ $item->regulatoryLicense ?? '' }}</span>
+                        <span class="font-weight-bold px-1 pl-2">{{ $item->licenseName }}</span>
+                    </div>
+                    <span class="px-1 text-primary">Đang giám sát</span>
                 </div>
-                <span class="font-weight-bold px-1">FSC</span>
-                <span class="font-weight-bold px-1">Giấy phép Forex bán lẻ</span>
-                <span class="px-1 text-primary">Đang giám sát</span>
-            </div>
+            @endforeach
 
-            <div class="license-items d-flex justify-content-between">
+
+            {{-- <div class="license-items d-flex justify-content-between">
                 <div class="license-items-brokers-normal bg-warning px-1">B</div>
                 <div class="license-items-brokers-img px-1">
                     <img src="https://img.wsbird.com/upload/2023/08/31/223152991.png" alt="">
@@ -97,8 +102,9 @@
                 <span class="font-weight-bold px-1">FSC</span>
                 <span class="font-weight-bold px-1">Giấy phép Forex bán lẻ</span>
                 <span class="px-1 text-primary">Đang giám sát</span>
-            </div>
+            </div> --}}
         </div>
+
         <div class="comment-view">
             <div class="comment-replay-view">
                 <div class="comment-replay-view-first">
@@ -106,9 +112,12 @@
                         <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
                             alt="">
                     </div>
-                    <form class="replay-box" action="">
-                        <textarea placeholder="Khiếu nại của bạn....?" class="el-textarea__inner"></textarea>
-                        <button>
+                    <form class="replay-box" action="{{ route('commentPost') }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <input name="id_broker" type="hidden" value="{{ $data->id }}">
+                        <textarea name="content" placeholder="Suy nghĩ của bạn....?" class="el-textarea__inner"></textarea>
+                        <button type="submit" value="Submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                                 class="bi bi-reply-all-fill" viewBox="0 0 16 16">
                                 <path
@@ -120,73 +129,89 @@
                     </form>
                 </div>
             </div>
-            <div class="comment-container">
+            <div class="comment-container px-3">
                 <div class="commont-container-title">
-                    <span>Tất cả khiếu nại</span>
-                    <span>(143)</span>
+                    <span>Tất cả bình luận</span>
+                    <span>({{ count($comment) }})</span>
                 </div>
-                <div class="comment-item pt-3">
-                    <div class="d-flex">
-                        <div class="comment-replay-avatar-box">
-                            <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
-                                alt="">
+                @foreach ($comment as $cmtFather)
+                    @if (empty($cmtFather->id_coment))
+                        <div class="comment-item pt-3">
+                            <div class="d-flex">
+                                <div class="comment-replay-avatar-box">
+                                    <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                                        alt="">
+                                </div>
+                                <div class="comment-item-content pl-2">
+                                    <div class="font-weight-bold">{{ $cmtFather->user->name ?? 'Ẩn Danh' }}</div>
+                                    <div class="text-grey">
+                                        {{ \App\Helpers\ConstCommon::formatTimeCmt($cmtFather->created_at) }}
+                                    </div>
+                                    <p>
+                                        {{ $cmtFather->content }}
+                                    </p>
+                                    @if ($cmtFather->replies->count() > 0)
+                                        <div class="col">
+                                            @foreach ($cmtFather->replies as $reply)
+                                                <div class="comment-item pt-3">
+                                                    <div class="d-flex">
+                                                        <div class="comment-replay-avatar-box">
+                                                            <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="comment-item-content pl-2">
+                                                            <div class="font-weight-bold">
+                                                                {{ $reply->user->name ?? 'Ẩn Danh' }}
+                                                            </div>
+                                                            <div class="text-grey">
+                                                                {{ \App\Helpers\ConstCommon::formatTimeCmt($cmtFather->created_at) }}
+                                                            </div>
+                                                            <p>{{ $reply->content }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="comment-replay-view">
+                                <div class="comment-replay-view-first">
+                                    <div class="comment-replay-avatar-box">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                                            alt="">
+                                    </div>
+                                    <form class="replay-box" action="{{ route('commentPost') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input name="id_broker" type="hidden" value="{{ $data->id }}">
+                                        <input name="id_coment" type="hidden" value="{{ $cmtFather->id }}">
+                                        <textarea name="content" placeholder="Trả lời bình luận này" class="el-textarea__inner"></textarea>
+                                        <button type="submit" value="Submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                                                fill="currentColor" class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.021 11.9 3.453 8.62a.72.72 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                                                <path
+                                                    d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945l-.042.028a.147.147 0 0 0 0 .252l.042.028 4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="comment-item-content pl-2">
-                            <div class="font-weight-bold">Tấn Tú</div>
-                            <div class="text-grey">10:51:12 11/1/2024</div>
-                            <p>
-                                Hiện tại mình đang hỗ trợ BACKCOM sàn EXNESS cơ chế cao: 8$/1lot vàng tài khoản Standard,
-                                3-4$ 1 lot tiền tệ; tài khoản Pro 3,125$ 1lot, tài khoản zero và raw 3,25$ 1 lot. - Bạn nào
-                                đang giao dịch ở sàn EXNESS mà
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment-item pt-3">
-                    <div class="d-flex">
-                        <div class="comment-replay-avatar-box">
-                            <img src="https://static.vecteezy.com/system/resources/previews/026/966/960/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
-                                alt="">
-                        </div>
-                        <div class="comment-item-content pl-2">
-                            <div class="font-weight-bold">Tấn Tú</div>
-                            <div class="text-grey">10:51:12 11/1/2024</div>
-                            <p>
-                                Hiện tại mình đang hỗ trợ BACKCOM sàn EXNESS cơ chế cao: 8$/1lot vàng tài khoản Standard,
-                                3-4$ 1 lot tiền tệ; tài khoản Pro 3,125$ 1lot, tài khoản zero và raw 3,25$ 1 lot. - Bạn nào
-                                đang giao dịch ở sàn EXNESS mà
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    @endif
+                @endforeach
             </div>
         </div>
-        <div>Bài viết</div>
-        <div class="article-view-container py-2 my-2">
-            <a href="">
-                <div class="author-container-box">
-                    <div class="author-container-box-time">19:56:09</div>
-                    <div class="author-container-box-title">VÌ SAO CÁC TRADER LẠI ƯA CHUỘNG GIAO DỊCH CẶP TIỀN EURUSD?</div>
-                    <div class="author-container-box-label">
-                        <div class="text-grey">
-                            <span>admin</span>&emsp;
-                            <span>12/11</span>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between py-2">
-                        <div class="author-container-box-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Aliquam, porro consequuntur maxime ad dignissimos distinctio reprehenderit magni impedit et
-                            nobis
-                            quam deserunt rem. Labore nisi provident sint temporibus voluptatem iusto!</div>
-                        <div class="author-container-box-img">
-                            <img src="https://img.wsbird.com/upload/2024-01-17/1705510754564/%E5%9B%BE%E7%89%871.jpg"
-                                alt="">
-                        </div>
-                    </div>
-                </div>
-            </a>
+        <div><b>Tất cả khiếu nại</b></div>
+        <div class="article-view-container py-2 my-2 text-center">
+            <span>Bài viết</span>
         </div>
-
+        <div><b>Bài viết</b></div>
+        <div class="article-view-container py-2 my-2 text-center">
+            <span>Chưa có bài viết</span>
+        </div>
     </div>
 @endsection
 @section('scripts')

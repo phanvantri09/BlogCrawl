@@ -36,5 +36,8 @@ class LicenseRepository implements LicenseRepositoryInterface
     {
         return License::find($id);
     }
+    public function findByIDBroker($id){
 
+        return License::where('platformMerchantsId',$id)->get();
+    }
 }

@@ -17,6 +17,7 @@ use App\Repositories\ImageRepositoryInterface;
 use App\Repositories\CommentRepositoryInterface;
 use App\Repositories\BlogRepositoryInterface;
 use App\Repositories\GoldRepositoryInterface;
+use App\Repositories\LicenseRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\ConstCommon;
@@ -37,6 +38,7 @@ class HomeController extends Controller
     protected $commentRepository;
     protected $blogsRepository;
     protected $goldRepository;
+    protected $licenseRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -48,7 +50,8 @@ class HomeController extends Controller
         EconomicCalendarRepositoryInterface $economicRepository,
         CommentRepositoryInterface $commentRepository,
         BlogRepositoryInterface $blogsRepository,
-        GoldRepositoryInterface $goldRepository
+        GoldRepositoryInterface $goldRepository,
+        LicenseRepositoryInterface $licenseRepository
     ) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
@@ -60,6 +63,7 @@ class HomeController extends Controller
         $this->commentRepository = $commentRepository;
         $this->blogsRepository = $blogsRepository;
         $this->goldRepository = $goldRepository;
+        $this->licenseRepository = $licenseRepository;
     }
     /**
      * Display a listing of the resource.
@@ -111,6 +115,7 @@ class HomeController extends Controller
 
     public function commentPost(Request $request)
     {
+        // dd($request->all());
         if (Auth::check()) {
             $id_user = Auth::user()->id;
             $data = array_merge($request->all(), ["id_user" => $id_user]);
@@ -137,6 +142,20 @@ class HomeController extends Controller
         $videos = $this->videoRepository->getLastedVideo(10);
         $posts = $this->postRepository->getLatestPosts(30);
         return view('user.page.broker', compact(['posts', 'videos', 'economics', 'brokers']));
+    }
+
+    public function brokers_detail(Request $request)
+    {
+        if ($request->has('id')) {
+            $data = $this->brokerRepository->find($request->id);
+            $license = $this->licenseRepository->findByIDBroker($data->pmid);
+            // dd($license);
+
+            $comment = $this->commentRepository->getCommentBrokerByid($request->id);
+            return view('user.page.broker_detail', compact(['data', 'comment', 'license']));
+        } else {
+            return redirect()->back();
+        }
     }
     public function article()
     {
@@ -186,17 +205,6 @@ class HomeController extends Controller
         $total_stock = json_encode(array_map('floatval', $total_stock));
 
         return view('user.page.gold', compact(['data', 'case', 'date', 'inc_or_dec', 'total_stock']));
-    }
-
-    public function brokers_detail()
-    {
-        $brokers = $this->brokerRepository->getLastedBroker(20);
-        $economics = $this->economicRepository->getLatestEconomic(5);
-        $firstVideo = $this->videoRepository->getFirstVideo();
-        $firstComplaint = $this->complaintRepository->getFirstComplaint();
-        $videos = $this->videoRepository->getLastedVideo(10);
-        $posts = $this->postRepository->getLatestPosts(30);
-        return view('user.page.broker_detail', compact(['posts', 'videos', 'firstComplaint', 'firstVideo', 'economics', 'brokers']));
     }
 
     public function login()

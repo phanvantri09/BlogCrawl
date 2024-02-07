@@ -48,7 +48,6 @@ class CommentRepository implements CommentRepositoryInterface
     public function getCommentPostByid($id)
     {
         return Comment::where('id_post', $id)
-            // ->whereNull('id_coment')
             ->orderBy('created_at','desc')
             ->get();
     }
@@ -56,9 +55,14 @@ class CommentRepository implements CommentRepositoryInterface
     public function getCommentBlogByid($id)
     {
         return Comment::where('id_blog', $id)
-            // ->whereNull('id_coment')
             ->orderBy('created_at','desc')
             ->get();
     }
-
+    
+    public function getCommentBrokerByid($id)
+    {
+        return Comment::where('id_broker', $id)
+            ->orderBy('created_at','desc')
+            ->get();
+    }
 }

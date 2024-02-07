@@ -16,7 +16,7 @@
         @foreach ($brokers as $broker )
         <div class="brokers-view-container p-2 my-2">
             <div class="brokers-item-container">
-                <div class="brokers-item-container-top pb-3">
+                <a href="{{ route('brokers_detail', ['id'=>$broker->id]) }}" class="brokers-item-container-top pb-3">
                     <div class="brokers-item-container-top-image">
                         @if ($broker->img)
                             <img src="{{ App\Helpers\ConstCommon::getLinkIMG($broker->img) }}" alt="">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 <div class="brokers-item-container-data d-flex justify-content-between py-2">
                     <div class="px-2">
                         <span class="text-grey">Tổng số đơn khiếu nại</span>
