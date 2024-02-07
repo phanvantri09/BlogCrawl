@@ -115,7 +115,6 @@ class HomeController extends Controller
 
     public function commentPost(Request $request)
     {
-        // dd($request->all());
         if (Auth::check()) {
             $id_user = Auth::user()->id;
             $data = array_merge($request->all(), ["id_user" => $id_user]);
@@ -149,7 +148,6 @@ class HomeController extends Controller
         if ($request->has('id')) {
             $data = $this->brokerRepository->find($request->id);
             $license = $this->licenseRepository->findByIDBroker($data->pmid);
-            // dd($license);
 
             $comment = $this->commentRepository->getCommentBrokerByid($request->id);
             return view('user.page.broker_detail', compact(['data', 'comment', 'license']));

@@ -45,7 +45,7 @@
                 </svg>&emsp;
             </div>
             <div class="brokers-detail-container-social-logo">
-                <img src="https://img.wsbird.com/upload/2023/08/31/225134171.jpg" alt="">
+                <img src="{{ \App\Helpers\ConstCommon::getLinkIMG($data->logo) }}" alt="">
             </div>
         </div>
         <div><b>Website: <a href="" class="text-info">{{ $data->website ?? '' }}</a></b></div>
